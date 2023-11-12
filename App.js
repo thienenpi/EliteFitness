@@ -10,12 +10,27 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   // Load fonts, change if you want
   const [fontsLoaded] = useFonts({
-    regular: require("./assets/fonts/Poppins-Regular.ttf"),
-    light: require("./assets/fonts/Poppins-Light.ttf"),
-    bold: require("./assets/fonts/Poppins-Bold.ttf"),
-    medium: require("./assets/fonts/Poppins-Medium.ttf"),
-    extrabold: require("./assets/fonts/Poppins-ExtraBold.ttf"),
-    semibold: require("./assets/fonts/Poppins-SemiBold.ttf"),
+    // Poppins
+    poppinsRegular: require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
+    poppinsLight: require("./assets/fonts/Poppins/Poppins-Light.ttf"),
+    poppinsBold: require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
+    poppinsMedium: require("./assets/fonts/Poppins/Poppins-Medium.ttf"),
+    poppinsExtrabold: require("./assets/fonts/Poppins/Poppins-ExtraBold.ttf"),
+    poppinsSemibold: require("./assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+
+    // Rufner
+    rufner: require('./assets/fonts/Rufner/Rufner.otf'),
+
+    // SF Pro
+    sfProBlackItalic: require('./assets/fonts/SFPro/SFPRODISPLAYBLACKITALIC.otf'),
+    sfProBold: require('./assets/fonts/SFPro/SFPRODISPLAYBOLD.otf'),
+    sfProHeavyItalic: require('./assets/fonts/SFPro/SFPRODISPLAYHEAVYITALIC.otf'),
+    sfProLightItalic: require('./assets/fonts/SFPro/SFPRODISPLAYLIGHTITALIC.otf'),
+    sfProMedium: require('./assets/fonts/SFPro/SFPRODISPLAYMEDIUM.otf'),
+    sfProRegular: require('./assets/fonts/SFPro/SFPRODISPLAYREGULAR.otf'),
+    sfProSemiBoldItalic: require('./assets/fonts/SFPro/SFPRODISPLAYSEMIBOLDITALIC.otf'),
+    sfProThinItalic: require('./assets/fonts/SFPro/SFPRODISPLAYTHINITALIC.otf'),
+    sfProUltraLightItalic: require('./assets/fonts/SFPro/SFPRODISPLAYULTRALIGHTITALIC.otf'),
   })
 
   // Unused code, but do not remove or cmd
