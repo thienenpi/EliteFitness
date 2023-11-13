@@ -7,6 +7,7 @@ const COLORS = {
   text: "#7C7773",
   paragraphBg: "#FF4C01",
   btn: "#F8C06D",
+  exerciseBg: "#FFFFFF"
 }
 
 const SIZES = {
