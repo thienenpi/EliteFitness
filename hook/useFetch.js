@@ -1,8 +1,7 @@
-import { View, Text } from "react-native"
-import { React, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 
-const useFetch = () => {
+const useFetch = ({ collection }) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -11,7 +10,7 @@ const useFetch = () => {
     setIsLoading(true)
 
     try {
-      const response = await axios.get("http://localhost:3000/api/exercises")
+      const response = await axios.get(`http://localhost:3000/api/${collection}`)
       setData(response.data)
       setIsLoading(false)
     } catch (error) {
