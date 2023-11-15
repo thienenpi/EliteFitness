@@ -27,7 +27,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/exercises/search/${searchKey || ""}`
+          `http://172.30.79.40:3000/api/exercises/search/${searchKey || ""}`
         )
         setFoundExercises(response.data)
       } catch (error) {
@@ -44,7 +44,7 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView></SafeAreaView>
+      <SafeAreaView style={{paddingTop:48}}></SafeAreaView>
       <Welcome></Welcome>
       <View style={styles.guideContainer}>
         <Image

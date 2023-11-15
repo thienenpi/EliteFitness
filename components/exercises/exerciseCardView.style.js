@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   image: {
     overflow: "hidden",
     borderRadius: SIZES.xSmall,
-    overlayColor: COLORS.text,
+    // overlayColor: COLORS.text,
     width: 68,
     height: 70,
     alignSelf: "center",

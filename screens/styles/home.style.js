@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 
   muscleContainer: {
     marginHorizontal: SIZES.xxLarge,
+    marginVertical: 12,
   },
 
   muscleHeader: {
