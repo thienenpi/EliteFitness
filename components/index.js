@@ -1,6 +1,9 @@
 import Button from "./Button";
 import ExerciseCardView from "./exercises/ExerciseCardView";
 import ExerciseColumn from "./exercises/ExerciseColumn";
+import FilterListView from "./home/FilterListView";
+import FilterRow from "./home/FilterRow";
+import Welcome from "./home/Welcome";
 import MuscleCardView from "./muscles/MuscleCardView";
 import MuscleRow from "./muscles/MuscleRow";
 
@@ -9,5 +12,8 @@ export {
   MuscleCardView,
   ExerciseColumn,
   ExerciseCardView,
-  Button
+  Button,
+  Welcome,
+  FilterRow,
+  FilterListView,
 }
