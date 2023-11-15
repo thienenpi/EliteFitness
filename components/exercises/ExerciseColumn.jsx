@@ -24,8 +24,7 @@ const ExerciseColumn = ({ items }) => {
   return (
     <View style={styles.container}>
       {!items.length ? (
-        <Text>
-          {" "}
+        <Text style={styles.guideTxt}>
           Choose Target Muscle then click Generate to get your Exercises{" "}
         </Text>
       ) : isLoading ? (
@@ -36,14 +35,12 @@ const ExerciseColumn = ({ items }) => {
       ) : error ? (
         <Text>Some thing went wrong</Text>
       ) : (
-        // <ScrollView>
           <FlatList
             data={items}
             renderItem={renderItem}
             keyExtractor={(item) => JSON.stringify(item._id)}
             contentContainerStyle={{ columnGap: SIZES.medium }}
           ></FlatList>
-        // </ScrollView>
       )}
     </View>
   )
