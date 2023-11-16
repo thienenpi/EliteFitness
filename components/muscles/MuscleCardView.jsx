@@ -8,7 +8,6 @@ const MuscleCardView = ({ item, isSelected }) => {
 
   useEffect(() => {
     if (item.imageUrl && item.imageUrl !== "none") {
-      console.log(item.imageUrl.toString())
       setIsLoading(false)
     }
   }, [item.imageUrl])
@@ -25,7 +24,7 @@ const MuscleCardView = ({ item, isSelected }) => {
         ) : (
           <Image
             style={styles.image}
-            source={require("../../assets/images/muscles/chest/3x.png")}
+            source={{uri: item.imageUrl}}
           ></Image>
         )}
       </View>

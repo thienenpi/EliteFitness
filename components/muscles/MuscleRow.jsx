@@ -64,6 +64,7 @@ const MuscleRow = ({ onUpdateSelectedMuscles }) => {
       )}
 
       <Button
+        styles={styles}
         onPress={generateExercise}
         title={"Generate"}
         isValid={selectedMuscles.length}

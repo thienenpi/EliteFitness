@@ -27,7 +27,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/exercises/search/${searchKey || ""}`
+          `http://10.0.148.202:3000/api/exercises/search/${searchKey || ""}`
         )
         setFoundExercises(response.data)
       } catch (error) {
