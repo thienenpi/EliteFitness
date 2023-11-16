@@ -3,7 +3,6 @@ import { COLORS, SIZES } from "../../constants"
 
 const styles = StyleSheet.create({
   container: {
-    width: 75.25,
     height: 85,
     justifyContent: "space-between",
   },
@@ -12,6 +11,7 @@ const styles = StyleSheet.create({
     width: 74,
     height: 69,
     alignItems: "center",
+    alignSelf: "center",
     justifyContent: "center",
     borderWidth: 1,
     borderColor: borderColor,
@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
     position: "relative",
     overflow: "hidden",
     borderRadius: SIZES.xSmall,
-    ...StyleSheet.absoluteFillObject,
-    overlayColor: COLORS.text,
+    // ...StyleSheet.absoluteFillObject,
+    // overlayColor: COLORS.text,
     width: 72,
     height: 67,
   },

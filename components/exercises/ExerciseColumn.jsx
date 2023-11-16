@@ -1,10 +1,7 @@
 import {
   ActivityIndicator,
   FlatList,
-  ScrollView,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native"
 import React, { useEffect, useState } from "react"
@@ -16,16 +13,13 @@ const ExerciseColumn = ({ items }) => {
   const isLoading = false,
     error = false
   const renderItem = ({ item }) => (
-    <TouchableOpacity>
-      <ExerciseCardView item={item}></ExerciseCardView>
-    </TouchableOpacity>
+    <ExerciseCardView item={item}></ExerciseCardView>
   )
 
   return (
     <View style={styles.container}>
       {!items.length ? (
-        <Text>
-          {" "}
+        <Text style={styles.guideTxt}>
           Choose Target Muscle then click Generate to get your Exercises{" "}
         </Text>
       ) : isLoading ? (
@@ -36,14 +30,12 @@ const ExerciseColumn = ({ items }) => {
       ) : error ? (
         <Text>Some thing went wrong</Text>
       ) : (
-        // <ScrollView>
-          <FlatList
-            data={items}
-            renderItem={renderItem}
-            keyExtractor={(item) => JSON.stringify(item._id)}
-            contentContainerStyle={{ columnGap: SIZES.medium }}
-          ></FlatList>
-        // </ScrollView>
+        <FlatList
+          data={items}
+          renderItem={renderItem}
+          keyExtractor={(item) => JSON.stringify(item._id)}
+          contentContainerStyle={{ columnGap: SIZES.medium }}
+        ></FlatList>
       )}
     </View>
   )

@@ -3,15 +3,35 @@ import { SIZES, COLORS } from "../../constants"
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-evenly',
     height: SIZES.height,
     width: SIZES.width,
     flexDirection: "column",
     backgroundColor: COLORS.primaryBg,
   },
 
+  guideContainer: {
+    height: SIZES.xxLarge,
+    marginHorizontal: SIZES.xxLarge,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+
+  sideIcon: {
+    height: 14.92,
+    width: 31,
+  },
+
+  guideTxt: {
+    fontFamily: "rufner",
+    fontSize: 13,
+    color: COLORS.text,
+    marginHorizontal: SIZES.xSmall,
+  },
+
   muscleContainer: {
     marginHorizontal: SIZES.xxLarge,
+    marginVertical: 12,
   },
 
   muscleHeader: {

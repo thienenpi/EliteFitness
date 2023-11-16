@@ -60,10 +60,13 @@ const MuscleRow = ({ onUpdateSelectedMuscles }) => {
           horizontal
           keyExtractor={(item) => JSON.stringify(item._id)}
           contentContainerStyle={{ columnGap: SIZES.medium }}
+        showsHorizontalScrollIndicator={false}
+
         ></FlatList>
       )}
 
       <Button
+        styles={styles}
         onPress={generateExercise}
         title={"Generate"}
         isValid={selectedMuscles.length}
