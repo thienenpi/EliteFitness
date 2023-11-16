@@ -1,8 +1,8 @@
-import { FlatList, Text, View } from "react-native"
-import React, { useState } from "react"
-import styles from "./filterRow.style"
-import { SIZES } from "../../constants"
-import FilterListView from "./FilterListView"
+import { FlatList, Text, View } from "react-native";
+import React, { useState } from "react";
+import styles from "./filterRow.style";
+import { SIZES } from "../../constants";
+import FilterListView from "./FilterListView";
 
 const FilterRow = () => {
   const filterField = [
@@ -22,9 +22,11 @@ const FilterRow = () => {
       label: "Muscle splits",
       values: ["Recoverd muscles", "Push muscles", "Pull muscles"],
     },
-  ]
+  ];
 
-  const renderItem = ({ item }) => <FilterListView item={item}></FilterListView>
+  const renderItem = ({ item }) => (
+    <FilterListView item={item}></FilterListView>
+  );
 
   return (
     <View style={styles.container}>
@@ -34,9 +36,10 @@ const FilterRow = () => {
         horizontal
         keyExtractor={(item) => JSON.stringify(item.label)}
         contentContainerStyle={{ columnGap: SIZES.medium }}
+        showsHorizontalScrollIndicator={false}
       ></FlatList>
     </View>
-  )
-}
+  );
+};
 
-export default FilterRow
+export default FilterRow;

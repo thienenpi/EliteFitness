@@ -44,7 +44,7 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView></SafeAreaView>
+      <SafeAreaView style={{paddingTop:48}}></SafeAreaView>
       <Welcome></Welcome>
       <View style={styles.guideContainer}>
         <Image
