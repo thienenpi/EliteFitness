@@ -8,7 +8,7 @@ import {
 import React from "react"
 import { COLORS, SIZES } from "../constants"
 
-const Button = ({ title, onPress, isValid, loader }) => {
+const Button = ({ styles, title, onPress, isValid, loader }) => {
   return (
     <TouchableOpacity
       style={styles.btn(isValid ? COLORS.btn : COLORS.text)}
@@ -25,20 +25,3 @@ const Button = ({ title, onPress, isValid, loader }) => {
 }
 
 export default Button
-
-const styles = StyleSheet.create({
-  btn: (backgroundColor) => ({
-    height: 50,
-    marginVertical: 10,
-    marginHorizontal: SIZES.xxLarge * 2,
-    backgroundColor: backgroundColor,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 12,
-  }),
-  btnText: {
-    fontFamily: "sfProBlackItalic",
-    color: COLORS.white,
-    fontSize: 18,
-  },
-})

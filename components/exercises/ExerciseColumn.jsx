@@ -1,10 +1,7 @@
 import {
   ActivityIndicator,
   FlatList,
-  ScrollView,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native"
 import React, { useEffect, useState } from "react"
@@ -16,9 +13,7 @@ const ExerciseColumn = ({ items }) => {
   const isLoading = false,
     error = false
   const renderItem = ({ item }) => (
-    <TouchableOpacity>
-      <ExerciseCardView item={item}></ExerciseCardView>
-    </TouchableOpacity>
+    <ExerciseCardView item={item}></ExerciseCardView>
   )
 
   return (
@@ -35,12 +30,12 @@ const ExerciseColumn = ({ items }) => {
       ) : error ? (
         <Text>Some thing went wrong</Text>
       ) : (
-          <FlatList
-            data={items}
-            renderItem={renderItem}
-            keyExtractor={(item) => JSON.stringify(item._id)}
-            contentContainerStyle={{ columnGap: SIZES.medium }}
-          ></FlatList>
+        <FlatList
+          data={items}
+          renderItem={renderItem}
+          keyExtractor={(item) => JSON.stringify(item._id)}
+          contentContainerStyle={{ columnGap: SIZES.medium }}
+        ></FlatList>
       )}
     </View>
   )
