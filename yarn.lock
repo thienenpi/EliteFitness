@@ -1650,6 +1650,13 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@koale/useworker@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/@koale/useworker/-/useworker-4.0.2.tgz"
+  integrity sha512-xPIPADtom8/3/4FLNj7MvNcBM/Z2FleH85Fdx2O869eoKW8+PoEgtSVvoxWjCWMA46Sm9A5/R1TyzNGc+yM0wg==
+  dependencies:
+    dequal "^1.0.0"
+
 "@mediapipe/pose@^0.5.1675469404":
   version "0.5.1675469404"
   resolved "https://registry.npmjs.org/@mediapipe/pose/-/pose-0.5.1675469404.tgz"
@@ -1692,10 +1699,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@react-native-async-storage/async-storage@^1.19.5":
-  version "1.19.5"
-  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.19.5.tgz"
-  integrity sha512-zLT7oNPXpW8BxJyHyq8AJbXtlHE/eonFWuJt44y0WeCGnp4KOJ8mfqD8mtAIKLyrYHHE1uadFe/s4C+diYAi8g==
+"@react-native-async-storage/async-storage@1.17.11":
+  version "1.17.11"
+  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.17.11.tgz"
+  integrity sha512-bzs45n5HNcDq6mxXnSsOHysZWn1SbbebNxldBXCQs8dSvF8Aor9KCdpm+TpnnGweK3R6diqsT8lFhX77VX0NFw==
   dependencies:
     merge-options "^3.0.4"
 
@@ -3308,6 +3315,11 @@ deprecated-react-native-prop-types@^3.0.1:
     invariant "^2.2.4"
     prop-types "^15.8.1"
 
+dequal@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/dequal/-/dequal-1.0.1.tgz"
+  integrity sha512-Fx8jxibzkJX2aJgyfSdLhr9tlRoTnHKrRJuu2XHlAgKioN2j19/Bcbe0d4mFXYZ3+wpE2KVobUVTfDutcD17xQ==
+
 destroy@1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz"
@@ -3522,11 +3534,12 @@ expo-asset@~8.9.1:
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
 
-expo-camera@^13.6.0:
-  version "13.6.0"
-  resolved "https://registry.npmjs.org/expo-camera/-/expo-camera-13.6.0.tgz"
-  integrity sha512-8lxK15D2tuEZom9bhDMMqNPW+5241Ak4wIup/ebh4JekgOtSQ/egbq7qDn2FCFi+5vPFKX4nRsvGOuzfuzvmZA==
+expo-camera@~13.2.1:
+  version "13.2.1"
+  resolved "https://registry.npmjs.org/expo-camera/-/expo-camera-13.2.1.tgz"
+  integrity sha512-fZdRyF402jJGGmLVlumrLcr5Em9+Y2SO1MIlxLBtHXnybyHbTRMRAbzVapKX1Aryfujqadh+Kl+sdsWYkMuJjg==
   dependencies:
+    "@koale/useworker" "^4.0.2"
     invariant "^2.2.4"
 
 expo-constants@~14.2.1:
@@ -3566,10 +3579,10 @@ expo-font@~11.1.1:
   dependencies:
     fontfaceobserver "^2.1.0"
 
-expo-gl@^13.2.0:
-  version "13.2.0"
-  resolved "https://registry.npmjs.org/expo-gl/-/expo-gl-13.2.0.tgz"
-  integrity sha512-4a8kOt7kxTj5IODNaWrw9G5Cgex849ENPW5+8o2ykpL6eu/k3m37jzYq6dLO/dSSwpalvMqz4W3+KPxR5MHfvQ==
+expo-gl@~12.4.0:
+  version "12.4.0"
+  resolved "https://registry.npmjs.org/expo-gl/-/expo-gl-12.4.0.tgz"
+  integrity sha512-Wp4qjtktRWzcv7Lz50inHFZTaukqbmN2Hy3AW6fEiMgVaCwedhOLjrfS2IKsLeS97lk9sgoPBo1i4x221lyIBw==
   dependencies:
     invariant "^2.2.4"
 
@@ -3607,10 +3620,10 @@ expo-permissions@~14.1.1:
   resolved "https://registry.npmjs.org/expo-permissions/-/expo-permissions-14.1.2.tgz"
   integrity sha512-NcozPs0cPDe65/Kc7yhSbdGcdpEIeEK1VcUlhRmOrC3kEahwlIdmyLdfhtuuUggaB75Wlo7VOGMZrsNHTWOVHw==
 
-expo-screen-orientation@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.npmjs.org/expo-screen-orientation/-/expo-screen-orientation-6.2.0.tgz"
-  integrity sha512-1uIIe5ACKlRu/vUccBOSXj1ZxQ38pn5MDsxdTqhlQDC637kfX5CTvaM2uYxRGV4S1PXdRrC+d/dvtE2xLQNAFQ==
+expo-screen-orientation@~5.1.1:
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/expo-screen-orientation/-/expo-screen-orientation-5.1.1.tgz"
+  integrity sha512-rYpHUwHpuKlEErxupl3wM+KWcySrSJTXb5Une5gDINMmjWbLBx0N1P2MG1aSPA2eT7bShTO/xDJyegjf438l8w==
 
 expo-splash-screen@~0.18.2:
   version "0.18.2"
@@ -3907,11 +3920,6 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
-
-fsevents@^2.3.2, fsevents@~2.3.2:
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
-  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
 function-bind@^1.1.2:
   version "1.1.2"
@@ -6079,10 +6087,10 @@ react-native-snap-carousel@^4.0.0-beta.6, react-native-snap-carousel@latest:
     "@types/react-addons-shallow-compare" "^0.14.22"
     react-addons-shallow-compare "15.6.2"
 
-react-native-svg@^14.0.0:
-  version "14.0.0"
-  resolved "https://registry.npmjs.org/react-native-svg/-/react-native-svg-14.0.0.tgz"
-  integrity sha512-17W/gWXRUMS7p7PSHu/WyGkZUc1NzRTGxxXc0VqBLjzKSchyb0EmgsiWf9aKmfC6gmY0wcsmKZcGV41bCcNfBA==
+react-native-svg@13.4.0:
+  version "13.4.0"
+  resolved "https://registry.npmjs.org/react-native-svg/-/react-native-svg-13.4.0.tgz"
+  integrity sha512-B3TwK+H0+JuRhYPzF21AgqMt4fjhCwDZ9QUtwNstT5XcslJBXC0FoTkdZo8IEb1Sv4suSqhZwlAY6lwOv3tHag==
   dependencies:
     css-select "^5.1.0"
     css-tree "^1.1.3"

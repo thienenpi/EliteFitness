@@ -2,19 +2,15 @@ import { StyleSheet } from "react-native";
 import { SIZES, COLORS } from "../../constants";
 
 const styles = StyleSheet.create({
-  container: {
-    height: SIZES.height,
-    width: SIZES.width,
-    flexDirection: "column",
-    backgroundColor: COLORS.primaryBg,
-  },
   guideContainer: {
-    paddingTop: 80,
-    height: SIZES.xxLarge,
-    marginHorizontal: SIZES.xxLarge,
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 60,
     flexDirection: "row",
+    paddingHorizontal: 40,
+    justifyContent: "space-between",
+  },
+  userContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 
   sideIcon: {
@@ -23,9 +19,17 @@ const styles = StyleSheet.create({
   },
 
   guideTxt: {
-    fontFamily: "rufner",
+    fontFamily: "poppinsRegular",
     fontSize: 13,
     color: COLORS.text,
+    marginHorizontal: SIZES.xSmall,
+  },
+
+  preText: {
+    fontFamily: "poppinsBold",
+    fontSize: 12,
+    color: COLORS.btn,
+    textTransform: "uppercase",
     marginHorizontal: SIZES.xSmall,
   },
 });
