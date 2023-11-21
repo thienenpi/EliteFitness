@@ -1,11 +1,8 @@
-import React from "react";
+import { FontAwesome, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
 import { COLORS } from "../constants/index";
-import { Home, ChatBot, Log, Shop, Account } from "../screens";
+import { ChatBot, Home, Log, Profile, Shop } from "../screens";
 
 // Create Bottom Tab Navigatior
 const Tab = createBottomTabNavigator();
@@ -45,10 +42,7 @@ const BottomTabNavigation = () => {
   // bottom tab navigation
 
   return (
-    <Tab.Navigator
-      screenOptions={screenOptions}
-      initialRouteName="Home"
-    >
+    <Tab.Navigator screenOptions={screenOptions} initialRouteName="Home">
       <Tab.Screen
         name="Home"
         component={Home}
@@ -112,6 +106,18 @@ const BottomTabNavigation = () => {
               //   color={focus ? COLORS.primary : COLORS.gray2}
               // />
               <FontAwesome5 name="shopping-cart" size={24} color={COLORS.btn} />
+            );
+          },
+        }}
+      ></Tab.Screen>
+
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ focus }) => {
+            return (
+              <FontAwesome5 name="user-circle" size={24} color={COLORS.btn} />
             );
           },
         }}
