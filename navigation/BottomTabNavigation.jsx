@@ -48,13 +48,6 @@ const BottomTabNavigation = () => {
     <Tab.Navigator
       screenOptions={screenOptions}
       initialRouteName="Home"
-      tabBarOptions={{
-        activeTintColor: "#F8C06D",
-        inactiveTintColor: "#7C7773",
-        labelStyle: {
-          fontSize: 12, // Adjust the font size as needed
-        },
-      }}
     >
       <Tab.Screen
         name="Home"
