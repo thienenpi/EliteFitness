@@ -16,14 +16,16 @@ const User = () => {
       </View>
 
       <View style={styles.userContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          style={{ flexDirection: "row", alignItems: "center" }}
+        >
           <FontAwesome
             size={24}
             color={COLORS.btn}
             name="diamond"
           ></FontAwesome>
+          <Text style={styles.preText}>Premium</Text>
         </TouchableOpacity>
-        <Text style={styles.preText}>Premium</Text>
       </View>
     </View>
   );

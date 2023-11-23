@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 
   guideTxt: {
-    fontFamily: "poppinsRegular",
+    fontFamily: "poppinsSemibold",
     fontSize: 13,
     color: COLORS.text,
     marginHorizontal: SIZES.xSmall,
