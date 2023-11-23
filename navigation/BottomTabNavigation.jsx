@@ -48,14 +48,7 @@ const BottomTabNavigation = () => {
         component={Home}
         options={{
           tabBarIcon: ({ focus }) => {
-            return (
-              <Ionicons name="md-home" size={24} color={COLORS.btn} />
-              // <Ionicons
-              //   name={focus ? "home" : "home-outline"}
-              //   size={24}
-              // color={focus ? COLORS.primary : COLORS.gray2}
-              // />
-            );
+            return <Ionicons name="md-home" size={24} color={COLORS.btn} />;
           },
         }}
       ></Tab.Screen>
@@ -83,11 +76,6 @@ const BottomTabNavigation = () => {
         options={{
           tabBarIcon: ({ focus }) => {
             return (
-              // <Ionicons
-              //   name={focus ? "person" : "person-outline"}
-              //   size={24}
-              //   color={focus ? COLORS.primary : COLORS.gray2}
-              // />
               <Ionicons name="chatbox-ellipses" size={24} color={COLORS.btn} />
             );
           },
@@ -100,11 +88,6 @@ const BottomTabNavigation = () => {
         options={{
           tabBarIcon: ({ focus }) => {
             return (
-              // <Ionicons
-              //   name={focus ? "home" : "home-outline"}
-              //   size={24}
-              //   color={focus ? COLORS.primary : COLORS.gray2}
-              // />
               <FontAwesome5 name="shopping-cart" size={24} color={COLORS.btn} />
             );
           },
@@ -117,7 +100,7 @@ const BottomTabNavigation = () => {
         options={{
           tabBarIcon: ({ focus }) => {
             return (
-              <FontAwesome5 name="user-circle" size={24} color={COLORS.btn} />
+              <FontAwesome name="user-circle" size={24} color={COLORS.btn} />
             );
           },
         }}
