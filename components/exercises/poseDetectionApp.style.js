@@ -12,13 +12,12 @@ const styles = StyleSheet.create({
     position: "relative",
     width: CAM_PREVIEW_WIDTH,
     height: CAM_PREVIEW_HEIGHT,
-    marginTop: SIZES.height / 2 - CAM_PREVIEW_HEIGHT / 2,
   },
   containerLandscape: {
     position: "relative",
     width: CAM_PREVIEW_HEIGHT,
     height: CAM_PREVIEW_WIDTH,
-    marginLeft: SIZES.height / 2 - CAM_PREVIEW_HEIGHT / 2,
+    // marginLeft: SIZES.height / 2 - CAM_PREVIEW_HEIGHT / 2,
   },
   loadingMsg: {
     position: "absolute",
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     padding: 8,
     zIndex: 20,
+    marginTop: SIZES.height / 2 - CAM_PREVIEW_HEIGHT / 2,
   },
   cameraTypeSwitcher: {
     position: "absolute",
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     right: 10,
     alignItems: "center",
     zIndex: 20,
+    marginTop: SIZES.height / 2 - CAM_PREVIEW_HEIGHT / 2,
   },
 })
 
