@@ -9,6 +9,9 @@ import { cameraWithTensors } from "@tensorflow/tfjs-react-native"
 import Svg, { Circle } from "react-native-svg"
 import styles from "./poseDetectionApp.style"
 import { COLORS } from "../../constants"
+import * as util from "../../lib/utilities"
+import { JointAngle } from "../../lib/jointAngles"
+import { BodyPart } from "../../lib/bodyPart"
 
 const TensorCamera = cameraWithTensors(Camera)
 
@@ -54,7 +57,7 @@ const PoseDetectionApp = ({ recordState }) => {
       await tf.ready()
 
       const movenetModelConfig = {
-        modelType: posedetection.movenet.modelType.SINGLEPOSE_THUNDER,
+        modelType: posedetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
         enableSmoothing: true,
       }
 
@@ -98,41 +101,41 @@ const PoseDetectionApp = ({ recordState }) => {
     console.log(recordState)
   }, [recordState])
 
-  const startRecording = async () => {
-    if (cameraRef.current) {
-      try {
-        const videoOptions = {
-            quality: Camera.Constants.VideoQuality["720p"],
-          // maxDuration: 60, // 60 seconds
-        }
+  //   const startRecording = async () => {
+  //     if (cameraRef.current) {
+  //       try {
+  //         const videoOptions = {
+  //           quality: Camera.Constants.VideoQuality["720p"],
+  //           // maxDuration: 60, // 60 seconds
+  //         }
 
-        const videoRecordPromise = cameraRef.current.recordAsync(videoOptions)
-        const videoRecordData = await videoRecordPromise
+  //         const videoRecordPromise = cameraRef.current.recordAsync(videoOptions)
+  //         const videoRecordData = await videoRecordPromise
 
-        await saveVideoToLibrary(videoRecordData.uri)
-      } catch (error) {
-        console.error("Error recording video:", error)
-      }
-    } else {
-        console.error("cameraRef is not available")
-    }
-  }
+  //         await saveVideoToLibrary(videoRecordData.uri)
+  //       } catch (error) {
+  //         console.error("Error recording video:", error)
+  //       }
+  //     } else {
+  //       console.error("cameraRef is not available")
+  //     }
+  //   }
 
-  const saveVideoToLibrary = async (videoUri) => {
-    try {
-      const asset = await MediaLibrary.createAssetAsync(videoUri)
-      await MediaLibrary.createAlbumAsync("Expo Videos", asset, false)
-      console.log("Video saved to Photos")
-    } catch (error) {
-      console.error("Error saving video to Photos:", error)
-    }
-  }
+  //   const saveVideoToLibrary = async (videoUri) => {
+  //     try {
+  //       const asset = await MediaLibrary.createAssetAsync(videoUri)
+  //       await MediaLibrary.createAlbumAsync("Expo Videos", asset, false)
+  //       console.log("Video saved to Photos")
+  //     } catch (error) {
+  //       console.error("Error saving video to Photos:", error)
+  //     }
+  //   }
 
-  const stopRecording = async () => {
-    if (cameraRef.current) {
-      cameraRef.current.stopRecording()
-    }
-  }
+  //   const stopRecording = async () => {
+  //     if (cameraRef.current) {
+  //       cameraRef.current.stopRecording()
+  //     }
+  //   }
 
   const handleCameraStream = async (images, updatePreview, gl) => {
     const loop = async () => {
@@ -190,6 +193,12 @@ const PoseDetectionApp = ({ recordState }) => {
             />
           )
         })
+
+      const ja = new JointAngle()
+      const bp = new BodyPart()
+      bp.cords = util.detectJoints(poses[0].keypoints)
+      const body_angles = ja.bodyAngles(bp)
+      console.log(body_angles[1])
 
       return <Svg style={styles.svg}>{keypoints}</Svg>
     } else {
