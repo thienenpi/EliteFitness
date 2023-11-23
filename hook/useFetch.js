@@ -10,11 +10,9 @@ const useFetch = ({ collection }) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.get(
-        `http://192.168.100.171:3000/api/${collection}`
-      );
-      setData(response.data);
-      setIsLoading(false);
+      const response = await axios.get(`http://10.45.50.224:3000/api/${collection}`)
+      setData(response.data)
+      setIsLoading(false)
     } catch (error) {
       setError(error);
     } finally {
