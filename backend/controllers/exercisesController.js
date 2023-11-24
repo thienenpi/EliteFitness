@@ -1,4 +1,7 @@
 const Exercise = require("../models/Exercises")
+const fs = require("fs")
+const { parse } = require("csv-parse")
+const path = require("path")
 
 module.exports = {
   createExercise: async (req, res) => {
@@ -24,7 +27,27 @@ module.exports = {
   getExercise: async (req, res) => {
     try {
       const exercise = await Exercise.findById(req.params.id)
-      res.status(200).json(exercise)
+      const csvPath = path.join(__dirname, exercise.csvPath)
+      var data = {
+        FrameNo: [],
+        Angles: [],
+        Velocities: [],
+      }
+
+      fs.createReadStream(csvPath)
+        .pipe(parse({ delimiter: ",", from_line: 2 }))
+        .on("data", function (row) {
+          data.FrameNo.push(row[1])
+          data.Angles.push(JSON.parse(row[2]))
+          data.Velocities.push(JSON.parse(row[3]))
+        })
+        .on("end", function () {
+          res.status(200).json(data)
+          console.log("finished")
+        })
+        .on("error", function (error) {
+          console.log(error.message)
+        })
     } catch (error) {
       res.status(500).json(error)
     }
