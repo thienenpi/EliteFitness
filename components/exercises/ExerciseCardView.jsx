@@ -7,7 +7,7 @@ const ExerciseCardView = ({ item }) => {
   const navigation = useNavigation()
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("Practice", {item})}>
+    <TouchableOpacity onPress={() => navigation.navigate("Practice", { item })}>
       <View style={styles.container}>
         <Image
           style={styles.image}

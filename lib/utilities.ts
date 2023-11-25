@@ -4,6 +4,21 @@ import { getKeypointIndexByName } from "@tensorflow-models/pose-detection/dist/u
 
 const keypointIndexMap = getKeypointIndexByName(SupportedModels.MoveNet)
 
+export function calculateVelocity(
+  prevAngles: number[],
+  currAngles: number[],
+  duration: number
+): number[] {
+  var gradient: number[] = []
+
+  for (var i = 0; i < prevAngles.length; i++) {
+    var deltaAngle = currAngles[i] - prevAngles[i]
+    gradient.push(deltaAngle / duration)
+  }
+
+  return gradient
+}
+
 export function calculateJointAngle(
   p1: number[],
   p2: number[],

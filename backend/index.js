@@ -19,5 +19,5 @@ app.use("/api/muscles", muscleRouter)
 app.use("/api/exercises", exercisesRouter)
 
 app.listen(process.env.PORT || port, () =>
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`EliteFitness app listening on port ${port}!`)
 )

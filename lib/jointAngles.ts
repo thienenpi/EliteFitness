@@ -15,11 +15,11 @@ export class Angles {
 }
 
 export class JointAngle {
-    private kps: Keypoint[]
+  private kps: Keypoint[]
 
-    constructor(kps: Keypoint[]) {
-      this.kps = kps
-    }
+  constructor(kps: Keypoint[]) {
+    this.kps = kps
+  }
 
   leftLegAngle(
     leftHip: number[],
