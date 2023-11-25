@@ -31,9 +31,15 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
+<<<<<<< HEAD
+          `http://192.168.100.171:3000/api/exercises/search/${searchKey || ""}`
+        );
+        setFoundExercises(response.data);
+=======
           `http://10.0.190.1:3000/api/exercises/search/${searchKey || ""}`
         )
         setFoundExercises(response.data)
+>>>>>>> d94e94cea79dd41bd5f2f6bd8abb65fe5fe8689a
       } catch (error) {
         console.log(error);
       }
