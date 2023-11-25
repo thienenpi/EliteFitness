@@ -27,6 +27,7 @@ const Practice = ({ navigation }) => {
       <View style={styles.workoutContainer}>
         {/* <VideoRecording></VideoRecording> */}
         <PoseDetectionApp
+          item={item}
           recordState={recordState}
         ></PoseDetectionApp>
       </View>
@@ -37,12 +38,12 @@ const Practice = ({ navigation }) => {
             <Text style={styles.trackValue}> Down </Text>
 
             <Text style={styles.trackTitle}> Set </Text>
-            <Text style={styles.trackValue}> 1 </Text>
+            <Text style={styles.trackValue}> 1/{item.numOfSet} </Text>
           </View>
 
           <View style={styles.trackContainer}>
             <Text style={styles.trackTitle}> Reps </Text>
-            <Text style={styles.trackValue}> 2/7 </Text>
+            <Text style={styles.trackValue}> 2/{item.numOfRep} </Text>
 
             <Text style={styles.trackTitle}> Score </Text>
             <Text style={styles.trackValue}> 0.99 </Text>

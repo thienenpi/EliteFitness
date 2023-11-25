@@ -6,45 +6,43 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import {
-  Ionicons,
-  MaterialCommunityIcons,
-  AntDesign,
-} from "@expo/vector-icons";
+} from "react-native"
+import React, { useEffect, useState } from "react"
+import { Ionicons, MaterialCommunityIcons, AntDesign } from "@expo/vector-icons"
 // Import external style.js file
-import styles from "./styles/home.style";
+import styles from "./styles/home.style"
 
-import { COLORS } from "../constants";
-import MuscleRow from "../components/muscles/MuscleRow";
-import ExerciseColumn from "../components/exercises/ExerciseColumn";
-import axios from "axios";
-import Welcome from "../components/home/Welcome";
-import FilterRow from "../components/home/FilterRow";
+import { COLORS } from "../constants"
+import MuscleRow from "../components/muscles/MuscleRow"
+import ExerciseColumn from "../components/exercises/ExerciseColumn"
+import axios from "axios"
+import Welcome from "../components/home/Welcome"
+import FilterRow from "../components/home/FilterRow"
 
 const Home = () => {
-  const [foundExercises, setFoundExercises] = useState([]);
-  const [searchKey, setSearchKey] = useState("");
+  const [foundExercises, setFoundExercises] = useState([])
+  const [searchKey, setSearchKey] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://10.0.190.1:3000/api/exercises/search/${searchKey || ""}`
+          `http://10.45.50.224:3000/api/exercises/search/${searchKey || ""}`
         )
         setFoundExercises(response.data)
       } catch (error) {
-        console.log(error);
+        console.error(error)
       }
-    };
+    }
 
-    fetchData();
-  }, [searchKey]);
+    if (searchKey) {
+      fetchData()
+    }
+  }, [searchKey])
 
   const updateSelectedMuscles = async (muscles) => {
-    setSearchKey(muscles.join("&"));
-  };
+    setSearchKey(muscles.join("&"))
+  }
 
   return (
     <View style={styles.container}>
@@ -89,7 +87,7 @@ const Home = () => {
         <ExerciseColumn items={foundExercises}></ExerciseColumn>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

@@ -12,6 +12,7 @@ import { COLORS } from "../../constants"
 import * as util from "../../lib/utilities"
 import { JointAngle } from "../../lib/jointAngles"
 import { BodyPart } from "../../lib/bodyPart"
+import axios from "axios"
 
 const TensorCamera = cameraWithTensors(Camera)
 
@@ -30,7 +31,14 @@ const AUTO_RENDER = false
 
 // const LOAD_MODEL_FROM_BUNDLE = false
 
-const PoseDetectionApp = ({ recordState }) => {
+var prevAngles,
+  currAngles = null,
+  velocities,
+  prevStartAt,
+  currStartAt = null,
+  frameCnt = 0
+
+const PoseDetectionApp = ({ recordState, item }) => {
   const cameraRef = useRef(null)
   const [tfReady, setTfReady] = useState(false)
   const [model, setModel] = useState()
@@ -39,6 +47,7 @@ const PoseDetectionApp = ({ recordState }) => {
   const [orientation, setOrientation] = useState()
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.front)
   const rafId = useRef(null)
+  let data
 
   useEffect(() => {
     async function prepare() {
@@ -101,6 +110,20 @@ const PoseDetectionApp = ({ recordState }) => {
     console.log(recordState)
   }, [recordState])
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://192.168.10.93:3000/api/exercises/${item._id}`
+        )
+        data = response.data
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchData()
+  }, [item])
   //   const startRecording = async () => {
   //     if (cameraRef.current) {
   //       try {
@@ -167,6 +190,28 @@ const PoseDetectionApp = ({ recordState }) => {
     loop()
   }
 
+  const extractData = () => {
+    const ja = new JointAngle()
+    const bp = new BodyPart()
+    bp.cords = util.detectJoints(poses[0].keypoints)
+
+    prevAngles = currAngles
+    currAngles = ja.bodyAngles(bp)
+
+    prevStartAt = currStartAt
+    currStartAt = Date.now()
+
+    if (prevAngles) {
+      const duration = currStartAt - prevStartAt
+      velocities = util.calculateVelocity(prevAngles, currAngles, duration)
+    } else {
+      const duration = 1
+      velocities = util.calculateVelocity(currAngles, currAngles, duration)
+    }
+
+    ++frameCnt
+  }
+
   const renderPose = () => {
     if (poses != null && poses.length > 0) {
       const keypoints = poses[0].keypoints
@@ -194,11 +239,7 @@ const PoseDetectionApp = ({ recordState }) => {
           )
         })
 
-      const ja = new JointAngle()
-      const bp = new BodyPart()
-      bp.cords = util.detectJoints(poses[0].keypoints)
-      const body_angles = ja.bodyAngles(bp)
-      console.log(body_angles[1])
+      extractData()
 
       return <Svg style={styles.svg}>{keypoints}</Svg>
     } else {
