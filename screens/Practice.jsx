@@ -13,6 +13,7 @@ const Practice = ({ navigation }) => {
   const { item } = route.params
   const [cameraState, setCameraState] = useState(false)
   const [recordState, setRecordState] = useState(false)
+  const [practiceState, setPracticeState] = useState(false)
 
   const onUpdateCameraState = () => {
     setCameraState((prevState) => !prevState)
@@ -29,6 +30,7 @@ const Practice = ({ navigation }) => {
         <PoseDetectionApp
           item={item}
           recordState={recordState}
+          practiceState={practiceState}
         ></PoseDetectionApp>
       </View>
       <View style={styles.menuContainer}>
@@ -74,9 +76,9 @@ const Practice = ({ navigation }) => {
 
         <Button
           styles={styles}
-          title={"Done"}
+          title={practiceState ? "Done" : "Start"}
           isValid={true}
-          onPress={() => {}}
+          onPress={() => setPracticeState(!practiceState)}
         ></Button>
       </View>
     </View>

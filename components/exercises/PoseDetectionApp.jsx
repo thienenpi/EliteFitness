@@ -30,24 +30,25 @@ const OUTPUT_TENSOR_HEIGHT = OUTPUT_TENSOR_WIDTH / (IS_IOS ? 9 / 16 : 3 / 4)
 const AUTO_RENDER = false
 
 // const LOAD_MODEL_FROM_BUNDLE = false
-
+let data
 var prevAngles,
   currAngles = null,
   velocities,
-  prevStartAt,
+  prevStartAt = 0,
   currStartAt = null,
-  frameCnt = 0
+  timeCnt = 0
 
-const PoseDetectionApp = ({ recordState, item }) => {
+const PoseDetectionApp = ({ practiceState, recordState, item }) => {
   const cameraRef = useRef(null)
   const [tfReady, setTfReady] = useState(false)
   const [model, setModel] = useState()
   const [poses, setPoses] = useState()
   const [fps, setFps] = useState(0)
+  const [start, setStart] = useState(practiceState)
   const [orientation, setOrientation] = useState()
-  const [cameraType, setCameraType] = useState(Camera.Constants.Type.front)
+  const [dataSet, setDataSet] = useState([])
+  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const rafId = useRef(null)
-  let data
 
   useEffect(() => {
     async function prepare() {
@@ -107,14 +108,42 @@ const PoseDetectionApp = ({ recordState, item }) => {
     // } else {
     //   stopRecording()
     // }
-    console.log(recordState)
+    // console.log(recordState)
   }, [recordState])
+
+  const checkDeviation = (vectorFromDataset, inputVector, threshold, time) => {
+    const bodyParts = [
+      "neck",
+      "left_arm",
+      "right_arm",
+      "back",
+      "abdomen",
+      "internal",
+      "left_leg",
+      "right_leg",
+    ]
+
+    const arrayFromDataset = vectorFromDataset.map(Number)
+    const arrayFromInput = inputVector.map(Number)
+
+    const deviation = arrayFromDataset.map((value, index) =>
+      Math.abs(value - arrayFromInput[index])
+    )
+
+    deviation.forEach((value, index) => {
+      if (value > threshold) {
+        console.log(
+          `${time}s: ${bodyParts[index]}: dang bi lech ${value} so voi tieu chuan`
+        )
+      }
+    })
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://192.168.10.93:3000/api/exercises/${item._id}`
+          `http://192.168.1.18:3000/api/exercises/${item._id}`
         )
         data = response.data
       } catch (error) {
@@ -122,8 +151,10 @@ const PoseDetectionApp = ({ recordState, item }) => {
       }
     }
 
+    setStart(practiceState)
+    timeCnt = 0
     fetchData()
-  }, [item])
+  }, [practiceState])
   //   const startRecording = async () => {
   //     if (cameraRef.current) {
   //       try {
@@ -191,25 +222,48 @@ const PoseDetectionApp = ({ recordState, item }) => {
   }
 
   const extractData = () => {
-    const ja = new JointAngle()
-    const bp = new BodyPart()
-    bp.cords = util.detectJoints(poses[0].keypoints)
+    try {
+      const ja = new JointAngle()
+      const bp = new BodyPart()
+      bp.cords = util.detectJoints(poses[0].keypoints)
 
-    prevAngles = currAngles
-    currAngles = ja.bodyAngles(bp)
+      currAngles = ja.bodyAngles(bp)
 
-    prevStartAt = currStartAt
-    currStartAt = Date.now()
+      currStartAt = Date.now()
+      prevStartAt = prevStartAt ? prevStartAt : currStartAt
 
-    if (prevAngles) {
-      const duration = currStartAt - prevStartAt
-      velocities = util.calculateVelocity(prevAngles, currAngles, duration)
-    } else {
-      const duration = 1
-      velocities = util.calculateVelocity(currAngles, currAngles, duration)
+      if (prevAngles) {
+        const duration = currStartAt - prevStartAt
+        if (duration > 1000) {
+          ++timeCnt
+          prevStartAt = currStartAt
+          velocities = util.calculateVelocity(prevAngles, currAngles, duration)
+          prevAngles = currAngles
+          checkDeviation(data.Angles[timeCnt], currAngles, 15, timeCnt)
+          //   const record = {
+          //     TimeCnt: timeCnt,
+          //     Angles: currAngles,
+          //     Velocities: velocities,
+          //   }
+          //   setDataSet((curr) => [...curr, record])
+        }
+      } else {
+        const duration = 1
+        velocities = util.calculateVelocity(currAngles, currAngles, duration)
+        prevAngles = currAngles
+        checkDeviation(data.Angles[timeCnt], currAngles, 20, timeCnt)
+        // const record = {
+        //   TimeCnt: timeCnt,
+        //   Angles: currAngles,
+        //   Velocities: velocities,
+        // }
+        // setDataSet((curr) => [...curr, record])
+      }
+
+      // console.log('dataSet', dataSet)
+    } catch (error) {
+      //   console.error(error)
     }
-
-    ++frameCnt
   }
 
   const renderPose = () => {
@@ -240,7 +294,6 @@ const PoseDetectionApp = ({ recordState, item }) => {
         })
 
       extractData()
-
       return <Svg style={styles.svg}>{keypoints}</Svg>
     } else {
       return <View></View>
@@ -340,7 +393,7 @@ const PoseDetectionApp = ({ recordState, item }) => {
           rotation={getTextureRotationAngleInDegrees()}
           onReady={handleCameraStream}
         />
-        {renderPose()}
+        {start && renderPose()}
         {renderFps()}
         {renderCameraTypeSwitcher()}
       </View>
