@@ -29,7 +29,7 @@ module.exports = {
       const exercise = await Exercise.findById(req.params.id)
       const csvPath = path.join(__dirname, exercise.csvPath)
       var data = {
-        FrameNo: [],
+        TimeCnt: [],
         Angles: [],
         Velocities: [],
       }
@@ -37,9 +37,9 @@ module.exports = {
       fs.createReadStream(csvPath)
         .pipe(parse({ delimiter: ",", from_line: 2 }))
         .on("data", function (row) {
-          data.FrameNo.push(row[1])
-          data.Angles.push(JSON.parse(row[2]))
-          data.Velocities.push(JSON.parse(row[3]))
+          data.TimeCnt.push(row[0])
+          data.Angles.push(JSON.parse(row[1]))
+          data.Velocities.push(JSON.parse(row[2]))
         })
         .on("end", function () {
           res.status(200).json(data)

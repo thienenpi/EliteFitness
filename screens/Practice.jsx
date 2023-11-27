@@ -13,6 +13,7 @@ const Practice = ({ navigation }) => {
   const { item } = route.params
   const [cameraState, setCameraState] = useState(false)
   const [recordState, setRecordState] = useState(false)
+  const [practiceState, setPracticeState] = useState(false)
 
   const onUpdateCameraState = () => {
     setCameraState((prevState) => !prevState)
@@ -27,7 +28,9 @@ const Practice = ({ navigation }) => {
       <View style={styles.workoutContainer}>
         {/* <VideoRecording></VideoRecording> */}
         <PoseDetectionApp
+          item={item}
           recordState={recordState}
+          practiceState={practiceState}
         ></PoseDetectionApp>
       </View>
       <View style={styles.menuContainer}>
@@ -37,12 +40,12 @@ const Practice = ({ navigation }) => {
             <Text style={styles.trackValue}> Down </Text>
 
             <Text style={styles.trackTitle}> Set </Text>
-            <Text style={styles.trackValue}> 1 </Text>
+            <Text style={styles.trackValue}> 1/{item.numOfSet} </Text>
           </View>
 
           <View style={styles.trackContainer}>
             <Text style={styles.trackTitle}> Reps </Text>
-            <Text style={styles.trackValue}> 2/7 </Text>
+            <Text style={styles.trackValue}> 2/{item.numOfRep} </Text>
 
             <Text style={styles.trackTitle}> Score </Text>
             <Text style={styles.trackValue}> 0.99 </Text>
@@ -73,9 +76,9 @@ const Practice = ({ navigation }) => {
 
         <Button
           styles={styles}
-          title={"Done"}
+          title={practiceState ? "Done" : "Start"}
           isValid={true}
-          onPress={() => {}}
+          onPress={() => setPracticeState(!practiceState)}
         ></Button>
       </View>
     </View>
