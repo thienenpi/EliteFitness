@@ -128,19 +128,23 @@ const PoseDetectionApp = ({ practiceState, recordState, item }) => {
       "internal",
       "left_leg",
       "right_leg",
+      "left_armpit",
+      "right_armpit",
     ]
 
     const arrayFromDataset = vectorFromDataset.map(Number)
     const arrayFromInput = inputVector.map(Number)
 
-    const deviation = arrayFromDataset.map((value, index) =>
-      Math.abs(value - arrayFromInput[index])
+    const deviation = arrayFromDataset.map(
+      (value, index) => value - arrayFromInput[index]
     )
 
     deviation.forEach((value, index) => {
-      if (value > threshold) {
+      if (Math.abs(value) > threshold) {
         console.log(
-          `${time}s: ${bodyParts[index]}: dang bi lech ${value} so voi tieu chuan`
+          `${time}s: ${bodyParts[index]}: dang bi ${
+            value > 0 ? "cao" : "thap"
+          } hon ${Math.abs(value)} so voi tieu chuan`
         )
       }
     })
@@ -148,11 +152,21 @@ const PoseDetectionApp = ({ practiceState, recordState, item }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (item.csvPath === "none") {
+        console.error("CSV path is none")
+        return
+      }
+
       try {
         const response = await axios.get(
-          `http://10.0.177.25:3000/api/exercises/${item._id}`
+          `http://192.168.1.107:3000/api/exercises/${item._id}`
         )
-        data = response.data
+
+        if (response.status === 200) {
+          data = response.data
+        } else {
+          console.error(response.statusText)
+        }
       } catch (error) {
         console.error(error)
       }
@@ -247,12 +261,12 @@ const PoseDetectionApp = ({ practiceState, recordState, item }) => {
           velocities = util.calculateVelocity(prevAngles, currAngles, duration)
           prevAngles = currAngles
           checkDeviation(data.Angles[timeCnt], currAngles, 15, timeCnt)
-          //   const record = {
-          //     TimeCnt: timeCnt,
-          //     Angles: currAngles,
-          //     Velocities: velocities,
-          //   }
-          //   setDataSet((curr) => [...curr, record])
+          // const record = {
+          //   TimeCnt: timeCnt,
+          //   Angles: currAngles,
+          //   Velocities: velocities,
+          // }
+          // setDataSet((curr) => [...curr, record])
         }
       } else {
         const duration = 1
@@ -267,9 +281,9 @@ const PoseDetectionApp = ({ practiceState, recordState, item }) => {
         // setDataSet((curr) => [...curr, record])
       }
 
-      // console.log('dataSet', dataSet)
+      //   console.log('dataSet', dataSet)
     } catch (error) {
-      //   console.error(error)
+      // console.error(error)
     }
   }
 

@@ -46,7 +46,7 @@ module.exports = {
           console.log("finished")
         })
         .on("error", function (error) {
-          console.log(error.message)
+          res.status(500).json(error.message)
         })
     } catch (error) {
       res.status(500).json(error)
