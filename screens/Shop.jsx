@@ -1,11 +1,12 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React from "react";
-import styles from "./styles/shop.style";
-import SearchBar from "../components/shop/search";
-import { COLORS } from "../constants";
-import Slider from "../components/shop/slider";
-import ProductList from "../components/shop/productList";
+import { View, Text, TouchableOpacity } from "react-native"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
+import React from "react"
+import styles from "./styles/shop.style"
+import SearchBar from "../components/shop/search"
+import { COLORS } from "../constants"
+import Slider from "../components/shop/slider"
+import ProductList from "../components/shop/productList"
+
 const Shop = () => {
   return (
     <View style={styles.container}>
@@ -45,7 +46,7 @@ const Shop = () => {
         <ProductList />
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default Shop;
+export default Shop
