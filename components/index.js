@@ -1,3 +1,4 @@
+import BackBtn from "./BackBtn";
 import Button from "./Button";
 import SettingRow from "./SettingRow";
 import ExerciseCardView from "./exercises/ExerciseCardView";
@@ -23,4 +24,5 @@ export {
   SettingRow,
   VideoRecording,
   PoseDetectionApp,
+  BackBtn,
 }
