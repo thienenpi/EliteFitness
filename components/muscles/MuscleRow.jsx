@@ -49,7 +49,7 @@ const MuscleRow = ({ onUpdateSelectedMuscles }) => {
       {isLoading ? (
         <ActivityIndicator
           size={SIZES.xxLarge}
-          color={COLORS.primary}
+          color={COLORS.btn}
         ></ActivityIndicator>
       ) : error ? (
         <Text>Some thing went wrong</Text>
@@ -60,8 +60,7 @@ const MuscleRow = ({ onUpdateSelectedMuscles }) => {
           horizontal
           keyExtractor={(item) => JSON.stringify(item._id)}
           contentContainerStyle={{ columnGap: SIZES.medium }}
-        showsHorizontalScrollIndicator={false}
-
+          showsHorizontalScrollIndicator={false}
         ></FlatList>
       )}
 
