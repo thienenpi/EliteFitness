@@ -77,12 +77,12 @@ const CreateExercise = ({ navigation }) => {
     }
 
     try {
-      const endpoint = `http://10.0.177.25:3000/api/exercises`
+      const endpoint = `http://192.168.1.107:3000/api/exercises`
       const response = await axios.post(endpoint, data)
 
       if (response.status === 200) {
         setLoader(false)
-        console.log("Create exercise successfully");
+        console.log("Create exercise successfully")
       } else {
         console.log("status", response.status)
       }
@@ -96,7 +96,7 @@ const CreateExercise = ({ navigation }) => {
   }
 
   return (
-    <ScrollView >
+    <ScrollView>
       <SafeAreaView style={styles.container}>
         <View style={styles.headerContainer}>
           <BackBtn onPress={() => navigation.goBack()}></BackBtn>
@@ -226,7 +226,7 @@ const CreateExercise = ({ navigation }) => {
                     )}
                   >
                     <TextInput
-                      placeholder="Enter affected muscles, separate by ','"
+                      placeholder="Enter muscles, separate by ','"
                       onFocus={() => {
                         setFieldTouched("affectedMuscles")
                       }}

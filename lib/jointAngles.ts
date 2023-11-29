@@ -12,6 +12,8 @@ export class Angles {
   internal = 5
   left_leg = 6
   right_leg = 7
+  left_armpit = 8
+  right_armpit = 9
 }
 
 export class JointAngle {
@@ -74,8 +76,24 @@ export class JointAngle {
     return calculateJointAngle(leftAnkle, hip, rightAnkle)
   }
 
+  leftArmpitAngle(
+    leftHip: number[],
+    leftShoulder: number[],
+    leftElbow: number[]
+  ): number {
+    return calculateJointAngle(leftHip, leftShoulder, leftElbow)
+  }
+
+  rightArmpitAngle(
+    rightHip: number[],
+    rightShoulder: number[],
+    rightElbow: number[]
+  ): number {
+    return calculateJointAngle(rightHip, rightShoulder, rightElbow)
+  }
+
   bodyAngles(bp: BodyPart): number[] {
-    const angles: number[] = Array(8).fill(0)
+    const angles: number[] = Array(10).fill(0)
     const angleTypes: Angles = new Angles()
 
     angles[angleTypes.neck] = this.neckAngle(
@@ -112,6 +130,16 @@ export class JointAngle {
       bp.cords[bp.right_hip],
       bp.cords[bp.right_knee],
       bp.cords[bp.right_ankle]
+    )
+    angles[angleTypes.left_armpit] = this.leftArmpitAngle(
+      bp.cords[bp.left_hip],
+      bp.cords[bp.left_shoulder],
+      bp.cords[bp.left_elbow]
+    )
+    angles[angleTypes.right_armpit] = this.rightArmpitAngle(
+      bp.cords[bp.right_hip],
+      bp.cords[bp.right_shoulder],
+      bp.cords[bp.right_elbow]
     )
 
     return angles
