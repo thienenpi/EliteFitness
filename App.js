@@ -3,7 +3,7 @@ import { useFonts } from "expo-font"
 import BottomTabNavigation from "./navigation/BottomTabNavigation"
 import { useCallback } from "react"
 import { NavigationContainer } from "@react-navigation/native"
-import { Practice } from "./screens"
+import { CreateExercise, Practice } from "./screens"
 
 // Create Stack Navigator
 const Stack = createNativeStackNavigator()
@@ -60,6 +60,12 @@ export default function App() {
         <Stack.Screen
           name="Practice"
           component={Practice}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+
+        <Stack.Screen
+          name="CreateExercise"
+          component={CreateExercise}
           options={{ headerShown: false }}
         ></Stack.Screen>
       </Stack.Navigator>

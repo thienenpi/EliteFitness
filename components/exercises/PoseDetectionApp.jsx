@@ -1,5 +1,12 @@
 import React, { useEffect, useState, useRef } from "react"
-import { Text, View, Dimensions, Platform, Switch } from "react-native"
+import {
+  Text,
+  View,
+  Dimensions,
+  Platform,
+  Switch,
+  ActivityIndicator,
+} from "react-native"
 import { Camera } from "expo-camera"
 import * as MediaLibrary from "expo-media-library"
 import * as tf from "@tensorflow/tfjs"
@@ -8,7 +15,7 @@ import * as ScreenOrientation from "expo-screen-orientation"
 import { cameraWithTensors } from "@tensorflow/tfjs-react-native"
 import Svg, { Circle } from "react-native-svg"
 import styles from "./poseDetectionApp.style"
-import { COLORS } from "../../constants"
+import { COLORS, SIZES } from "../../constants"
 import * as util from "../../lib/utilities"
 import { JointAngle } from "../../lib/jointAngles"
 import { BodyPart } from "../../lib/bodyPart"
@@ -143,7 +150,7 @@ const PoseDetectionApp = ({ practiceState, recordState, item }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://192.168.1.18:3000/api/exercises/${item._id}`
+          `http://10.0.177.25:3000/api/exercises/${item._id}`
         )
         data = response.data
       } catch (error) {
@@ -371,9 +378,11 @@ const PoseDetectionApp = ({ practiceState, recordState, item }) => {
 
   if (!tfReady) {
     return (
-      <View style={styles.loadingMsg}>
-        <Text>Loading...</Text>
-      </View>
+      <ActivityIndicator
+        style={styles.loader}
+        size={SIZES.xxLarge}
+        color={COLORS.btn}
+      ></ActivityIndicator>
     )
   } else {
     return (

@@ -9,10 +9,7 @@ const ExerciseCardView = ({ item }) => {
   return (
     <TouchableOpacity onPress={() => navigation.navigate("Practice", { item })}>
       <View style={styles.container}>
-        <Image
-          style={styles.image}
-          source={require("../../assets/images/exercises/dbp/3x.png")}
-        ></Image>
+        <Image style={styles.image} source={{ uri: item.imageUrl }}></Image>
         <View style={styles.details}>
           <Text style={styles.title}> {item.title}</Text>
           <Text style={styles.description}>
