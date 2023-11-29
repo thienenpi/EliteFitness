@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     height: CAM_PREVIEW_WIDTH,
     // marginLeft: SIZES.height / 2 - CAM_PREVIEW_HEIGHT / 2,
   },
-  loadingMsg: {
+  loader: {
     position: "absolute",
     width: "100%",
     height: "100%",

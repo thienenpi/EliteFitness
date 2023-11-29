@@ -18,18 +18,20 @@ import ExerciseColumn from "../components/exercises/ExerciseColumn"
 import axios from "axios"
 import Welcome from "../components/home/Welcome"
 import FilterRow from "../components/home/FilterRow"
+import { useNavigation } from "@react-navigation/native"
 
 const Home = () => {
   const [foundExercises, setFoundExercises] = useState([])
   const [searchKey, setSearchKey] = useState(null)
+  const navigation = useNavigation()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://192.168.1.18:3000/api/exercises/search/${searchKey || ""}`
-        );
-        setFoundExercises(response.data);
+          `http://10.0.177.25:3000/api/exercises/search/${searchKey || ""}`
+        )
+        setFoundExercises(response.data)
       } catch (error) {
         console.error(error)
       }
@@ -76,7 +78,9 @@ const Home = () => {
       <View style={styles.exerciseContainer}>
         <View style={styles.exerciseHeader}>
           <Text style={styles.title}>Exercise</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CreateExercise")}
+          >
             <MaterialCommunityIcons
               size={24}
               color={COLORS.btn}

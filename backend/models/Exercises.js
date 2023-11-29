@@ -6,7 +6,7 @@ const ExerciseSchema = new mongoose.Schema(
     numOfSet: { type: Number, required: true },
     numOfRep: { type: Number, required: true },
     imageUrl: { type: String, required: true },
-    videoUrl: { type: String, required: true },
+    videoUrls: [{ type: String, required: true }],
     muscles: [{ type: String, required: true }],
     csvPath: { type: String, required: true },
   },

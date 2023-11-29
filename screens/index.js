@@ -5,7 +5,8 @@ import Shop from "./Shop";
 import Profile from "./Profile";
 import Search from "./Search";
 import Practice from "./Practice";
+import CreateExercise from "./CreateExercise";
 
 // Export to use in other parent directories
 
-export { ChatBot, Home, Profile, Search, Log, Shop, Practice };
+export { ChatBot, Home, Profile, Search, Log, Shop, Practice, CreateExercise };
