@@ -1,14 +1,16 @@
-import { StyleSheet } from "react-native";
-import { SIZES, COLORS } from "../../constants";
+import { StyleSheet } from "react-native"
+import { SIZES, COLORS } from "../../constants"
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    marginTop: 250,
-    marginHorizontal: 40,
-    textAlign: "center",
-    width: "100%",
+    alignItems: "center",
+    flex: 1
   },
+
+  separator: {
+    height: 16,
+  },
+
   headerTxt: {
     fontFamily: "poppinsMedium",
     fontSize: 16,
@@ -16,6 +18,6 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     textAlign: "center",
   },
-});
+})
 
-export default styles;
+export default styles
