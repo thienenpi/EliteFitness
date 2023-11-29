@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
   Alert,
+  Platform,
 } from "react-native"
 import React, { useState } from "react"
 import styles from "./styles/createExercise.style"
@@ -13,9 +14,9 @@ import { BackBtn, Button } from "../components"
 import { Formik } from "formik"
 import * as Yup from "yup"
 import { COLORS } from "../constants"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
 import axios from "axios"
-import { data, string } from "@tensorflow/tfjs"
+
+const IS_IOS = Platform.OS === "ios"
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -77,7 +78,7 @@ const CreateExercise = ({ navigation }) => {
     }
 
     try {
-      const endpoint = `http://192.168.1.107:3000/api/exercises`
+      const endpoint = `http://10.0.177.25:3000/api/exercises`
       const response = await axios.post(endpoint, data)
 
       if (response.status === 200) {
@@ -98,6 +99,7 @@ const CreateExercise = ({ navigation }) => {
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
+        {IS_IOS ? <View></View> : <View style={{ paddingTop: 60 }}></View>}
         <View style={styles.headerContainer}>
           <BackBtn onPress={() => navigation.goBack()}></BackBtn>
           <Text style={styles.headerText}>Create Exercise</Text>

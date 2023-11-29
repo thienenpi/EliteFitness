@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { SIZES, COLORS } from "../../constants";
+import { StyleSheet } from "react-native"
+import { SIZES, COLORS } from "../../constants"
 
 const styles = StyleSheet.create({
   container: {
@@ -54,11 +54,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+})
 
-  // Slider
-  sliderContainer: {
-    paddingHorizontal: 40,
-  },
-});
-
-export default styles;
+export default styles
