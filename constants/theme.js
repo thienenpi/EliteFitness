@@ -9,6 +9,7 @@ const COLORS = {
   btn: "#F8C06D", //yellow
   exerciseBg: "#FFFFFF",
   accept: "#0E7D77",
+  productBg: "rgba(248,192,109,0.1)",
 };
 
 const SIZES = {
