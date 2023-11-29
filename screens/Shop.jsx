@@ -5,6 +5,7 @@ import styles from "./styles/shop.style";
 import SearchBar from "../components/shop/search";
 import { COLORS } from "../constants";
 import Slider from "../components/shop/slider";
+import ProductList from "../components/shop/productList";
 const Shop = () => {
   return (
     <View style={styles.container}>
@@ -41,6 +42,7 @@ const Shop = () => {
 
       <View style={styles.sliderContainer}>
         <Slider />
+        <ProductList />
       </View>
     </View>
   );
