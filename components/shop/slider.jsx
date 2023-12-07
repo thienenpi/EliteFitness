@@ -1,7 +1,8 @@
-import { Animated, FlatList, StyleSheet, Text, View } from "react-native";
-import React, { useRef, useState } from "react";
-import SlideItem from "./slideItem";
-import Pagination from "./pagination";
+import { Animated, FlatList, StyleSheet, Text, View } from "react-native"
+import React, { useRef, useState } from "react"
+import SlideItem from "./slideItem"
+import Pagination from "./pagination"
+import { COLORS } from "../../constants"
 const Slides = [
   {
     id: 1,
@@ -15,10 +16,10 @@ const Slides = [
     id: 3,
     img: require("../../assets/images/banners/banner3.jpg"),
   },
-];
+]
 const Slider = () => {
-  const [index, setIndex] = useState(0);
-  const scrollX = useRef(new Animated.Value(0)).current;
+  const [index, setIndex] = useState(0)
+  const scrollX = useRef(new Animated.Value(0)).current
 
   const handleOnScroll = (event) => {
     Animated.event(
@@ -34,8 +35,8 @@ const Slider = () => {
       {
         useNativeDriver: false,
       }
-    )(event);
-  };
+    )(event)
+  }
 
   //   const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
   //     // console.log('viewableItems', viewableItems);
@@ -44,16 +45,16 @@ const Slider = () => {
 
   const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
     if (viewableItems.length > 0) {
-      setIndex(viewableItems[0].index);
+      setIndex(viewableItems[0].index)
     }
-  }).current;
+  }).current
 
   const viewabilityConfig = useRef({
     itemVisiblePercentThreshold: 50,
-  }).current;
+  }).current
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={Slides}
         renderItem={({ item }) => <SlideItem item={item} />}
@@ -67,9 +68,16 @@ const Slider = () => {
       />
       <Pagination data={Slides} scrollX={scrollX} index={index} />
     </View>
-  );
-};
+  )
+}
 
-export default Slider;
+export default Slider
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 40,
+    height: 240,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+})

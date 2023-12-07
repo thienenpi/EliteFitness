@@ -11,8 +11,8 @@ import ProductCard from "./product";
 import useFetch from "../../hook/useFetch";
 import { COLORS, SIZES } from "../../constants";
 
-const ProductList = ({ items }) => {
-  const { data, isLoading, error } = useFetch({ collection: "products" });
+const ProductList = () => {
+  const { data, isLoading, error } = useFetch({ collection: "products" })
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => {}}>
@@ -33,11 +33,11 @@ const ProductList = ({ items }) => {
       ) : (
         <FlatList
           data={data}
+          numColumns={2}
           renderItem={renderItem}
           keyExtractor={(item) => JSON.stringify(item._id)}
           contentContainerStyle={{}}
           showsHorizontalScrollIndicator={false}
-          numColumns={2} // Hiển thị 2 mục trên mỗi hàng
         ></FlatList>
       )}
     </View>

@@ -5,11 +5,13 @@ const styles = StyleSheet.create({
   container: {
     // borderColor: COLORS.btn,
     // borderWidth: 2,
+    marginHorizontal: SIZES.xSmall,
   },
   productContainer: {
     backgroundColor: COLORS.productBg,
     borderRadius: 8,
-    width: "48%",
+    width: 160,
+    height: 209,
   },
   productImg: {
     width: 140,
@@ -18,6 +20,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   productTitle: {
+    height: 25,
+    width: 160,
     textAlign: "center",
     paddingHorizontal: 2,
     fontFamily: "poppinsMedium",

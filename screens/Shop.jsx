@@ -39,12 +39,10 @@ const Shop = () => {
           </TouchableOpacity>
         </View>
       </View>
-      {/* Slider */}
+      
+      <Slider />
 
-      <View style={styles.sliderContainer}>
-        <Slider />
-        <ProductList />
-      </View>
+      <ProductList />
     </View>
   )
 }
