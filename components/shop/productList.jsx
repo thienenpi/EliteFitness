@@ -12,7 +12,7 @@ import useFetch from "../../hook/useFetch";
 import { COLORS, SIZES } from "../../constants";
 
 const ProductList = () => {
-  const { data, isLoading, error } = useFetch({ collection: "products" })
+  const { data, isLoading, error } = useFetch({ collection: "products" });
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => {}}>

@@ -16,7 +16,12 @@ const ProductCard = ({ item }) => {
           source={{ uri: item.imageUrl }}
           style={styles.productImg}
         ></Image>
-        <Text style={styles.productTitle}>{item.title}</Text>
+        <Text style={styles.productTitle}>
+          {item.title.length > 30
+            ? `${item.title.slice(0, 30)}...`
+            : item.title}
+        </Text>
+        {/* <Text style={styles.productTitle}>{item.title}</Text> */}
         <Text style={styles.productPrice}>{formatPrice(item.price)}</Text>
       </TouchableOpacity>
     </View>

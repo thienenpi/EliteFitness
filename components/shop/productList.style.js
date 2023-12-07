@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native"
-import { SIZES, COLORS } from "../../constants"
+import { StyleSheet } from "react-native";
+import { SIZES, COLORS } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    marginTop: 250,
+    position: "relative",
+    // marginTop: 340,
     marginHorizontal: 40,
     textAlign: "center",
     // width: "100%",
@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 10,
   },
-})
+});
 
-export default styles
+export default styles;
