@@ -1,6 +1,12 @@
-import { View, Text, TouchableOpacity, Image } from "react-native"
-import React from "react"
-import styles from "./product.style"
+import { View, Text, TouchableOpacity, Image } from "react-native";
+import React from "react";
+import styles from "./product.style";
+
+// Hàm chuyển đổi số thành chuỗi có định dạng ***.***VNĐ
+const formatPrice = (price) => {
+  const formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return `${formattedPrice} VNĐ`;
+};
 
 const ProductCard = ({ item }) => {
   return (
@@ -11,10 +17,10 @@ const ProductCard = ({ item }) => {
           style={styles.productImg}
         ></Image>
         <Text style={styles.productTitle}>{item.title}</Text>
-        <Text style={styles.productPrice}>{item.price} VNĐ</Text>
+        <Text style={styles.productPrice}>{formatPrice(item.price)}</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;
