@@ -6,9 +6,7 @@ const useFetch = ({ collection }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  
-
-  const fetchData = async () => {  
+  const fetchData = async () => {
     setIsLoading(true);
 
     try {
@@ -17,7 +15,6 @@ const useFetch = ({ collection }) => {
       );
       setData(response.data);
       setIsLoading(false);
-
     } catch (error) {
       setError(error);
     } finally {
