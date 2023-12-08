@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { SIZES, COLORS } from "../../constants";
+
+const IS_IOS = Platform.OS === "ios"
 
 const styles = StyleSheet.create({
   container: {
@@ -8,6 +10,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
     textAlign: "center",
     // width: "100%",
+    flex: 1,
+    marginBottom: IS_IOS ? 80 : 10
   },
 
   separator: {
