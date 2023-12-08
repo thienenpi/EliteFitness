@@ -7,13 +7,12 @@ export class Angles {
   neck = 0
   left_arm = 1
   right_arm = 2
-  back = 3
-  abodmen = 4
-  internal = 5
-  left_leg = 6
-  right_leg = 7
-  left_armpit = 8
-  right_armpit = 9
+  abodmen = 3
+  internal = 4
+  left_leg = 5
+  right_leg = 6
+  left_armpit = 7
+  right_armpit = 8
 }
 
 export class JointAngle {
@@ -63,9 +62,8 @@ export class JointAngle {
     return calculateJointAngle(shoulder, hip, knee)
   }
 
-  backAngle(shoulder: number[], hip: number[]): number {
-    const ref = [hip[0], shoulder[1]]
-    return calculateJointAngle(shoulder, hip, ref)
+  backAngle(shoulder: number[], hip: number[], knee: number[]): number {
+    return calculateJointAngle(shoulder, hip, knee)
   }
 
   internalAngle(
@@ -93,7 +91,7 @@ export class JointAngle {
   }
 
   bodyAngles(bp: BodyPart): number[] {
-    const angles: number[] = Array(10).fill(0)
+    const angles: number[] = Array(9).fill(0)
     const angleTypes: Angles = new Angles()
 
     angles[angleTypes.neck] = this.neckAngle(

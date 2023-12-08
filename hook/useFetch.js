@@ -11,7 +11,7 @@ const useFetch = ({ collection }) => {
 
     try {
       const response = await axios.get(
-        `http://192.168.100.171:3000/api/${collection}`
+        `http://172.20.10.2:3000/api/${collection}`
       );
       setData(response.data);
       setIsLoading(false);

@@ -14,6 +14,21 @@ const Practice = ({ navigation }) => {
   const [cameraState, setCameraState] = useState(false)
   const [recordState, setRecordState] = useState(false)
   const [practiceState, setPracticeState] = useState(false)
+  const [counter, setCounter] = useState({
+    stage: "none",
+    set: 1,
+    rep: 0,
+    score: 100,
+    correction: "Good",
+  })
+
+  const onUpdateCounter = (newCounter) => {
+    setCounter(newCounter)
+  }
+
+  useEffect(() => {
+    // console.log("counter", counter)
+  }, [counter])
 
   const onUpdateCameraState = () => {
     setCameraState((prevState) => !prevState)
@@ -31,30 +46,40 @@ const Practice = ({ navigation }) => {
           item={item}
           recordState={recordState}
           practiceState={practiceState}
+          cameraState={cameraState}
+          onUpdateCounter={onUpdateCounter}
         ></PoseDetectionApp>
       </View>
       <View style={styles.menuContainer}>
         <View style={styles.detailsContainer}>
           <View style={styles.trackContainer}>
             <Text style={styles.trackTitle}> Stage </Text>
-            <Text style={styles.trackValue}> Down </Text>
+            <Text style={styles.trackValue}> {counter.stage} </Text>
 
             <Text style={styles.trackTitle}> Set </Text>
-            <Text style={styles.trackValue}> 1/{item.numOfSet} </Text>
+            <Text style={styles.trackValue}>
+              {" "}
+              {counter.set}/{item.numOfSet}{" "}
+            </Text>
           </View>
 
           <View style={styles.trackContainer}>
             <Text style={styles.trackTitle}> Reps </Text>
-            <Text style={styles.trackValue}> 2/{item.numOfRep} </Text>
+            <Text style={styles.trackValue}>
+              {" "}
+              {counter.rep}/{item.numOfRep}{" "}
+            </Text>
 
             <Text style={styles.trackTitle}> Score </Text>
-            <Text style={styles.trackValue}> 0.99 </Text>
+            <Text style={styles.trackValue}> {counter.score} </Text>
           </View>
 
           <Image source={require("../assets/icons/divider/1x.png")}></Image>
           <View style={styles.crtContainer}>
             <Text style={styles.crtTitle}>Correction</Text>
-            <Text style={styles.crtValue(COLORS.accept)}>Good</Text>
+            <Text style={styles.crtValue(COLORS.accept)}>
+              {counter.correction}
+            </Text>
           </View>
         </View>
 
