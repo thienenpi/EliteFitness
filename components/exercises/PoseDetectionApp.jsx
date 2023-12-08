@@ -152,7 +152,7 @@ const PoseDetectionApp = ({
 
       try {
         const response = await axios.get(
-          `http://172.20.10.2:3000/api/exercises/${item._id}`
+          `http://192.168.1.78:3000/api/exercises/${item._id}`
         )
 
         if (response.status === 200) {
