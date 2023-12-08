@@ -1,10 +1,13 @@
-import { StyleSheet } from "react-native"
-import { SIZES, COLORS } from "../../constants"
+import { StyleSheet } from "react-native";
+import { SIZES, COLORS } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    flex: 1
+    position: "relative",
+    // marginTop: 340,
+    marginHorizontal: 40,
+    textAlign: "center",
+    // width: "100%",
   },
 
   separator: {
@@ -17,7 +20,8 @@ const styles = StyleSheet.create({
     color: COLORS.paragraphBg,
     textTransform: "uppercase",
     textAlign: "center",
+    marginBottom: 10,
   },
-})
+});
 
-export default styles
+export default styles;
