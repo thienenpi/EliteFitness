@@ -12,23 +12,46 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    alignItems: 'center',
+    alignItems: "center",
   },
 
   headerText: {
-    fontFamily: 'rufner',
+    fontFamily: "rufner",
     color: COLORS.btn,
-    fontSize: SIZES.medium
+    fontSize: SIZES.medium,
   },
 
-  convo: {
-  },
+  convo: {},
 
   inputWrapper: {
+    flexDirection: 'row',
     height: 50,
-    borderRadius: SIZES.small,
+    borderRadius: SIZES.large,
     borderColor: COLORS.btn,
     borderWidth: 1,
+    padding: 10,
+    marginBottom: SIZES.xxLarge,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+
+  inputText: {
+    color: COLORS.text
+  },
+
+  sendIcon: {
+    color: COLORS.btn,
+  },
+
+  bubble: {
+    backgroundColor: COLORS.exerciseBg,
+    borderRadius: 10,
+    padding: 10,
+    maxWidth: 250,
+  },
+
+  separator: {
+    height: SIZES.medium
   }
 })
 
