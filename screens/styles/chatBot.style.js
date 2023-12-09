@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   },
 
   inputText: {
-    color: COLORS.text
+    color: COLORS.text,
+    width: 280
   },
 
   sendIcon: {

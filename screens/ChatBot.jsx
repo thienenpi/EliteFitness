@@ -43,7 +43,7 @@ const ChatBot = () => {
       setMessages((previousMessages) =>
         GiftedChat.append(previousMessages, userMessage)
       )
-      const messageText = userMessage.text.toLowerCase()
+      const messageText = userMessage.text
       //   const keywords = [
       //     "exercise",
       //     "product",
