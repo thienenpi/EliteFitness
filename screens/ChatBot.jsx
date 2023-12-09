@@ -4,6 +4,7 @@ import styles from "./styles/chatBot.style"
 import { GiftedChat } from "react-native-gifted-chat"
 import axios from "axios"
 
+// You need to paste your own key, not using the key below
 const OPENAI_API_KEY = "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"
 // const openai = new OpenAI({
 //   apiKey: OPENAI_API_KEY,
