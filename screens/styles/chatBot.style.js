@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontFamily: "rufner",
     color: COLORS.btn,
-    fontSize: SIZES.medium,
+    fontSize: SIZES.large,
   },
 
   convo: {},

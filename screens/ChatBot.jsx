@@ -30,6 +30,8 @@ const initialMessage = {
   },
 }
 
+const chatHistory = []
+
 const ChatBot = () => {
   const [messages, setMessages] = useState([initialMessage])
   const [inputText, setInputText] = useState("")
@@ -39,11 +41,16 @@ const ChatBot = () => {
       // Get the user's message
       const userMessage = newMessages[0]
 
+      const userMessages = chatHistory.map(([role, content]) => ({
+        role,
+        content,
+      }))
+      userMessages.push({ role: "user", content: userMessage.text })
+
       // Add the user's message to the messages state
       setMessages((previousMessages) =>
         GiftedChat.append(previousMessages, userMessage)
       )
-      const messageText = userMessage.text
       //   const keywords = [
       //     "exercise",
       //     "product",
@@ -76,12 +83,7 @@ const ChatBot = () => {
         "https://api.openai.com/v1/chat/completions",
         {
           model: "gpt-3.5-turbo",
-          messages: [
-            {
-              role: "system",
-              content: messageText,
-            },
-          ],
+          messages: userMessages,
           max_tokens: 1200,
           temperature: 0.2,
           n: 1,
@@ -96,10 +98,10 @@ const ChatBot = () => {
 
       const completion = response.data
 
-      const content = completion.choices[0].message.content
+      const completionText = completion.choices[0].message.content
       const botMessage = {
         _id: new Date().getTime() + 1,
-        text: content,
+        text: completionText,
         createdAt: new Date(),
         user: {
           _id: 2,
@@ -110,6 +112,8 @@ const ChatBot = () => {
       setMessages((previousMessages) =>
         GiftedChat.append(previousMessages, botMessage)
       )
+      chatHistory.push(["user", userMessage.text])
+      chatHistory.push(["assistant", completionText])
     } catch (error) {
       console.error(error)
     }
