@@ -23,6 +23,11 @@ const styles = StyleSheet.create({
 
   convo: {},
 
+  botAvatar: {
+    height: 40,
+    width: 40,
+  },
+
   inputWrapper: {
     flexDirection: 'row',
     height: 50,
