@@ -291,7 +291,6 @@ const PoseDetectionApp = ({
       bp.cords = util.detectJoints(poses[0].keypoints)
 
       currAngles = ja.bodyAngles(bp)
-      console.log("currAngles", currAngles)
 
       currStartAt = Date.now()
       prevStartAt = prevStartAt ? prevStartAt : currStartAt
