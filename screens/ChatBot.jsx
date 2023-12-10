@@ -1,11 +1,5 @@
-import {
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native"
-import React, { useState } from "react"
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native"
+import React, { useEffect, useState } from "react"
 import styles from "./styles/chatBot.style"
 import { GiftedChat } from "react-native-gifted-chat"
 import { Feather } from "@expo/vector-icons"
@@ -18,21 +12,70 @@ const OPENAI_API_KEY = ""
 //   baseURL: "https://api.openai.com/v1/chat/completions",
 // })
 
-const initialMessage = {
-  _id: new Date().getTime() + 1,
-  text: "Hello! how can I assist you?",
-  createdAt: new Date(),
-  user: {
-    _id: 2,
-    name: "Elite chatbot",
-  },
-}
-
 const chatHistory = []
 
 const ChatBot = () => {
-  const [messages, setMessages] = useState([initialMessage])
+  const [messages, setMessages] = useState([])
   const [inputText, setInputText] = useState("")
+
+  useEffect(() => {
+    async function fetch() {
+      const userMessage = "Now you are Elite Chatbot, a copy of ChatGPT, customized by ThienNguyen"
+      const userMessages = chatHistory.map(([role, content]) => ({
+        role,
+        content,
+      }))
+      userMessages.push({
+        role: "user",
+        content: userMessage,
+      })
+
+      const completionText = await sendMessage(userMessages)
+
+      const botMessage = {
+        _id: new Date().getTime() + 1,
+        text: completionText,
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: "Elite chatbot",
+        },
+      }
+
+      setMessages((previousMessages) =>
+        GiftedChat.append(previousMessages, botMessage)
+      )
+
+      chatHistory.push(["user", userMessage])
+      chatHistory.push(["assistant", completionText])
+    }
+
+    fetch()
+  }, [])
+
+  const sendMessage = async (userMessages) => {
+    const response = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model: "gpt-3.5-turbo",
+        messages: userMessages,
+        max_tokens: 1200,
+        temperature: 0.2,
+        n: 1,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
+        },
+      }
+    )
+
+    const completion = response.data
+    const completionText = completion.choices[0].message.content
+
+    return completionText
+  }
 
   const handleSend = async (newMessages = []) => {
     try {
@@ -77,26 +120,8 @@ const ChatBot = () => {
       //   }
 
       // if the message contains gym-related keywords, fetch a answer from the API and response with it
-      const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          model: "gpt-3.5-turbo",
-          messages: userMessages,
-          max_tokens: 1200,
-          temperature: 0.2,
-          n: 1,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${OPENAI_API_KEY}`,
-          },
-        }
-      )
+      const completionText = await sendMessage(userMessages)
 
-      const completion = response.data
-
-      const completionText = completion.choices[0].message.content
       const botMessage = {
         _id: new Date().getTime() + 1,
         text: completionText,
