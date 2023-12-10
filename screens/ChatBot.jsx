@@ -1,7 +1,5 @@
 import {
   Image,
-  SafeAreaView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -149,16 +147,25 @@ const ChatBot = () => {
     )
   }
 
+  const renderAvatar = () => {
+    return (
+      <Image
+        style={styles.botAvatar}
+        source={require("../assets/icons/app-icon/3x.png")}
+      ></Image>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>ELITE CHATBOT</Text>
       </View>
       <GiftedChat
+        renderAvatar={renderAvatar}
         messages={messages}
         onSend={(newMessages) => handleSend(newMessages)}
-        user={{ _id: 1, avatar: require("../assets/icons/profile/1x.png") }}
-        showUserAvatar={true}
+        user={{ _id: 1 }}
         alwaysShowSend={true}
         renderBubble={renderBubble}
         renderInputToolbar={renderInputToolbar}
