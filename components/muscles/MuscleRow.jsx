@@ -11,7 +11,6 @@ import { COLORS, SIZES } from "../../constants"
 import MuscleCardView from "./MuscleCardView"
 import useFetch from "../../hook/useFetch"
 import Button from "../Button"
-import axios from "axios"
 
 const MuscleRow = ({ onUpdateSelectedMuscles }) => {
   const { data, isLoading, error } = useFetch({ collection: "muscles" })
