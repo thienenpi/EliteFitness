@@ -45,8 +45,7 @@ var prevAngles,
   currAngles = null,
   velocities,
   prevStartAt = 0,
-  currStartAt = null,
-  timeCnt = 0
+  currStartAt = null
 
 const PoseDetectionApp = ({
   practiceState,
@@ -55,6 +54,7 @@ const PoseDetectionApp = ({
   item,
   onUpdateCounter,
 }) => {
+  const rafId = useRef(null)
   const cameraRef = useRef(null)
   const [tfReady, setTfReady] = useState(false)
   const [model, setModel] = useState()
@@ -64,8 +64,7 @@ const PoseDetectionApp = ({
   const [orientation, setOrientation] = useState()
   const [dataSet, setDataSet] = useState([])
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
-  const rafId = useRef(null)
-  const [correction, setCorrection] = useState("")
+  const [timeCnt, setTimeCnt] = useState(0)
   const [counter, setCounter] = useState({
     stage: "none",
     set: 1,
@@ -90,10 +89,10 @@ const PoseDetectionApp = ({
 
       await tf.ready()
 
-      //   const movenetModelConfig = {
-      //     modelType: posedetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
-      //     enableSmoothing: true,
-      //   }
+      const movenetModelConfig = {
+        modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
+        enableSmoothing: true,
+      }
 
       //   if (LOAD_MODEL_FROM_BUNDLE) {
       //     const modelJson = require("./offline_model/model.json")
@@ -105,20 +104,12 @@ const PoseDetectionApp = ({
       //     ])
       //   }
 
-      //   const model = await posedetection.createDetector(
-      //     posedetection.SupportedModels.MoveNet,
-      //     movenetModelConfig
-      //   )
+      const model = await poseDetection.createDetector(
+        poseDetection.SupportedModels.MoveNet,
+        movenetModelConfig
+      )
 
-      const model = poseDetection.SupportedModels.BlazePose
-      const detectorConfig = {
-        runtime: "tfjs",
-        enableSmoothing: true,
-        modelType: "full",
-      }
-      const detector = await poseDetection.createDetector(model, detectorConfig)
-
-      setModel(detector)
+      setModel(model)
       setTfReady(true)
     }
 
@@ -134,14 +125,14 @@ const PoseDetectionApp = ({
     }
   }, [])
 
-  useEffect(() => {
-    // if (recordState) {
-    //   startRecording()
-    // } else {
-    //   stopRecording()
-    // }
-    // console.log(recordState)
-  }, [recordState])
+  //   useEffect(() => {
+  //     if (recordState) {
+  //       startRecording()
+  //     } else {
+  //       stopRecording()
+  //     }
+  //     console.log(recordState)
+  //   }, [recordState])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -152,7 +143,7 @@ const PoseDetectionApp = ({
 
       try {
         const response = await axios.get(
-          `http://192.168.100.151:3000/api/exercises/${item._id}`
+          `http://10.0.106.26:3000/api/exercises/${item._id}`
         )
 
         if (response.status === 200) {
@@ -166,19 +157,19 @@ const PoseDetectionApp = ({
     }
 
     setStart(practiceState)
-    timeCnt = 0
     fetchData()
   }, [practiceState])
 
   useEffect(() => {
-    // onUpdateCounter(counter)
-  }, [counter, onUpdateCounter])
+    updateCounter()
+  }, [timeCnt])
 
   const updateCounter = () => {
     setCounter((prev) => ({
       ...prev,
-      correction: correction,
+      correction: timeCnt,
     }))
+    onUpdateCounter(counter)
   }
 
   const checkDeviation = (vectorFromDataset, inputVector, threshold, time) => {
@@ -193,7 +184,6 @@ const PoseDetectionApp = ({
       "left armpit",
       "right armpit",
     ]
-    setCorrection("")
 
     const arrayFromDataset = vectorFromDataset.map(Number)
     const arrayFromInput = inputVector.map(Number)
@@ -208,7 +198,6 @@ const PoseDetectionApp = ({
           value > 0 ? "cao" : "thap"
         } ${Math.abs(value)} do\n`
 
-        setCorrection((curr) => [...curr, line])
         // console.log(
         //   `${time}s: ${bodyParts[index]}: dang bi ${
         //     value > 0 ? "cao" : "thap"
@@ -297,26 +286,33 @@ const PoseDetectionApp = ({
 
       if (prevAngles) {
         const duration = currStartAt - prevStartAt
-        if (duration > 1000) {
-          ++timeCnt
+        if (duration > 500) {
+          setTimeCnt((prev) => prev + 0.5)
           prevStartAt = currStartAt
           velocities = util.calculateVelocity(prevAngles, currAngles, duration)
           prevAngles = currAngles
           //   checkDeviation(data.Angles[timeCnt], currAngles, 15, timeCnt)
-          //   updateCounter()
           // const record = {
           //   TimeCnt: timeCnt,
           //   Angles: currAngles,
           //   Velocities: velocities,
           // }
           // setDataSet((curr) => [...curr, record])
+
+          if (timeCnt * 2 + 1 === data.TimeCnt.length) {
+            setCounter((prev) => ({
+              ...prev,
+              rep: prev.rep + 1,
+            }))
+
+            setTimeCnt(0)
+          }
         }
       } else {
         const duration = 1
         velocities = util.calculateVelocity(currAngles, currAngles, duration)
         prevAngles = currAngles
         // checkDeviation(data.Angles[timeCnt], currAngles, 20, timeCnt)
-        // updateCounter()
         // const record = {
         //   TimeCnt: timeCnt,
         //   Angles: currAngles,
@@ -325,7 +321,7 @@ const PoseDetectionApp = ({
         // setDataSet((curr) => [...curr, record])
       }
 
-      //   console.log('dataSet', dataSet)
+      // console.log("dataSet", dataSet)
     } catch (error) {
       console.error(error)
     }

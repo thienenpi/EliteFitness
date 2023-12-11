@@ -22,13 +22,9 @@ const Practice = ({ navigation }) => {
     correction: "Good",
   })
 
-  const onUpdateCounter = (newCounter) => {
+  const updateCounter = (newCounter) => {
     setCounter(newCounter)
   }
-
-  useEffect(() => {
-    // console.log("counter", counter)
-  }, [counter])
 
   const onUpdateCameraState = () => {
     setCameraState((prevState) => !prevState)
@@ -47,7 +43,7 @@ const Practice = ({ navigation }) => {
           recordState={recordState}
           practiceState={practiceState}
           cameraState={cameraState}
-          onUpdateCounter={onUpdateCounter}
+          onUpdateCounter={updateCounter}
         ></PoseDetectionApp>
       </View>
       <View style={styles.menuContainer}>
