@@ -23,6 +23,7 @@ import * as util from "../../lib/utilities"
 import { JointAngle } from "../../lib/jointAngles"
 import { BodyPart } from "../../lib/bodyPart"
 import axios from "axios"
+import {IP_ADDRESS} from '@env'
 
 const TensorCamera = cameraWithTensors(Camera)
 
@@ -143,7 +144,7 @@ const PoseDetectionApp = ({
 
       try {
         const response = await axios.get(
-          `http://10.0.106.26:3000/api/exercises/${item._id}`
+          `http://${IP_ADDRESS}:3000/api/exercises/${item._id}`
         )
 
         if (response.status === 200) {
