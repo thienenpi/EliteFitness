@@ -23,7 +23,7 @@ import * as util from "../../lib/utilities"
 import { JointAngle } from "../../lib/jointAngles"
 import { BodyPart } from "../../lib/bodyPart"
 import axios from "axios"
-import {IP_ADDRESS} from '@env'
+import { IP_ADDRESS } from "@env"
 
 const TensorCamera = cameraWithTensors(Camera)
 
@@ -68,8 +68,8 @@ const PoseDetectionApp = ({
   const [timeCnt, setTimeCnt] = useState(0)
   const [counter, setCounter] = useState({
     stage: "none",
-    set: 1,
-    rep: 0,
+    set: 3,
+    rep: 9,
     score: 100,
     correction: "Good",
   })
@@ -162,16 +162,8 @@ const PoseDetectionApp = ({
   }, [practiceState])
 
   useEffect(() => {
-    updateCounter()
-  }, [timeCnt])
-
-  const updateCounter = () => {
-    setCounter((prev) => ({
-      ...prev,
-      correction: timeCnt,
-    }))
     onUpdateCounter(counter)
-  }
+  }, [timeCnt])
 
   const checkDeviation = (vectorFromDataset, inputVector, threshold, time) => {
     const bodyParts = [
@@ -193,19 +185,20 @@ const PoseDetectionApp = ({
       (value, index) => value - arrayFromInput[index]
     )
 
+    var lines = ""
     deviation.forEach((value, index) => {
       if (Math.abs(value) > threshold) {
         const line = `${bodyParts[index]} - ${
-          value > 0 ? "cao" : "thap"
-        } ${Math.abs(value)} do\n`
-
-        // console.log(
-        //   `${time}s: ${bodyParts[index]}: dang bi ${
-        //     value > 0 ? "cao" : "thap"
-        //   } hon ${Math.abs(value)} so voi tieu chuan`
-        // )
+          value > 0 ? "larger" : "smaller"
+        }  ${Math.abs(value)} degrees\n`
+        lines += line
       }
     })
+
+    setCounter((prev) => ({
+      ...prev,
+      correction: lines === "" ? "Good" : lines,
+    }))
   }
 
   //   const startRecording = async () => {
@@ -292,13 +285,13 @@ const PoseDetectionApp = ({
           prevStartAt = currStartAt
           velocities = util.calculateVelocity(prevAngles, currAngles, duration)
           prevAngles = currAngles
-          //   checkDeviation(data.Angles[timeCnt], currAngles, 15, timeCnt)
-          // const record = {
-          //   TimeCnt: timeCnt,
-          //   Angles: currAngles,
-          //   Velocities: velocities,
-          // }
-          // setDataSet((curr) => [...curr, record])
+          checkDeviation(data.Angles[timeCnt * 2], currAngles, 20, timeCnt)
+          //   const record = {
+          //     TimeCnt: timeCnt,
+          //     Angles: currAngles,
+          //     Velocities: velocities,
+          //   }
+          //   setDataSet((curr) => [...curr, record])
 
           if (timeCnt * 2 + 1 === data.TimeCnt.length) {
             setCounter((prev) => ({
@@ -308,12 +301,24 @@ const PoseDetectionApp = ({
 
             setTimeCnt(0)
           }
+
+          if (counter.rep === item.numOfRep && counter.set < item.numOfSet) {
+            setCounter((prev) => ({
+              ...prev,
+              rep: 0,
+              set: prev.set + 1,
+            }))
+          }
+
+          if (counter.set === item.numOfSet && counter.rep === item.numOfRep) {
+            setStart(!start)
+          }
         }
       } else {
         const duration = 1
         velocities = util.calculateVelocity(currAngles, currAngles, duration)
         prevAngles = currAngles
-        // checkDeviation(data.Angles[timeCnt], currAngles, 20, timeCnt)
+        checkDeviation(data.Angles[timeCnt * 2], currAngles, 20, timeCnt)
         // const record = {
         //   TimeCnt: timeCnt,
         //   Angles: currAngles,
@@ -322,7 +327,7 @@ const PoseDetectionApp = ({
         // setDataSet((curr) => [...curr, record])
       }
 
-      // console.log("dataSet", dataSet)
+      //   console.log("dataSet", dataSet)
     } catch (error) {
       console.error(error)
     }
