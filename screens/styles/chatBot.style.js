@@ -29,36 +29,36 @@ const styles = StyleSheet.create({
   },
 
   inputWrapper: {
-    flexDirection: 'row',
+    flexDirection: "row",
     height: 50,
     borderRadius: SIZES.large,
     borderColor: COLORS.btn,
     borderWidth: 1,
     padding: 10,
     marginBottom: SIZES.xxLarge,
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
   inputText: {
     color: COLORS.text,
-    width: 280
+    width: 280,
   },
 
   sendIcon: {
     color: COLORS.btn,
   },
 
-  bubble: {
-    backgroundColor: COLORS.exerciseBg,
+  bubble: (user) => ({
+    backgroundColor: user === 1 ? COLORS.exerciseBg : COLORS.btn,
     borderRadius: 10,
     padding: 10,
     maxWidth: 250,
-  },
+  }),
 
   separator: {
-    height: SIZES.medium
-  }
+    height: SIZES.medium,
+  },
 })
 
 export default styles
