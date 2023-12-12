@@ -23,7 +23,7 @@ import * as util from "../../lib/utilities"
 import { JointAngle } from "../../lib/jointAngles"
 import { BodyPart } from "../../lib/bodyPart"
 import axios from "axios"
-import { IP_ADDRESS } from "@env"
+import {IP_ADDRESS} from "@env"
 
 const TensorCamera = cameraWithTensors(Camera)
 
