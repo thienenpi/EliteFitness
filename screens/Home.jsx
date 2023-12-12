@@ -1,14 +1,7 @@
 // Type 'rnfes' for quick-setup
-import {
-  FlatList,
-  Image,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native"
+import { Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 import React, { useEffect, useState } from "react"
-import { Ionicons, MaterialCommunityIcons, AntDesign } from "@expo/vector-icons"
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 // Import external style.js file
 import styles from "./styles/home.style"
 
@@ -19,6 +12,7 @@ import axios from "axios"
 import Welcome from "../components/home/Welcome"
 import FilterRow from "../components/home/FilterRow"
 import { useNavigation } from "@react-navigation/native"
+import { IP_ADDRESS } from "@env"
 
 const Home = () => {
   const [foundExercises, setFoundExercises] = useState([])
@@ -29,7 +23,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://10.0.106.26:3000/api/exercises/search/${searchKey || ""}`
+          `http://${IP_ADDRESS}:3000/api/exercises/search/${searchKey || ""}`
         )
         setFoundExercises(response.data)
       } catch (error) {
