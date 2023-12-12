@@ -7,6 +7,7 @@ import axios from "axios"
 import { OPENAI_API_KEY } from "@env"
 
 const chatHistory = []
+const API_KEY = OPENAI_API_KEY
 
 const ChatBot = () => {
   const [messages, setMessages] = useState([])
@@ -14,8 +15,18 @@ const ChatBot = () => {
 
   useEffect(() => {
     async function fetch() {
+      const response = await axios.get("http://localhost:3000/api/products")
+      const trainData = response.data
+      const title = trainData[0].title
+      const description = trainData[0].description
+      console.log("title", title)
+      console.log("description", description)
       const userMessage =
-        "Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness"
+        `ProductName,Function\n
+        ${title},${description}\n
+        Only answer within the information provided.
+        Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness, let say hello first.
+        `
       const userMessages = chatHistory.map(([role, content]) => ({
         role,
         content,
@@ -25,24 +36,24 @@ const ChatBot = () => {
         content: userMessage,
       })
 
-      const completionText = await sendMessage(userMessages)
+        const completionText = await sendMessage(userMessages)
 
-      const botMessage = {
-        _id: new Date().getTime() + 1,
-        text: completionText,
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: "Elite chatbot",
-        },
-      }
+        const botMessage = {
+          _id: new Date().getTime() + 1,
+          text: completionText,
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: "Elite chatbot",
+          },
+        }
 
-      setMessages((previousMessages) =>
-        GiftedChat.append(previousMessages, botMessage)
-      )
+        setMessages((previousMessages) =>
+          GiftedChat.append(previousMessages, botMessage)
+        )
 
-      chatHistory.push(["user", userMessage])
-      chatHistory.push(["assistant", completionText])
+        chatHistory.push(["user", userMessage])
+        chatHistory.push(["assistant", completionText])
     }
 
     fetch()
@@ -61,7 +72,7 @@ const ChatBot = () => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${OPENAI_API_KEY.toString()}`,
+          Authorization: `Bearer ${API_KEY}`,
         },
       }
     )
@@ -76,7 +87,6 @@ const ChatBot = () => {
     try {
       // Get the user's message
       const userMessage = newMessages[0]
-
       const userMessages = chatHistory.map(([role, content]) => ({
         role,
         content,
@@ -87,34 +97,7 @@ const ChatBot = () => {
       setMessages((previousMessages) =>
         GiftedChat.append(previousMessages, userMessage)
       )
-      //   const keywords = [
-      //     "exercise",
-      //     "product",
-      //     "gym",
-      //     "muscle",
-      //     "exercises",
-      //     "products",
-      //     "muscles",
-      //   ]
 
-      //   if (!keywords.some((keyword) => messageText.includes(keyword))) {
-      //     // If the message does not contain any gym-related keywords, respond with a default message
-      //     const botMessage = {
-      //       _id: new Date().getTime() + 1,
-      //       text: "I'm your Elite chatbot, please ask me anything relate to gym and exercise",
-      //       createdAt: new Date(),
-      //       user: {
-      //         _id: 2,
-      //         name: "Elite chatbot",
-      //       },
-      //     }
-      //     setMessages((previousMessages) =>
-      //       GiftedChat.append(previousMessages, botMessage)
-      //     )
-      //     return
-      //   }
-
-      // if the message contains gym-related keywords, fetch a answer from the API and response with it
       const completionText = await sendMessage(userMessages)
 
       const botMessage = {
@@ -139,7 +122,7 @@ const ChatBot = () => {
 
   const renderBubble = (props) => {
     return (
-      <View style={styles.bubble}>
+      <View style={styles.bubble(props.currentMessage.user._id)}>
         <Text>{props.currentMessage.text}</Text>
       </View>
     )
