@@ -1,37 +1,38 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react"
+import axios from "axios"
+import { IP_ADDRESS } from "@env"
 
 const useFetch = ({ collection }) => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const fetchData = async () => {
-    setIsLoading(true);
+    setIsLoading(true)
 
     try {
       const response = await axios.get(
-        `http://10.0.106.26:3000/api/${collection}`
-      );
-      setData(response.data);
-      setIsLoading(false);
+        `http://${IP_ADDRESS}:3000/api/${collection}`
+      )
+      setData(response.data)
+      setIsLoading(false)
     } catch (error) {
-      setError(error);
+      setError(error)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const refetch = () => {
-    setIsLoading(true);
-    fetchData();
-  };
+    setIsLoading(true)
+    fetchData()
+  }
 
-  return { data, isLoading, error, refetch };
-};
+  return { data, isLoading, error, refetch }
+}
 
-export default useFetch;
+export default useFetch

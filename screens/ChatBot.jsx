@@ -4,13 +4,7 @@ import styles from "./styles/chatBot.style"
 import { GiftedChat } from "react-native-gifted-chat"
 import { Feather } from "@expo/vector-icons"
 import axios from "axios"
-
-// You need to paste your own key
-const OPENAI_API_KEY = "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"
-// const openai = new OpenAI({
-//   apiKey: OPENAI_API_KEY,
-//   baseURL: "https://api.openai.com/v1/chat/completions",
-// })
+import { OPENAI_API_KEY } from "@env"
 
 const chatHistory = []
 
@@ -20,7 +14,8 @@ const ChatBot = () => {
 
   useEffect(() => {
     async function fetch() {
-      const userMessage = "Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness"
+      const userMessage =
+        "Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness"
       const userMessages = chatHistory.map(([role, content]) => ({
         role,
         content,
