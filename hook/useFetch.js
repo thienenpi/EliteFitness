@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-// import {IP_ADDRESS} from "@env"
+import {IP_ADDRESS} from "@env"
 
 const useFetch = ({ collection }) => {
   const [data, setData] = useState([])
@@ -12,7 +12,7 @@ const useFetch = ({ collection }) => {
 
     try {
       const response = await axios.get(
-        `http://172.16.3.49:3000/api/${collection}`
+        `http://${IP_ADDRESS}:3000/api/${collection}`
       )
       setData(response.data)
       setIsLoading(false)

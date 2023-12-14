@@ -12,8 +12,7 @@ import axios from "axios"
 import Welcome from "../components/home/Welcome"
 import FilterRow from "../components/home/FilterRow"
 import { useNavigation } from "@react-navigation/native"
-import {IP_ADDRESS} from "@env"
-
+import { IP_ADDRESS } from "@env"
 
 const Home = () => {
   const [foundExercises, setFoundExercises] = useState([])
