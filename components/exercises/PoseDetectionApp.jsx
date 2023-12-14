@@ -23,7 +23,8 @@ import * as util from "../../lib/utilities"
 import { JointAngle } from "../../lib/jointAngles"
 import { BodyPart } from "../../lib/bodyPart"
 import axios from "axios"
-import {IP_ADDRESS} from "@env"
+import { IP_ADDRESS } from "@env"
+import useSpeech from "../../hook/useSpeech"
 
 const TensorCamera = cameraWithTensors(Camera)
 
@@ -68,8 +69,8 @@ const PoseDetectionApp = ({
   const [timeCnt, setTimeCnt] = useState(0)
   const [counter, setCounter] = useState({
     stage: "none",
-    set: 3,
-    rep: 9,
+    set: 1,
+    rep: 0,
     score: 100,
     correction: "Good",
   })
@@ -192,6 +193,7 @@ const PoseDetectionApp = ({
           value > 0 ? "larger" : "smaller"
         }  ${Math.abs(value)} degrees\n`
         lines += line
+        useSpeech(bodyParts[index])
       }
     })
 
