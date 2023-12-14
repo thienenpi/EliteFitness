@@ -5,7 +5,7 @@ import {
   ActivityIndicator,
   Text,
 } from "react-native"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./muscleRow.style"
 import { COLORS, SIZES } from "../../constants"
 import MuscleCardView from "./MuscleCardView"

@@ -3656,6 +3656,11 @@ expo-screen-orientation@~5.1.1:
   resolved "https://registry.npmjs.org/expo-screen-orientation/-/expo-screen-orientation-5.1.1.tgz"
   integrity sha512-rYpHUwHpuKlEErxupl3wM+KWcySrSJTXb5Une5gDINMmjWbLBx0N1P2MG1aSPA2eT7bShTO/xDJyegjf438l8w==
 
+expo-speech@^11.1.1:
+  version "11.1.1"
+  resolved "https://registry.npmjs.org/expo-speech/-/expo-speech-11.1.1.tgz"
+  integrity sha512-JiyZmmNci7vIXZA/XLZ7x64jIvT/v/TOc5Y/nTBzo6Aqc3+YnYk3VoR+QDVQzeFRR6MW72FZyOvhvlFbfGRzTQ==
+
 expo-splash-screen@~0.18.2:
   version "0.18.2"
   resolved "https://registry.npmjs.org/expo-splash-screen/-/expo-splash-screen-0.18.2.tgz"
