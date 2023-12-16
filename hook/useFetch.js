@@ -12,11 +12,12 @@ const useFetch = ({ collection }) => {
 
     try {
       const response = await axios.get(
-        `http://${IP_ADDRESS}:3000/api/${collection}`
+        `http://172.0.1.94:3000/api/${collection}`
       )
       setData(response.data)
       setIsLoading(false)
     } catch (error) {
+      console.log(error)
       setError(error)
     } finally {
       setIsLoading(false)

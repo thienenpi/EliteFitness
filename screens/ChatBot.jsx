@@ -15,7 +15,7 @@ const ChatBot = () => {
 
   useEffect(() => {
     async function fetch() {
-      const response = await axios.get(`http://${IP_ADDRESS}:3000/api/products`)
+      const response = await axios.get(`http://172.0.1.94:3000/api/products`)
       const trainData = response.data
       const title = trainData[0].title
       const description = trainData[0].description

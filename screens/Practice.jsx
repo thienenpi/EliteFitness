@@ -14,7 +14,8 @@ const Practice = ({ navigation }) => {
   const [cameraState, setCameraState] = useState(false)
   const [recordState, setRecordState] = useState(false)
   const [practiceState, setPracticeState] = useState(false)
-  const [counter, setCounter] = useState({
+  // const a = useRef()
+  const [counter, _] = useState({
     stage: "none",
     set: 1,
     rep: 0,
@@ -23,7 +24,7 @@ const Practice = ({ navigation }) => {
   })
 
   const updateCounter = (newCounter) => {
-    setCounter(newCounter)
+    // setCounter(newCounter)
   }
 
   const onUpdateCameraState = () => {

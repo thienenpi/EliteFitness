@@ -16,6 +16,13 @@ const MuscleRow = ({ onUpdateSelectedMuscles }) => {
   const { data, isLoading, error } = useFetch({ collection: "muscles" })
   const [selectedMuscles, setSelectedMuscles] = useState([])
 
+//   useEffect(()=>{
+// console.log(isLoading)
+//   }, [isLoading])
+
+//   useEffect(()=>{
+// console.log(error)
+//   }, [error])
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleMusclePress(item.title)}>
       <MuscleCardView
