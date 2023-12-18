@@ -4,10 +4,9 @@ import styles from "./styles/chatBot.style"
 import { GiftedChat } from "react-native-gifted-chat"
 import { Feather } from "@expo/vector-icons"
 import axios from "axios"
-import { OPENAI_API_KEY, IP_ADDRESS } from "@env"
+import { OPENAI_API_KEY, IP_ADDRESS } from "../constants"
 
 const chatHistory = []
-const API_KEY = OPENAI_API_KEY
 
 const ChatBot = () => {
   const [messages, setMessages] = useState([])
@@ -19,41 +18,45 @@ const ChatBot = () => {
       const trainData = response.data
       const title = trainData[0].title
       const description = trainData[0].description
-    //   console.log("title", title)
-    //   console.log("description", description)
-      const userMessage =
-        `ProductName,Function\n
-        ${title},${description}\n
-        Only answer within the information provided.
-        Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness, let say hello first.
-        `
+      //   console.log("title", title)
+      //   console.log("description", description)
+      //   const userMessage = `ProductName,Function\n
+      //     ${title},${description}\n
+      //     Only answer within the information provided.
+      //     Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness, let say hello first.
+      //     `
+      const userMessage = `Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness.
+        You are only allowed to answer questions related to health & fitnes.
+        Don't answer those questions are not related to health & fitness.
+        Let say hello first.`
       const userMessages = chatHistory.map(([role, content]) => ({
         role,
         content,
       }))
+
       userMessages.push({
         role: "user",
         content: userMessage,
       })
 
-        const completionText = await sendMessage(userMessages)
+      const completionText = await sendMessage(userMessages)
 
-        const botMessage = {
-          _id: new Date().getTime() + 1,
-          text: completionText,
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: "Elite chatbot",
-          },
-        }
+      const botMessage = {
+        _id: new Date().getTime() + 1,
+        text: completionText,
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: "Elite chatbot",
+        },
+      }
 
-        setMessages((previousMessages) =>
-          GiftedChat.append(previousMessages, botMessage)
-        )
+      setMessages((previousMessages) =>
+        GiftedChat.append(previousMessages, botMessage)
+      )
 
-        chatHistory.push(["user", userMessage])
-        chatHistory.push(["assistant", completionText])
+      chatHistory.push(["user", userMessage])
+      chatHistory.push(["assistant", completionText])
     }
 
     fetch()
@@ -72,7 +75,7 @@ const ChatBot = () => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
         },
       }
     )
@@ -136,6 +139,7 @@ const ChatBot = () => {
           placeholder="Send a message"
           onChangeText={(text) => setInputText(text)}
           value={inputText}
+          multiline={true}
         />
         <TouchableOpacity
           onPress={() => {

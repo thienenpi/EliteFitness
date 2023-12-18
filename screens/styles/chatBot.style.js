@@ -1,7 +1,5 @@
-import { Platform, StyleSheet } from "react-native"
+import { StyleSheet } from "react-native"
 import { COLORS, SIZES } from "../../constants"
-
-const IS_IOS = Platform.OS === "ios"
 
 const styles = StyleSheet.create({
   container: {
@@ -30,19 +28,19 @@ const styles = StyleSheet.create({
 
   inputWrapper: {
     flexDirection: "row",
-    height: 50,
     borderRadius: SIZES.large,
     borderColor: COLORS.btn,
     borderWidth: 1,
     padding: 10,
     marginBottom: SIZES.xxLarge,
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
 
   inputText: {
     color: COLORS.text,
     width: 280,
+    textAlign: 'justify',
   },
 
   sendIcon: {

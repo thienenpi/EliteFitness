@@ -18,12 +18,11 @@ import * as ScreenOrientation from "expo-screen-orientation"
 import { cameraWithTensors } from "@tensorflow/tfjs-react-native"
 import Svg, { Circle } from "react-native-svg"
 import styles from "./poseDetectionApp.style"
-import { COLORS, SIZES } from "../../constants"
+import { COLORS, SIZES, IP_ADDRESS } from "../../constants"
 import * as util from "../../lib/utilities"
 import { JointAngle } from "../../lib/jointAngles"
 import { BodyPart } from "../../lib/bodyPart"
 import axios from "axios"
-import { IP_ADDRESS } from "@env"
 import useSpeech from "../../hook/useSpeech"
 
 const TensorCamera = cameraWithTensors(Camera)
@@ -160,7 +159,7 @@ const PoseDetectionApp = ({
 
     setStart(practiceState)
     fetchData()
-  }, [practiceState])
+  }, [practiceState, IP_ADDRESS])
 
   useEffect(() => {
     onUpdateCounter(counter)
