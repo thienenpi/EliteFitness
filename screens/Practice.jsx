@@ -5,8 +5,8 @@ import styles from "./styles/practice.style"
 import { COLORS } from "../constants"
 import Button from "../components/Button"
 import SettingRow from "../components/SettingRow"
-import VideoRecording from "../components/exercises/VideoRecording"
-import PoseDetectionApp from "../components/exercises/PoseDetectionApp"
+import VideoRecording from "../components/practice/VideoRecording"
+import PoseDetectionApp from "../components/practice/PoseDetectionApp"
 
 const Practice = ({ navigation }) => {
   const route = useRoute()
