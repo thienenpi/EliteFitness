@@ -1,18 +1,17 @@
 // Type 'rnfes' for quick-setup
 import { Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 import React, { useEffect, useState } from "react"
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 // Import external style.js file
 import styles from "./styles/home.style"
 
-import { COLORS } from "../constants"
+import { COLORS, IP_ADDRESS } from "../constants"
 import MuscleRow from "../components/muscles/MuscleRow"
 import ExerciseColumn from "../components/exercises/ExerciseColumn"
 import axios from "axios"
 import Welcome from "../components/home/Welcome"
 import FilterRow from "../components/home/FilterRow"
 import { useNavigation } from "@react-navigation/native"
-import { IP_ADDRESS } from "@env"
 
 const Home = () => {
   const [foundExercises, setFoundExercises] = useState([])
