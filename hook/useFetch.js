@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import {IP_ADDRESS} from "@env"
+import { IP_ADDRESS } from "../constants"
 
 const useFetch = ({ collection }) => {
   const [data, setData] = useState([])
