@@ -1,0 +1,4 @@
+const OPENAI_API_KEY = ''
+const IP_ADDRESS = '192.168.9.78'
+
+export {OPENAI_API_KEY, IP_ADDRESS}

@@ -4,7 +4,7 @@ import styles from "./styles/chatBot.style"
 import { GiftedChat } from "react-native-gifted-chat"
 import { Feather } from "@expo/vector-icons"
 import axios from "axios"
-import { OPENAI_API_KEY } from "@env"
+import { OPENAI_API_KEY, IP_ADDRESS } from "../constants"
 
 const chatHistory = []
 
@@ -14,12 +14,26 @@ const ChatBot = () => {
 
   useEffect(() => {
     async function fetch() {
-      const userMessage =
-        "Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness"
+      const response = await axios.get(`http://${IP_ADDRESS}:3000/api/products`)
+      const trainData = response.data
+      const title = trainData[0].title
+      const description = trainData[0].description
+      //   console.log("title", title)
+      //   console.log("description", description)
+      //   const userMessage = `ProductName,Function\n
+      //     ${title},${description}\n
+      //     Only answer within the information provided.
+      //     Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness, let say hello first.
+      //     `
+      const userMessage = `Now you are Elite Chatbot, a copy of ChatGPT-3.5, customized by Elite Fitness.
+        You are only allowed to answer questions related to health & fitnes.
+        Don't answer those questions are not related to health & fitness.
+        Let say hello first.`
       const userMessages = chatHistory.map(([role, content]) => ({
         role,
         content,
       }))
+
       userMessages.push({
         role: "user",
         content: userMessage,
@@ -61,7 +75,7 @@ const ChatBot = () => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${OPENAI_API_KEY.toString()}`,
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
         },
       }
     )
@@ -76,7 +90,6 @@ const ChatBot = () => {
     try {
       // Get the user's message
       const userMessage = newMessages[0]
-
       const userMessages = chatHistory.map(([role, content]) => ({
         role,
         content,
@@ -87,34 +100,7 @@ const ChatBot = () => {
       setMessages((previousMessages) =>
         GiftedChat.append(previousMessages, userMessage)
       )
-      //   const keywords = [
-      //     "exercise",
-      //     "product",
-      //     "gym",
-      //     "muscle",
-      //     "exercises",
-      //     "products",
-      //     "muscles",
-      //   ]
 
-      //   if (!keywords.some((keyword) => messageText.includes(keyword))) {
-      //     // If the message does not contain any gym-related keywords, respond with a default message
-      //     const botMessage = {
-      //       _id: new Date().getTime() + 1,
-      //       text: "I'm your Elite chatbot, please ask me anything relate to gym and exercise",
-      //       createdAt: new Date(),
-      //       user: {
-      //         _id: 2,
-      //         name: "Elite chatbot",
-      //       },
-      //     }
-      //     setMessages((previousMessages) =>
-      //       GiftedChat.append(previousMessages, botMessage)
-      //     )
-      //     return
-      //   }
-
-      // if the message contains gym-related keywords, fetch a answer from the API and response with it
       const completionText = await sendMessage(userMessages)
 
       const botMessage = {
@@ -139,7 +125,7 @@ const ChatBot = () => {
 
   const renderBubble = (props) => {
     return (
-      <View style={styles.bubble}>
+      <View style={styles.bubble(props.currentMessage.user._id)}>
         <Text>{props.currentMessage.text}</Text>
       </View>
     )
@@ -153,6 +139,7 @@ const ChatBot = () => {
           placeholder="Send a message"
           onChangeText={(text) => setInputText(text)}
           value={inputText}
+          multiline={true}
         />
         <TouchableOpacity
           onPress={() => {

@@ -1,7 +1,5 @@
-import { Platform, StyleSheet } from "react-native"
+import { StyleSheet } from "react-native"
 import { COLORS, SIZES } from "../../constants"
-
-const IS_IOS = Platform.OS === "ios"
 
 const styles = StyleSheet.create({
   container: {
@@ -29,36 +27,36 @@ const styles = StyleSheet.create({
   },
 
   inputWrapper: {
-    flexDirection: 'row',
-    height: 50,
+    flexDirection: "row",
     borderRadius: SIZES.large,
     borderColor: COLORS.btn,
     borderWidth: 1,
     padding: 10,
     marginBottom: SIZES.xxLarge,
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    justifyContent: "space-between",
+    alignItems: "flex-end",
   },
 
   inputText: {
     color: COLORS.text,
-    width: 280
+    width: 280,
+    textAlign: 'justify',
   },
 
   sendIcon: {
     color: COLORS.btn,
   },
 
-  bubble: {
-    backgroundColor: COLORS.exerciseBg,
+  bubble: (user) => ({
+    backgroundColor: user === 1 ? COLORS.exerciseBg : COLORS.btn,
     borderRadius: 10,
     padding: 10,
     maxWidth: 250,
-  },
+  }),
 
   separator: {
-    height: SIZES.medium
-  }
+    height: SIZES.medium,
+  },
 })
 
 export default styles

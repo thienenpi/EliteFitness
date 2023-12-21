@@ -3359,11 +3359,6 @@ domutils@^3.0.1:
     domelementtype "^2.3.0"
     domhandler "^5.0.3"
 
-dotenv@^16.3.1:
-  version "16.3.1"
-  resolved "https://registry.npmjs.org/dotenv/-/dotenv-16.3.1.tgz"
-  integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==
-
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
@@ -3611,6 +3606,11 @@ expo-screen-orientation@~5.1.1:
   version "5.1.1"
   resolved "https://registry.npmjs.org/expo-screen-orientation/-/expo-screen-orientation-5.1.1.tgz"
   integrity sha512-rYpHUwHpuKlEErxupl3wM+KWcySrSJTXb5Une5gDINMmjWbLBx0N1P2MG1aSPA2eT7bShTO/xDJyegjf438l8w==
+
+expo-speech@^11.1.1:
+  version "11.1.1"
+  resolved "https://registry.npmjs.org/expo-speech/-/expo-speech-11.1.1.tgz"
+  integrity sha512-JiyZmmNci7vIXZA/XLZ7x64jIvT/v/TOc5Y/nTBzo6Aqc3+YnYk3VoR+QDVQzeFRR6MW72FZyOvhvlFbfGRzTQ==
 
 expo-splash-screen@~0.18.2:
   version "0.18.2"
@@ -6072,13 +6072,6 @@ react-native-communications@2.2.1:
   version "2.2.1"
   resolved "https://registry.npmjs.org/react-native-communications/-/react-native-communications-2.2.1.tgz"
   integrity sha512-5+C0X9mopI0+qxyQHzOPEi5v5rxNBQjxydPPiKMQSlX1RBIcJ8uTcqUPssQ9Mo8p6c1IKIWJUSqCj4jAmD0qVQ==
-
-react-native-dotenv@^3.4.9:
-  version "3.4.9"
-  resolved "https://registry.npmjs.org/react-native-dotenv/-/react-native-dotenv-3.4.9.tgz"
-  integrity sha512-dbyd+mcy7SUzxEgmt33TRf1FGcNe6swJhXmB0unKkI49F7+pidog9kPtjxMLTAfmKA8gcN2XHQSKltGfGbGCLQ==
-  dependencies:
-    dotenv "^16.3.1"
 
 react-native-fs@^2.20.0:
   version "2.20.0"
