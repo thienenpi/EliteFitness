@@ -37,6 +37,7 @@ const ProductList = () => {
           renderItem={renderItem}
           keyExtractor={(item) => JSON.stringify(item._id)}
           showsVerticalScrollIndicator={false}
+          scrollEnabled={false}
         ></FlatList>
       )}
     </View>
