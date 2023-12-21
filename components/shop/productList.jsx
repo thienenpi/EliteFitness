@@ -4,12 +4,12 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import styles from "./productList.style";
-import ProductCard from "./product";
-import useFetch from "../../hook/useFetch";
-import { COLORS, SIZES } from "../../constants";
+} from "react-native"
+import React, { useEffect } from "react"
+import styles from "./productList.style"
+import ProductCard from "./product"
+import useFetch from "../../hook/useFetch"
+import { COLORS, SIZES } from "../../constants"
 
 const ProductList = ({ items }) => {
   const { data, isLoading, error } = useFetch({ collection: "products" });
@@ -33,10 +33,7 @@ const ProductList = ({ items }) => {
     <View style={styles.container}>
       <Text style={styles.headerTxt}>Recommend for you</Text>
       {isLoading ? (
-        <ActivityIndicator
-          size={SIZES.xxLarge}
-          color={COLORS.btn}
-        ></ActivityIndicator>
+        <ActivityIndicator size={SIZES.xxLarge} color={COLORS.btn}></ActivityIndicator>
       ) : error ? (
         <Text>Something went wrong</Text>
       ) : (

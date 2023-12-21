@@ -26,8 +26,8 @@ const Shop = () => {
         </View>
         <View
           style={{
-            flexDirection: "row",
-            gap: 12,
+            flexDirection: 'row',
+            gap: 12
           }}
         >
           <TouchableOpacity>

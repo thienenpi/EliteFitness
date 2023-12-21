@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from "react"
-import { View, Text, TouchableOpacity, Switch, StyleSheet } from "react-native"
-import { Camera } from "expo-camera"
-import { NativeModules } from "react-native"
-import * as MediaLibrary from "expo-media-library"
-import { COLORS } from "../../constants"
-
+import React, { useState, useRef, useEffect } from 'react'
+import { View, Text, TouchableOpacity, Switch, StyleSheet } from 'react-native'
+import { Camera } from 'expo-camera'
+import { NativeModules } from 'react-native'
+import * as MediaLibrary from 'expo-media-library'
+import { COLORS } from '../../constants'
 
 const VideoRecording = () => {
   const [hasPermission, setHasPermission] = useState(null)
@@ -17,10 +16,7 @@ const VideoRecording = () => {
       const cameraStatus = await Camera.requestCameraPermissionsAsync()
       const mediaLibraryStatus = await MediaLibrary.requestPermissionsAsync()
 
-      setHasPermission(
-        cameraStatus.status === "granted" &&
-          mediaLibraryStatus.status === "granted"
-      )
+      setHasPermission(cameraStatus.status === 'granted' && mediaLibraryStatus.status === 'granted')
     })()
   }, [])
 
@@ -31,7 +27,7 @@ const VideoRecording = () => {
         setIsRecording(true)
 
         const videoOptions = {
-          quality: Camera.Constants.VideoQuality["720p"],
+          quality: Camera.Constants.VideoQuality['720p']
           //   maxDuration: 60, // 60 seconds
         }
 
@@ -40,7 +36,7 @@ const VideoRecording = () => {
 
         await saveVideoToLibrary(videoRecordData.uri)
       } catch (error) {
-        console.error("Error recording video:", error)
+        console.error('Error recording video:', error)
       }
     }
   }
@@ -55,10 +51,10 @@ const VideoRecording = () => {
   const saveVideoToLibrary = async (videoUri) => {
     try {
       const asset = await MediaLibrary.createAssetAsync(videoUri)
-      await MediaLibrary.createAlbumAsync("Expo Videos", asset, false)
-      console.log("Video saved to Photos")
+      await MediaLibrary.createAlbumAsync('Expo Videos', asset, false)
+      console.log('Video saved to Photos')
     } catch (error) {
-      console.error("Error saving video to Photos:", error)
+      console.error('Error saving video to Photos:', error)
     }
   }
 
@@ -92,26 +88,22 @@ const VideoRecording = () => {
         <View
           style={{
             flex: 1,
-            backgroundColor: "transparent",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
+            backgroundColor: 'transparent',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
             marginBottom: 20,
-            marginHorizontal: 20,
+            marginHorizontal: 20
           }}
         >
           <TouchableOpacity onPress={toggleRecording}>
-            <Text style={{ fontSize: 18, color: "white" }}>
-              {isRecording ? "Stop Recording" : "Start Recording"}
+            <Text style={{ fontSize: 18, color: 'white' }}>
+              {isRecording ? 'Stop Recording' : 'Start Recording'}
             </Text>
           </TouchableOpacity>
           <Switch
             trackColor={{ true: COLORS.exerciseBg, false: COLORS.text }}
-            thumbColor={
-              cameraType === Camera.Constants.Type.front
-                ? COLORS.btn
-                : COLORS.text
-            }
+            thumbColor={cameraType === Camera.Constants.Type.front ? COLORS.btn : COLORS.text}
             onValueChange={toggleCameraType}
             value={cameraType === Camera.Constants.Type.front}
           />

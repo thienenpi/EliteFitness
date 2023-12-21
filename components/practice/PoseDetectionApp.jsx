@@ -1,36 +1,29 @@
-import React, { useEffect, useState, useRef } from "react"
-import {
-  Text,
-  View,
-  Dimensions,
-  Platform,
-  Switch,
-  ActivityIndicator,
-} from "react-native"
-import { Camera } from "expo-camera"
-import * as MediaLibrary from "expo-media-library"
-import * as poseDetection from "@tensorflow-models/pose-detection"
-import * as tf from "@tensorflow/tfjs"
+import React, { useEffect, useState, useRef } from 'react'
+import { Text, View, Dimensions, Platform, Switch, ActivityIndicator } from 'react-native'
+import { Camera } from 'expo-camera'
+import * as MediaLibrary from 'expo-media-library'
+import * as poseDetection from '@tensorflow-models/pose-detection'
+import * as tf from '@tensorflow/tfjs'
 // Register WebGL backend.
-import "@tensorflow/tfjs-backend-webgl"
+import '@tensorflow/tfjs-backend-webgl'
 
-import * as ScreenOrientation from "expo-screen-orientation"
-import { cameraWithTensors, bundleResourceIO } from "@tensorflow/tfjs-react-native"
-import Svg, { Circle } from "react-native-svg"
-import styles from "./poseDetectionApp.style"
-import { COLORS, SIZES, IP_ADDRESS } from "../../constants"
-import * as util from "../../lib/utilities"
-import { JointAngle } from "../../lib/jointAngles"
-import { BodyPart } from "../../lib/bodyPart"
-import axios from "axios"
-import useSpeech from "../../hook/useSpeech"
+import * as ScreenOrientation from 'expo-screen-orientation'
+import { cameraWithTensors, bundleResourceIO } from '@tensorflow/tfjs-react-native'
+import Svg, { Circle } from 'react-native-svg'
+import styles from './poseDetectionApp.style'
+import { COLORS, SIZES, IP_ADDRESS } from '../../constants'
+import * as util from '../../lib/utilities'
+import { JointAngle } from '../../lib/jointAngles'
+import { BodyPart } from '../../lib/bodyPart'
+import axios from 'axios'
+import useSpeech from '../../hook/useSpeech'
 
 const TensorCamera = cameraWithTensors(Camera)
 
-const IS_ANDROID = Platform.OS === "android"
-const IS_IOS = Platform.OS === "ios"
+const IS_ANDROID = Platform.OS === 'android'
+const IS_IOS = Platform.OS === 'ios'
 
-const CAM_PREVIEW_WIDTH = Dimensions.get("window").width
+const CAM_PREVIEW_WIDTH = Dimensions.get('window').width
 const CAM_PREVIEW_HEIGHT = CAM_PREVIEW_WIDTH / (IS_IOS ? 9 / 16 : 3 / 4)
 
 const MIN_KEYPOINT_SCORE = 0.3
@@ -49,30 +42,25 @@ var prevAngles,
   prevStartAt = 0,
   currStartAt = null
 
-const PoseDetectionApp = ({
-  practiceState,
-  recordState,
-  cameraState,
-  item,
-  onUpdateCounter,
-}) => {
+const PoseDetectionApp = ({ practiceState, recordState, cameraState, item, onUpdateCounter }) => {
   const rafId = useRef(null)
   const cameraRef = useRef(null)
   const [tfReady, setTfReady] = useState(false)
   const [model, setModel] = useState()
   const [poses, setPoses] = useState()
-  const [fps, setFps] = useState(0)
+  //   const [fps, setFps] = useState(0)
   const [orientation, setOrientation] = useState()
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.front)
+
   const [start, setStart] = useState(practiceState)
-  const [dataSet, setDataSet] = useState([])
+  //   const [dataSet, setDataSet] = useState([])
   const [timeCnt, setTimeCnt] = useState(0)
   const [counter, setCounter] = useState({
-    stage: "none",
+    stage: 'none',
     set: 1,
     rep: 0,
     score: 100,
-    correction: "Good",
+    correction: 'Good'
   })
 
   useEffect(() => {
@@ -93,17 +81,14 @@ const PoseDetectionApp = ({
 
       const movenetModelConfig = {
         modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
-        enableSmoothing: true,
+        enableSmoothing: true
       }
 
       if (LOAD_MODEL_FROM_BUNDLE) {
-        const modelJson = require("../../offline_model/model.json")
-        const modelWeights1 = require("../../offline_model/group1-shard1of2.bin")
-        const modelWeights2 = require("../../offline_model/group1-shard2of2.bin")
-        movenetModelConfig.modelUrl = bundleResourceIO(modelJson, [
-          modelWeights1,
-          modelWeights2,
-        ])
+        const modelJson = require('../../offline_model/model.json')
+        const modelWeights1 = require('../../offline_model/group1-shard1of2.bin')
+        const modelWeights2 = require('../../offline_model/group1-shard2of2.bin')
+        movenetModelConfig.modelUrl = bundleResourceIO(modelJson, [modelWeights1, modelWeights2])
       }
 
       const model = await poseDetection.createDetector(
@@ -138,15 +123,13 @@ const PoseDetectionApp = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      if (item.csvPath === "none") {
-        console.error("CSV path is none")
+      if (item.csvPath === 'none') {
+        console.error('CSV path is none')
         return
       }
 
       try {
-        const response = await axios.get(
-          `http://${IP_ADDRESS}:3000/api/exercises/${item._id}`
-        )
+        const response = await axios.get(`http://${IP_ADDRESS}:3000/api/exercises/${item._id}`)
 
         if (response.status === 200) {
           data = response.data
@@ -163,35 +146,45 @@ const PoseDetectionApp = ({
   }, [practiceState, IP_ADDRESS])
 
   useEffect(() => {
-    onUpdateCounter(counter)
+    //   onUpdateCounter(counter)
   }, [timeCnt])
+
+//   useEffect(() => {
+//     if (start) {
+//       const intervalId = setInterval(() => {
+//         setTimeCnt((prev) => prev + 0.5)
+//       }, 500)
+
+//       return () => {
+//         clearInterval(intervalId)
+//       }
+//     }
+//   }, [start])
 
   const checkDeviation = (vectorFromDataset, inputVector, threshold, time) => {
     const bodyParts = [
-      "neck",
-      "left arm",
-      "right arm",
-      "abdomen",
-      "internal",
-      "left leg",
-      "right leg",
-      "left armpit",
-      "right armpit",
+      'neck',
+      'left arm',
+      'right arm',
+      'abdomen',
+      'internal',
+      'left leg',
+      'right leg',
+      'left armpit',
+      'right armpit'
     ]
 
     const arrayFromDataset = vectorFromDataset.map(Number)
     const arrayFromInput = inputVector.map(Number)
 
-    const deviation = arrayFromDataset.map(
-      (value, index) => value - arrayFromInput[index]
-    )
+    const deviation = arrayFromDataset.map((value, index) => value - arrayFromInput[index])
 
-    var lines = ""
+    var lines = ''
     deviation.forEach((value, index) => {
       if (Math.abs(value) > threshold) {
-        const line = `${bodyParts[index]} - ${
-          value > 0 ? "larger" : "smaller"
-        }  ${Math.abs(value)} degrees\n`
+        const line = `${bodyParts[index]} - ${value > 0 ? 'larger' : 'smaller'}  ${Math.abs(
+          value
+        )} degrees\n`
         lines += line
         useSpeech(bodyParts[index])
       }
@@ -199,7 +192,7 @@ const PoseDetectionApp = ({
 
     setCounter((prev) => ({
       ...prev,
-      correction: lines === "" ? "Good" : lines,
+      correction: lines === '' ? 'Good' : lines
     }))
   }
 
@@ -243,15 +236,11 @@ const PoseDetectionApp = ({
     const loop = async () => {
       const imageTensor = images.next().value
 
-      const startTs = Date.now()
-      const poses = await model.estimatePoses(
-        imageTensor,
-        undefined,
-        Date.now()
-      )
-      const latency = Date.now() - startTs
-      setFps(Math.floor(1000 / latency))
-      setPoses(poses)
+      //   const startTs = Date.now()
+      //   const poses = await model.estimatePoses(imageTensor, undefined, Date.now())
+      //   const latency = Date.now() - startTs
+      //   setFps(Math.floor(1000 / latency))
+      //   setPoses(poses)
       tf.dispose([imageTensor])
 
       if (rafId.current === 0) {
@@ -298,7 +287,7 @@ const PoseDetectionApp = ({
           if (timeCnt * 2 + 1 === data.TimeCnt.length) {
             setCounter((prev) => ({
               ...prev,
-              rep: prev.rep + 1,
+              rep: prev.rep + 1
             }))
 
             setTimeCnt(0)
@@ -308,7 +297,7 @@ const PoseDetectionApp = ({
             setCounter((prev) => ({
               ...prev,
               rep: 0,
-              set: prev.set + 1,
+              set: prev.set + 1
             }))
           }
 
@@ -344,11 +333,9 @@ const PoseDetectionApp = ({
           const x = flipX ? getOutputTensorWidth() - k.x : k.x
           const y = k.y
           const cx =
-            (x / getOutputTensorWidth()) *
-            (isPortrait() ? CAM_PREVIEW_WIDTH : CAM_PREVIEW_HEIGHT)
+            (x / getOutputTensorWidth()) * (isPortrait() ? CAM_PREVIEW_WIDTH : CAM_PREVIEW_HEIGHT)
           const cy =
-            (y / getOutputTensorHeight()) *
-            (isPortrait() ? CAM_PREVIEW_HEIGHT : CAM_PREVIEW_WIDTH)
+            (y / getOutputTensorHeight()) * (isPortrait() ? CAM_PREVIEW_HEIGHT : CAM_PREVIEW_WIDTH)
           return (
             <Circle
               key={`skeletonkp_${k.name}`}
@@ -369,24 +356,20 @@ const PoseDetectionApp = ({
     }
   }
 
-  const renderFps = () => {
-    return (
-      <View style={styles.fpsContainer}>
-        <Text>FPS: {fps}</Text>
-      </View>
-    )
-  }
+  //   const renderFps = () => {
+  //     return (
+  //       <View style={styles.fpsContainer}>
+  //         <Text>FPS: {fps}</Text>
+  //       </View>
+  //     )
+  //   }
 
   const renderCameraTypeSwitcher = () => {
     return (
       <View style={styles.cameraTypeSwitcher}>
         <Switch
           trackColor={{ true: COLORS.exerciseBg, false: COLORS.text }}
-          thumbColor={
-            cameraType === Camera.Constants.Type.front
-              ? COLORS.btn
-              : COLORS.text
-          }
+          thumbColor={cameraType === Camera.Constants.Type.front ? COLORS.btn : COLORS.text}
           onValueChange={toggleCameraType}
           value={cameraType === Camera.Constants.Type.front}
         />
@@ -410,15 +393,11 @@ const PoseDetectionApp = ({
   }
 
   const getOutputTensorWidth = () => {
-    return isPortrait() || IS_ANDROID
-      ? OUTPUT_TENSOR_WIDTH
-      : OUTPUT_TENSOR_HEIGHT
+    return isPortrait() || IS_ANDROID ? OUTPUT_TENSOR_WIDTH : OUTPUT_TENSOR_HEIGHT
   }
 
   const getOutputTensorHeight = () => {
-    return isPortrait() || IS_ANDROID
-      ? OUTPUT_TENSOR_HEIGHT
-      : OUTPUT_TENSOR_WIDTH
+    return isPortrait() || IS_ANDROID ? OUTPUT_TENSOR_HEIGHT : OUTPUT_TENSOR_WIDTH
   }
 
   const getTextureRotationAngleInDegrees = () => {
@@ -448,11 +427,7 @@ const PoseDetectionApp = ({
     )
   } else {
     return (
-      <View
-        style={
-          isPortrait() ? styles.containerPortrait : styles.containerLandscape
-        }
-      >
+      <View style={isPortrait() ? styles.containerPortrait : styles.containerLandscape}>
         <TensorCamera
           ref={cameraRef}
           style={styles.camera}
@@ -464,8 +439,8 @@ const PoseDetectionApp = ({
           rotation={getTextureRotationAngleInDegrees()}
           onReady={handleCameraStream}
         />
-        {start && renderPose()}
-        {renderFps()}
+        {/* {start && renderPose()} */}
+        {/* {renderFps()} */}
         {renderCameraTypeSwitcher()}
       </View>
     )

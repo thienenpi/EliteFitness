@@ -1,6 +1,6 @@
-import { Keypoint } from "@tensorflow-models/pose-detection"
-import { calculateJointAngle, averageCord } from "./utilities"
-import { BodyPart } from "./bodyPart"
+import { Keypoint } from '@tensorflow-models/pose-detection'
+import { calculateJointAngle, averageCord } from './utilities'
+import { BodyPart } from './bodyPart'
 
 export class Angles {
   constructor() {}
@@ -22,19 +22,11 @@ export class JointAngle {
     this.kps = kps
   }
 
-  leftLegAngle(
-    leftHip: number[],
-    leftKnee: number[],
-    leftAnkle: number[]
-  ): number {
+  leftLegAngle(leftHip: number[], leftKnee: number[], leftAnkle: number[]): number {
     return calculateJointAngle(leftHip, leftKnee, leftAnkle)
   }
 
-  rightLegAngle(
-    rightHip: number[],
-    rightKnee: number[],
-    rightAnkle: number[]
-  ): number {
+  rightLegAngle(rightHip: number[], rightKnee: number[], rightAnkle: number[]): number {
     return calculateJointAngle(rightHip, rightKnee, rightAnkle)
   }
 
@@ -42,19 +34,11 @@ export class JointAngle {
     return Math.abs(180 - calculateJointAngle(nose, shoulder, hip))
   }
 
-  leftArmAngle(
-    leftShoulder: number[],
-    leftElbow: number[],
-    leftWrist: number[]
-  ): number {
+  leftArmAngle(leftShoulder: number[], leftElbow: number[], leftWrist: number[]): number {
     return calculateJointAngle(leftShoulder, leftElbow, leftWrist)
   }
 
-  rightArmAngle(
-    rightShoulder: number[],
-    rightElbow: number[],
-    rightWrist: number[]
-  ): number {
+  rightArmAngle(rightShoulder: number[], rightElbow: number[], rightWrist: number[]): number {
     return calculateJointAngle(rightShoulder, rightElbow, rightWrist)
   }
 
@@ -66,27 +50,15 @@ export class JointAngle {
     return calculateJointAngle(shoulder, hip, knee)
   }
 
-  internalAngle(
-    hip: number[],
-    leftAnkle: number[],
-    rightAnkle: number[]
-  ): number {
+  internalAngle(hip: number[], leftAnkle: number[], rightAnkle: number[]): number {
     return calculateJointAngle(leftAnkle, hip, rightAnkle)
   }
 
-  leftArmpitAngle(
-    leftHip: number[],
-    leftShoulder: number[],
-    leftElbow: number[]
-  ): number {
+  leftArmpitAngle(leftHip: number[], leftShoulder: number[], leftElbow: number[]): number {
     return calculateJointAngle(leftHip, leftShoulder, leftElbow)
   }
 
-  rightArmpitAngle(
-    rightHip: number[],
-    rightShoulder: number[],
-    rightElbow: number[]
-  ): number {
+  rightArmpitAngle(rightHip: number[], rightShoulder: number[], rightElbow: number[]): number {
     return calculateJointAngle(rightHip, rightShoulder, rightElbow)
   }
 

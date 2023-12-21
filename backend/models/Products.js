@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -7,9 +7,9 @@ const ProductSchema = new mongoose.Schema(
     imageUrl: { type: String, required: true },
     description: { type: String, required: true },
     muscles: [{ type: String, require: true }],
-    level: [{ type: String, require: true }],
+    level: [{ type: String, require: true }]
   },
   { timestamps: true }
 )
 
-module.exports = mongoose.model("Product", ProductSchema)
+module.exports = mongoose.model('Product', ProductSchema)

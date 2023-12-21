@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native"
-import { COLORS, SIZES } from "../../constants"
+import { StyleSheet } from 'react-native'
+import { COLORS, SIZES } from '../../constants'
 
 const styles = StyleSheet.create({
   container: {
@@ -7,51 +7,51 @@ const styles = StyleSheet.create({
     height: 86,
     borderRadius: 6,
     marginVertical: SIZES.xSmall,
-    flexDirection: "row",
-    paddingHorizontal: SIZES.xSmall,
+    flexDirection: 'row',
+    paddingHorizontal: SIZES.xSmall
   },
 
   image: {
-    overflow: "hidden",
+    overflow: 'hidden',
     borderRadius: SIZES.xSmall,
     // overlayColor: COLORS.text,
     width: 68,
     height: 70,
-    alignSelf: "center",
+    alignSelf: 'center'
   },
 
   details: {
     width: SIZES.width - 250,
     marginHorizontal: SIZES.large,
     marginTop: SIZES.xSmall,
-    alignItems: "flex-start",
-    flexDirection: "column",
+    alignItems: 'flex-start',
+    flexDirection: 'column'
   },
 
   title: {
-    fontFamily: "sfProBlackItalic",
+    fontFamily: 'sfProBlackItalic',
     fontSize: SIZES.small,
-    color: COLORS.btn,
+    color: COLORS.btn
   },
 
   description: {
     marginTop: SIZES.xSmall,
-    fontFamily: "sfProBlackItalic",
+    fontFamily: 'sfProBlackItalic',
     fontSize: SIZES.xSmall,
-    color: COLORS.text,
+    color: COLORS.text
   },
 
   btnColumn: {
     marginVertical: SIZES.xSmall,
-    alignItems: "flex-start",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
 
   btn: {
     height: 24,
-    width: 24,
-  },
+    width: 24
+  }
 })
 
 export default styles

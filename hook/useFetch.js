@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-import { IP_ADDRESS } from "../constants"
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { IP_ADDRESS } from '../constants'
 
 const useFetch = ({ collection }) => {
   const [data, setData] = useState([])
@@ -11,9 +11,7 @@ const useFetch = ({ collection }) => {
     setIsLoading(true)
 
     try {
-      const response = await axios.get(
-        `http://${IP_ADDRESS}:3000/api/${collection}`
-      )
+      const response = await axios.get(`http://${IP_ADDRESS}:3000/api/${collection}`)
       setData(response.data)
       setIsLoading(false)
     } catch (error) {
