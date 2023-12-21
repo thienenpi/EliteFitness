@@ -1,10 +1,10 @@
-import { Image, Text, View } from "react-native";
-import React, { useState } from "react";
-import styles from "./filterListView.style";
-import { Picker } from "@react-native-picker/picker";
+import { Image, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import styles from './filterListView.style'
+import { Picker } from '@react-native-picker/picker'
 
 const FilterListView = ({ item }) => {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState('')
 
   return (
     <View style={styles.container}>
@@ -19,11 +19,11 @@ const FilterListView = ({ item }) => {
         ))}
       </Picker> */}
       <Image
-        source={require("../../assets/icons/dropdown/3x.png")}
+        source={require('../../assets/icons/dropdown/3x.png')}
         style={styles.dropdownIcon}
       ></Image>
     </View>
-  );
-};
+  )
+}
 
-export default FilterListView;
+export default FilterListView

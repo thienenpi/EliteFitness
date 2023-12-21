@@ -1,24 +1,24 @@
-import { StyleSheet } from "react-native";
-import { SIZES, COLORS } from "../../constants";
+import { StyleSheet } from 'react-native'
+import { SIZES, COLORS } from '../../constants'
 
 const styles = StyleSheet.create({
   container: {
     height: SIZES.height,
-    backgroundColor: COLORS.primaryBg,
+    backgroundColor: COLORS.primaryBg
   },
 
   header: {
     paddingHorizontal: 40,
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingTop: 60,
-    flexDirection: "row",
+    flexDirection: 'row'
   },
   userTxt: {
-    fontFamily: "rufner",
+    fontFamily: 'rufner',
     color: COLORS.text,
-    fontSize: 16,
-  },
-});
+    fontSize: 16
+  }
+})
 
-export default styles;
+export default styles

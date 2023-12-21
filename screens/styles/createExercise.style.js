@@ -1,33 +1,33 @@
-import { StyleSheet } from "react-native"
-import { COLORS, SIZES } from "../../constants"
+import { StyleSheet } from 'react-native'
+import { COLORS, SIZES } from '../../constants'
 
 const styles = StyleSheet.create({
   container: {
     height: SIZES.height * 1.5,
-    backgroundColor: COLORS.primaryBg,
+    backgroundColor: COLORS.primaryBg
   },
 
   headerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginHorizontal: SIZES.xxLarge,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: SIZES.xxLarge
   },
 
   headerText: {
-    fontFamily: "sfProBlackItalic",
+    fontFamily: 'sfProBlackItalic',
     fontSize: SIZES.xLarge,
     color: COLORS.btn,
-    alignSelf: "center",
+    alignSelf: 'center'
   },
 
   bodyContainer: {
     backgroundColor: COLORS.exerciseBg,
     marginVertical: SIZES.xLarge,
-    marginHorizontal: SIZES.xxLarge,
+    marginHorizontal: SIZES.xxLarge
   },
 
   wrapper: {
-    marginBottom: 20,
+    marginBottom: 20
   },
 
   label: {
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     color: COLORS.btn,
     marginBottom: 5,
     marginEnd: 5,
-    textAlign: "left",
+    textAlign: 'left'
   },
 
   inputWrapper: (borderColor) => ({
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 40,
     borderRadius: 12,
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 15,
-    alignItems: "center",
+    alignItems: 'center'
   }),
 
   btn: (backgroundColor) => ({
@@ -54,28 +54,28 @@ const styles = StyleSheet.create({
     width: 200,
     marginVertical: 20,
     backgroundColor: backgroundColor,
-    alignItems: "center",
-    alignSelf: "center",
-    justifyContent: "center",
-    borderRadius: SIZES.xLarge,
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    borderRadius: SIZES.xLarge
   }),
 
   btnText: {
-    fontFamily: "sfProBlackItalic",
-    fontSize: 16,
+    fontFamily: 'sfProBlackItalic',
+    fontSize: 16
   },
 
   errorMessage: {
     color: COLORS.red,
     marginTop: 5,
     marginLeft: 5,
-    fontSize: SIZES.xSmall,
+    fontSize: SIZES.xSmall
   },
 
   iconStyle: {
     marginRight: 10,
-    color: COLORS.btn,
-  },
+    color: COLORS.btn
+  }
 })
 
 export default styles

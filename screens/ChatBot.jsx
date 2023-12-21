@@ -1,16 +1,16 @@
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native"
-import React, { useEffect, useState } from "react"
-import styles from "./styles/chatBot.style"
-import { GiftedChat } from "react-native-gifted-chat"
-import { Feather } from "@expo/vector-icons"
-import axios from "axios"
-import { OPENAI_API_KEY, IP_ADDRESS } from "../constants"
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import styles from './styles/chatBot.style'
+import { GiftedChat } from 'react-native-gifted-chat'
+import { Feather } from '@expo/vector-icons'
+import axios from 'axios'
+import { OPENAI_API_KEY, IP_ADDRESS } from '../constants'
 
 const chatHistory = []
 
 const ChatBot = () => {
   const [messages, setMessages] = useState([])
-  const [inputText, setInputText] = useState("")
+  const [inputText, setInputText] = useState('')
 
   useEffect(() => {
     async function fetch() {
@@ -31,12 +31,12 @@ const ChatBot = () => {
         Let say hello first.`
       const userMessages = chatHistory.map(([role, content]) => ({
         role,
-        content,
+        content
       }))
 
       userMessages.push({
-        role: "user",
-        content: userMessage,
+        role: 'user',
+        content: userMessage
       })
 
       const completionText = await sendMessage(userMessages)
@@ -47,16 +47,14 @@ const ChatBot = () => {
         createdAt: new Date(),
         user: {
           _id: 2,
-          name: "Elite chatbot",
-        },
+          name: 'Elite chatbot'
+        }
       }
 
-      setMessages((previousMessages) =>
-        GiftedChat.append(previousMessages, botMessage)
-      )
+      setMessages((previousMessages) => GiftedChat.append(previousMessages, botMessage))
 
-      chatHistory.push(["user", userMessage])
-      chatHistory.push(["assistant", completionText])
+      chatHistory.push(['user', userMessage])
+      chatHistory.push(['assistant', completionText])
     }
 
     fetch()
@@ -64,19 +62,19 @@ const ChatBot = () => {
 
   const sendMessage = async (userMessages) => {
     const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
+      'https://api.openai.com/v1/chat/completions',
       {
-        model: "gpt-3.5-turbo",
+        model: 'gpt-3.5-turbo',
         messages: userMessages,
         max_tokens: 1200,
         temperature: 0.2,
-        n: 1,
+        n: 1
       },
       {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${OPENAI_API_KEY}`,
-        },
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${OPENAI_API_KEY}`
+        }
       }
     )
 
@@ -92,14 +90,12 @@ const ChatBot = () => {
       const userMessage = newMessages[0]
       const userMessages = chatHistory.map(([role, content]) => ({
         role,
-        content,
+        content
       }))
-      userMessages.push({ role: "user", content: userMessage.text })
+      userMessages.push({ role: 'user', content: userMessage.text })
 
       // Add the user's message to the messages state
-      setMessages((previousMessages) =>
-        GiftedChat.append(previousMessages, userMessage)
-      )
+      setMessages((previousMessages) => GiftedChat.append(previousMessages, userMessage))
 
       const completionText = await sendMessage(userMessages)
 
@@ -109,15 +105,13 @@ const ChatBot = () => {
         createdAt: new Date(),
         user: {
           _id: 2,
-          name: "Elite chatbot",
-        },
+          name: 'Elite chatbot'
+        }
       }
 
-      setMessages((previousMessages) =>
-        GiftedChat.append(previousMessages, botMessage)
-      )
-      chatHistory.push(["user", userMessage.text])
-      chatHistory.push(["assistant", completionText])
+      setMessages((previousMessages) => GiftedChat.append(previousMessages, botMessage))
+      chatHistory.push(['user', userMessage.text])
+      chatHistory.push(['assistant', completionText])
     } catch (error) {
       console.error(error)
     }
@@ -143,7 +137,7 @@ const ChatBot = () => {
         />
         <TouchableOpacity
           onPress={() => {
-            props.onSend({ text: inputText.trim() }, true), setInputText("")
+            props.onSend({ text: inputText.trim() }, true), setInputText('')
           }}
         >
           <View>
@@ -156,10 +150,7 @@ const ChatBot = () => {
 
   const renderAvatar = () => {
     return (
-      <Image
-        style={styles.botAvatar}
-        source={require("../assets/icons/app-icon/3x.png")}
-      ></Image>
+      <Image style={styles.botAvatar} source={require('../assets/icons/app-icon/3x.png')}></Image>
     )
   }
 

@@ -53,7 +53,7 @@ const SearchBar = ({ onUpdateProductList }) => {
         onSubmitEditing={handleEnterPress}
       />
     </View>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

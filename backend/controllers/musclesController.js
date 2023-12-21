@@ -1,4 +1,4 @@
-const Muscle = require("../models/Muscles")
+const Muscle = require('../models/Muscles')
 
 module.exports = {
   createMuscle: async (req, res) => {
@@ -36,15 +36,15 @@ module.exports = {
       const result = await Muscle.aggregate([
         {
           $search: {
-            index: "elitefitness",
+            index: 'elitefitness',
             text: {
               query: req.params.key,
               path: {
-                wildcard: "*",
-              },
-            },
-          },
-        },
+                wildcard: '*'
+              }
+            }
+          }
+        }
       ])
 
       //   result.forEach((item) => musclesId.push(item._id.toString()))
@@ -53,5 +53,5 @@ module.exports = {
     } catch (error) {
       res.status(500).json(error)
     }
-  },
+  }
 }

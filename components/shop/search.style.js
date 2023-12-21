@@ -1,16 +1,16 @@
-import { StyleSheet } from "react-native";
-import { SIZES, COLORS } from "../../constants";
+import { StyleSheet } from 'react-native'
+import { SIZES, COLORS } from '../../constants'
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 8,
-    alignItems: "center",
+    alignItems: 'center',
     borderColor: COLORS.btn,
     borderRadius: 16,
     borderWidth: 1,
     width: 240,
-    paddingHorizontal: 4,
+    paddingHorizontal: 4
   },
   searchBtn: {
     zIndex: 999
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
   input: {
     color: COLORS.text,
     width: 200,
-    fontFamily: "poppinsRegular",
-  },
-});
+    fontFamily: 'poppinsRegular'
+  }
+})
 
-export default styles;
+export default styles

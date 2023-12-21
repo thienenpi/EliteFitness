@@ -1,7 +1,7 @@
-const Exercise = require("../models/Exercises")
-const fs = require("fs")
-const { parse } = require("csv-parse")
-const path = require("path")
+const Exercise = require('../models/Exercises')
+const fs = require('fs')
+const { parse } = require('csv-parse')
+const path = require('path')
 
 module.exports = {
   createExercise: async (req, res) => {
@@ -31,21 +31,21 @@ module.exports = {
       var data = {
         TimeCnt: [],
         Angles: [],
-        Velocities: [],
+        Velocities: []
       }
 
       fs.createReadStream(csvPath)
-        .pipe(parse({ delimiter: ",", from_line: 2 }))
-        .on("data", function (row) {
+        .pipe(parse({ delimiter: ',', from_line: 2 }))
+        .on('data', function (row) {
           data.TimeCnt.push(row[0])
           data.Angles.push(JSON.parse(row[1]))
           data.Velocities.push(JSON.parse(row[2]))
         })
-        .on("end", function () {
+        .on('end', function () {
           res.status(200).json(data)
-          console.log("finished")
+          console.log('finished')
         })
-        .on("error", function (error) {
+        .on('error', function (error) {
           res.status(500).json(error.message)
         })
     } catch (error) {
@@ -58,19 +58,19 @@ module.exports = {
       const result = await Exercise.aggregate([
         {
           $search: {
-            index: "elitefitness",
+            index: 'elitefitness',
             text: {
               query: req.params.key,
               path: {
-                wildcard: "*",
-              },
-            },
-          },
-        },
+                wildcard: '*'
+              }
+            }
+          }
+        }
       ])
       res.status(200).json(result)
     } catch (error) {
       res.status(500).json(error)
     }
-  },
+  }
 }
