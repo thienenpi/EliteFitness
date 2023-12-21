@@ -1,18 +1,33 @@
-import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
-import React, { useEffect } from 'react'
-import styles from './productList.style'
-import ProductCard from './product'
-import useFetch from '../../hook/useFetch'
-import { COLORS, SIZES } from '../../constants'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+} from "react-native"
+import React, { useEffect } from "react"
+import styles from "./productList.style"
+import ProductCard from "./product"
+import useFetch from "../../hook/useFetch"
+import { COLORS, SIZES } from "../../constants"
 
-const ProductList = () => {
-  const { data, isLoading, error } = useFetch({ collection: 'products' })
+const ProductList = ({ items }) => {
+  const { data, isLoading, error } = useFetch({ collection: "products" });
+  const [productList, setProductList] = useState(data);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => {}}>
       <ProductCard item={item}></ProductCard>
     </TouchableOpacity>
-  )
+  );
+
+  useEffect(() => {
+    if (items && items.length) {
+      setProductList(items);
+    } else {
+      setProductList(data);
+    }
+  }, [items, data]);
 
   return (
     <View style={styles.container}>
@@ -23,15 +38,16 @@ const ProductList = () => {
         <Text>Something went wrong</Text>
       ) : (
         <FlatList
-          data={data}
+          data={productList}
           numColumns={2}
           renderItem={renderItem}
           keyExtractor={(item) => JSON.stringify(item._id)}
           showsVerticalScrollIndicator={false}
+          scrollEnabled={false}
         ></FlatList>
       )}
     </View>
-  )
-}
+  );
+};
 
-export default ProductList
+export default ProductList;

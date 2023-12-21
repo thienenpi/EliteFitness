@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     width: 240,
     paddingHorizontal: 4
   },
+  searchBtn: {
+    zIndex: 999
+  },
   input: {
     color: COLORS.text,
     width: 200,
