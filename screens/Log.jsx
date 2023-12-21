@@ -1,9 +1,9 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import CalendarStrip from "react-native-calendar-strip";
-import React from "react";
-import styles from "./styles/log.style";
-import { COLORS } from "../constants";
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Feather } from '@expo/vector-icons'
+import CalendarStrip from 'react-native-calendar-strip'
+import React from 'react'
+import styles from './styles/log.style'
+import { COLORS } from '../constants'
 
 const Log = () => {
   return (
@@ -22,15 +22,15 @@ const Log = () => {
         calendarColor={COLORS.primaryBg}
         calendarHeaderStyle={{
           color: COLORS.btn,
-          fontFamily: "rufner",
-          textTransform: "uppercase",
+          fontFamily: 'rufner',
+          textTransform: 'uppercase'
         }}
         dateNumberStyle={{ color: COLORS.text }}
         dateNameStyle={{ color: COLORS.btn, fontSize: 10 }}
         iconContainer={{ flex: 0.1 }}
       />
     </View>
-  );
-};
+  )
+}
 
-export default Log;
+export default Log

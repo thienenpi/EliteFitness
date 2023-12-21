@@ -1,13 +1,13 @@
-import { Image, Text, TouchableOpacity, View } from "react-native"
-import React from "react"
-import styles from "./exerciseCardView.style"
-import { useNavigation } from "@react-navigation/native"
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import styles from './exerciseCardView.style'
+import { useNavigation } from '@react-navigation/native'
 
 const ExerciseCardView = ({ item }) => {
   const navigation = useNavigation()
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("Practice", { item })}>
+    <TouchableOpacity onPress={() => navigation.navigate('Practice', { item })}>
       <View style={styles.container}>
         <Image style={styles.image} source={{ uri: item.imageUrl }}></Image>
         <View style={styles.details}>
@@ -19,15 +19,12 @@ const ExerciseCardView = ({ item }) => {
 
         <View style={styles.btnColumn}>
           <TouchableOpacity>
-            <Image
-              style={styles.btn}
-              source={require("../../assets/icons/trash/3x.png")}
-            ></Image>
+            <Image style={styles.btn} source={require('../../assets/icons/trash/3x.png')}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
             <Image
               style={styles.btn}
-              source={require("../../assets/icons/transger/3x.png")}
+              source={require('../../assets/icons/transger/3x.png')}
             ></Image>
           </TouchableOpacity>
         </View>

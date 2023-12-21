@@ -1,21 +1,21 @@
-import { Animated, FlatList, StyleSheet, Text, View } from "react-native"
-import React, { useRef, useState } from "react"
-import SlideItem from "./slideItem"
-import Pagination from "./pagination"
-import { COLORS } from "../../constants"
+import { Animated, FlatList, StyleSheet, Text, View } from 'react-native'
+import React, { useRef, useState } from 'react'
+import SlideItem from './slideItem'
+import Pagination from './pagination'
+import { COLORS } from '../../constants'
 const Slides = [
   {
     id: 1,
-    img: require("../../assets/images/banners/banner1.jpg"),
+    img: require('../../assets/images/banners/banner1.jpg')
   },
   {
     id: 2,
-    img: require("../../assets/images/banners/banner2.jpg"),
+    img: require('../../assets/images/banners/banner2.jpg')
   },
   {
     id: 3,
-    img: require("../../assets/images/banners/banner3.jpg"),
-  },
+    img: require('../../assets/images/banners/banner3.jpg')
+  }
 ]
 const Slider = () => {
   const [index, setIndex] = useState(0)
@@ -27,13 +27,13 @@ const Slider = () => {
         {
           nativeEvent: {
             contentOffset: {
-              x: scrollX,
-            },
-          },
-        },
+              x: scrollX
+            }
+          }
+        }
       ],
       {
-        useNativeDriver: false,
+        useNativeDriver: false
       }
     )(event)
   }
@@ -50,7 +50,7 @@ const Slider = () => {
   }).current
 
   const viewabilityConfig = useRef({
-    itemVisiblePercentThreshold: 50,
+    itemVisiblePercentThreshold: 50
   }).current
 
   return (
@@ -79,5 +79,5 @@ const styles = StyleSheet.create({
     height: 240,
     justifyContent: 'center',
     alignItems: 'center'
-  },
+  }
 })

@@ -1,19 +1,13 @@
-import {
-  FlatList,
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-  Text,
-} from "react-native"
-import React, { useEffect, useState } from "react"
-import styles from "./muscleRow.style"
-import { COLORS, SIZES } from "../../constants"
-import MuscleCardView from "./MuscleCardView"
-import useFetch from "../../hook/useFetch"
-import Button from "../Button"
+import { FlatList, View, TouchableOpacity, ActivityIndicator, Text } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import styles from './muscleRow.style'
+import { COLORS, SIZES } from '../../constants'
+import MuscleCardView from './MuscleCardView'
+import useFetch from '../../hook/useFetch'
+import Button from '../Button'
 
 const MuscleRow = ({ onUpdateSelectedMuscles }) => {
-  const { data, isLoading, error } = useFetch({ collection: "muscles" })
+  const { data, isLoading, error } = useFetch({ collection: 'muscles' })
   const [selectedMuscles, setSelectedMuscles] = useState([])
 
   const renderItem = ({ item }) => (
@@ -46,10 +40,7 @@ const MuscleRow = ({ onUpdateSelectedMuscles }) => {
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <ActivityIndicator
-          size={SIZES.xxLarge}
-          color={COLORS.btn}
-        ></ActivityIndicator>
+        <ActivityIndicator size={SIZES.xxLarge} color={COLORS.btn}></ActivityIndicator>
       ) : error ? (
         <Text>Some thing went wrong</Text>
       ) : (
@@ -66,7 +57,7 @@ const MuscleRow = ({ onUpdateSelectedMuscles }) => {
       <Button
         styles={styles}
         onPress={generateExercise}
-        title={"Generate"}
+        title={'Generate'}
         isValid={selectedMuscles.length}
       ></Button>
     </View>

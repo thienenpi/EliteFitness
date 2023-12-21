@@ -1,62 +1,62 @@
-import { StyleSheet } from "react-native"
-import { COLORS, SIZES } from "../../constants"
+import { StyleSheet } from 'react-native'
+import { COLORS, SIZES } from '../../constants'
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 60,
     paddingHorizontal: 20,
     backgroundColor: COLORS.primaryBg,
-    flex: 1,
+    flex: 1
   },
 
   header: {
-    alignItems: "center",
+    alignItems: 'center'
   },
 
   headerText: {
-    fontFamily: "rufner",
+    fontFamily: 'rufner',
     color: COLORS.btn,
-    fontSize: SIZES.large,
+    fontSize: SIZES.large
   },
 
   convo: {},
 
   botAvatar: {
     height: 40,
-    width: 40,
+    width: 40
   },
 
   inputWrapper: {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderRadius: SIZES.large,
     borderColor: COLORS.btn,
     borderWidth: 1,
     padding: 10,
     marginBottom: SIZES.xxLarge,
-    justifyContent: "space-between",
-    alignItems: "flex-end",
+    justifyContent: 'space-between',
+    alignItems: 'flex-end'
   },
 
   inputText: {
     color: COLORS.text,
     width: 280,
-    textAlign: 'justify',
+    textAlign: 'justify'
   },
 
   sendIcon: {
-    color: COLORS.btn,
+    color: COLORS.btn
   },
 
   bubble: (user) => ({
     backgroundColor: user === 1 ? COLORS.exerciseBg : COLORS.btn,
     borderRadius: 10,
     padding: 10,
-    maxWidth: 250,
+    maxWidth: 250
   }),
 
   separator: {
-    height: SIZES.medium,
-  },
+    height: SIZES.medium
+  }
 })
 
 export default styles

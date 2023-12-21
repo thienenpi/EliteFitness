@@ -1,37 +1,37 @@
-import { StyleSheet } from "react-native";
-import { SIZES, COLORS } from "../../constants";
+import { StyleSheet } from 'react-native'
+import { SIZES, COLORS } from '../../constants'
 
 const styles = StyleSheet.create({
   guideContainer: {
     paddingTop: 60,
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 40,
-    justifyContent: "space-between",
+    justifyContent: 'space-between'
   },
   userContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 
   sideIcon: {
     height: 40,
-    width: 40,
+    width: 40
   },
 
   guideTxt: {
-    fontFamily: "poppinsSemibold",
+    fontFamily: 'poppinsSemibold',
     fontSize: 13,
     color: COLORS.text,
-    marginHorizontal: SIZES.xSmall,
+    marginHorizontal: SIZES.xSmall
   },
 
   preText: {
-    fontFamily: "poppinsBold",
+    fontFamily: 'poppinsBold',
     fontSize: 12,
     color: COLORS.btn,
-    textTransform: "uppercase",
-    marginHorizontal: SIZES.xSmall,
-  },
-});
+    textTransform: 'uppercase',
+    marginHorizontal: SIZES.xSmall
+  }
+})
 
-export default styles;
+export default styles

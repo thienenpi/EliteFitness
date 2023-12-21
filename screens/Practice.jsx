@@ -1,12 +1,12 @@
-import { TouchableOpacity, SafeAreaView, Text, View, Image } from "react-native"
-import React, { useEffect, useRef, useState } from "react"
-import { useRoute } from "@react-navigation/native"
-import styles from "./styles/practice.style"
-import { COLORS } from "../constants"
-import Button from "../components/Button"
-import SettingRow from "../components/SettingRow"
-import VideoRecording from "../components/practice/VideoRecording"
-import PoseDetectionApp from "../components/practice/PoseDetectionApp"
+import { TouchableOpacity, SafeAreaView, Text, View, Image } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
+import { useRoute } from '@react-navigation/native'
+import styles from './styles/practice.style'
+import { COLORS } from '../constants'
+import Button from '../components/Button'
+import SettingRow from '../components/SettingRow'
+import VideoRecording from '../components/practice/VideoRecording'
+import PoseDetectionApp from '../components/practice/PoseDetectionApp'
 
 const Practice = ({ navigation }) => {
   const route = useRoute()
@@ -15,11 +15,11 @@ const Practice = ({ navigation }) => {
   const [recordState, setRecordState] = useState(false)
   const [practiceState, setPracticeState] = useState(false)
   const [counter, setCounter] = useState({
-    stage: "none",
+    stage: 'none',
     set: 1,
     rep: 0,
     score: 100,
-    correction: "Good",
+    correction: 'Good'
   })
 
   const updateCounter = (newCounter) => {
@@ -54,50 +54,48 @@ const Practice = ({ navigation }) => {
 
             <Text style={styles.trackTitle}> Set </Text>
             <Text style={styles.trackValue}>
-              {" "}
-              {counter.set}/{item.numOfSet}{" "}
+              {' '}
+              {counter.set}/{item.numOfSet}{' '}
             </Text>
           </View>
 
           <View style={styles.trackContainer}>
             <Text style={styles.trackTitle}> Reps </Text>
             <Text style={styles.trackValue}>
-              {" "}
-              {counter.rep}/{item.numOfRep}{" "}
+              {' '}
+              {counter.rep}/{item.numOfRep}{' '}
             </Text>
 
             <Text style={styles.trackTitle}> Score </Text>
             <Text style={styles.trackValue}> {counter.score} </Text>
           </View>
 
-          <Image source={require("../assets/icons/divider/1x.png")}></Image>
+          <Image source={require('../assets/icons/divider/1x.png')}></Image>
           <View style={styles.crtContainer}>
             <Text style={styles.crtTitle}>Correction</Text>
-            <Text style={styles.crtValue(COLORS.accept)}>
-              {counter.correction}
-            </Text>
+            <Text style={styles.crtValue(COLORS.accept)}>{counter.correction}</Text>
           </View>
         </View>
 
         <SettingRow
           styles={styles}
-          title={"Turn off your camera"}
-          iconName={"camera"}
+          title={'Turn off your camera'}
+          iconName={'camera'}
           onChange={onUpdateCameraState}
           value={cameraState}
         ></SettingRow>
 
         <SettingRow
           styles={styles}
-          title={"Record your workout"}
-          iconName={"clipboard-file"}
+          title={'Record your workout'}
+          iconName={'clipboard-file'}
           onChange={onUpdateRecordState}
           value={recordState}
         ></SettingRow>
 
         <Button
           styles={styles}
-          title={practiceState ? "Done" : "Start"}
+          title={practiceState ? 'Done' : 'Start'}
           isValid={true}
           onPress={() => setPracticeState(!practiceState)}
         ></Button>

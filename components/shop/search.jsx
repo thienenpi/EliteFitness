@@ -1,10 +1,10 @@
-import { View, Text, TextInput } from "react-native";
-import React from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { COLORS } from "../../constants";
-import styles from "./search.style";
+import { View, Text, TextInput } from 'react-native'
+import React from 'react'
+import { Ionicons } from '@expo/vector-icons'
+import { COLORS } from '../../constants'
+import styles from './search.style'
 const SearchBar = () => {
-  const [text, onChangeText] = React.useState("");
+  const [text, onChangeText] = React.useState('')
 
   return (
     <View style={styles.container}>
@@ -16,7 +16,7 @@ const SearchBar = () => {
         placeholder="Search"
       />
     </View>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

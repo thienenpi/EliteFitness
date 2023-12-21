@@ -1,13 +1,13 @@
-import { Image, Text, TouchableOpacity, View } from "react-native"
-import React from "react"
-import styles from "./welcome.style"
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import styles from './welcome.style'
 
 const Welcome = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity>
         <Image
-          source={require("../../assets/icons/profile/3x.png")}
+          source={require('../../assets/icons/profile/3x.png')}
           style={styles.profileImage}
         ></Image>
       </TouchableOpacity>
@@ -17,7 +17,7 @@ const Welcome = () => {
       </View>
       <TouchableOpacity style={{ width: 52 }}>
         <Image
-          source={require("../../assets/icons/setting/3x.png")}
+          source={require('../../assets/icons/setting/3x.png')}
           style={styles.settingIcon}
         ></Image>
       </TouchableOpacity>

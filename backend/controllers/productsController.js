@@ -1,4 +1,4 @@
-const Product = require("../models/Products")
+const Product = require('../models/Products')
 
 module.exports = {
   createProduct: async (req, res) => {
@@ -6,9 +6,9 @@ module.exports = {
 
     try {
       await newProduct.save()
-      res.status(200).json("Product created successfully")
+      res.status(200).json('Product created successfully')
     } catch (error) {
-      res.status(500).json("Failed to create the product")
+      res.status(500).json('Failed to create the product')
     }
   },
 
@@ -17,7 +17,7 @@ module.exports = {
       const products = await Product.find().sort({ createdAt: -1 })
       res.status(200).json(products)
     } catch (error) {
-      res.status(500).json("Failed to get the products")
+      res.status(500).json('Failed to get the products')
     }
   },
 
@@ -26,7 +26,7 @@ module.exports = {
       const product = await Product.findById(req.params.id)
       res.status(200).json(product)
     } catch (error) {
-      res.status(500).json("Failed to get the product")
+      res.status(500).json('Failed to get the product')
     }
   },
 
@@ -35,19 +35,19 @@ module.exports = {
       const result = await Product.aggregate([
         {
           $search: {
-            index: "furniture",
+            index: 'furniture',
             text: {
               query: req.params.key,
               path: {
-                wildcard: "*",
-              },
-            },
-          },
-        },
+                wildcard: '*'
+              }
+            }
+          }
+        }
       ])
       res.status(200).json(result)
     } catch (error) {
-      res.status(500).json("Failed to get the products")
+      res.status(500).json('Failed to get the products')
     }
-  },
+  }
 }

@@ -1,8 +1,8 @@
-import React from "react";
-import { View } from "react-native";
-import Setting from "../components/profile/Setting";
-import User from "../components/profile/User";
-import styles from "./styles/profile.style";
+import React from 'react'
+import { View } from 'react-native'
+import Setting from '../components/profile/Setting'
+import User from '../components/profile/User'
+import styles from './styles/profile.style'
 
 const Profile = () => {
   return (
@@ -10,7 +10,7 @@ const Profile = () => {
       <User></User>
       <Setting></Setting>
     </View>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
