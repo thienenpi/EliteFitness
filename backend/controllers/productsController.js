@@ -35,15 +35,15 @@ module.exports = {
       const result = await Product.aggregate([
         {
           $search: {
-            index: "furniture",
+            index: "elitefitness",
             text: {
               query: req.params.key,
               path: {
-                wildcard: "*",
-              },
-            },
-          },
-        },
+                wildcard: "*"
+              }
+            }
+          }
+        }
       ])
       res.status(200).json(result)
     } catch (error) {
