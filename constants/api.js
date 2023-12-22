@@ -1,4 +1,4 @@
-const OPENAI_API_KEY = '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'
-const IP_ADDRESS = '10.0.106.26'
+const OPENAI_API_KEY = ''
+const IP_ADDRESS = '10.45.50.224'
 
 export { OPENAI_API_KEY, IP_ADDRESS }

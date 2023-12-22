@@ -26,12 +26,16 @@ const Practice = ({ navigation }) => {
     setCounter(newCounter)
   }
 
-  const onUpdateCameraState = () => {
+  const updateCameraState = () => {
     setCameraState((prevState) => !prevState)
   }
 
-  const onUpdateRecordState = () => {
+  const updateRecordState = () => {
     setRecordState((prevState) => !prevState)
+  }
+
+  const updatePracticeState = () => {
+    setPracticeState((prevState) => !prevState)
   }
 
   return (
@@ -40,10 +44,12 @@ const Practice = ({ navigation }) => {
         {/* <VideoRecording></VideoRecording> */}
         <PoseDetectionApp
           item={item}
-          recordState={recordState}
+          counter={counter}
+        //   recordState={recordState}
           practiceState={practiceState}
-          cameraState={cameraState}
+        //   cameraState={cameraState}
           onUpdateCounter={updateCounter}
+          onUpdatePracticeState={updatePracticeState}
         ></PoseDetectionApp>
       </View>
       <View style={styles.menuContainer}>
@@ -81,7 +87,7 @@ const Practice = ({ navigation }) => {
           styles={styles}
           title={'Turn off your camera'}
           iconName={'camera'}
-          onChange={onUpdateCameraState}
+          onChange={updateCameraState}
           value={cameraState}
         ></SettingRow>
 
@@ -89,7 +95,7 @@ const Practice = ({ navigation }) => {
           styles={styles}
           title={'Record your workout'}
           iconName={'clipboard-file'}
-          onChange={onUpdateRecordState}
+          onChange={updateRecordState}
           value={recordState}
         ></SettingRow>
 
@@ -97,7 +103,7 @@ const Practice = ({ navigation }) => {
           styles={styles}
           title={practiceState ? 'Done' : 'Start'}
           isValid={true}
-          onPress={() => setPracticeState(!practiceState)}
+          onPress={updatePracticeState}
         ></Button>
       </View>
     </View>
