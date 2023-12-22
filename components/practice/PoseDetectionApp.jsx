@@ -36,32 +36,29 @@ const AUTO_RENDER = false
 const LOAD_MODEL_FROM_BUNDLE = true
 
 let data
-var prevAngles,
-  currAngles = null,
-  velocities,
-  prevStartAt = 0,
-  currStartAt = null
+// var prevAngles,
+//   currAngles = null,
+//   velocities,
+//   prevStartAt = 0,
+//   currStartAt = null
 
-const PoseDetectionApp = ({ practiceState, recordState, cameraState, item, onUpdateCounter }) => {
+const PoseDetectionApp = (props) => {
   const rafId = useRef(null)
   const cameraRef = useRef(null)
   const [tfReady, setTfReady] = useState(false)
   const [model, setModel] = useState()
-  const [poses, setPoses] = useState()
+  const [poses, setPoses] = useState(null)
   //   const [fps, setFps] = useState(0)
   const [orientation, setOrientation] = useState()
-  const [cameraType, setCameraType] = useState(Camera.Constants.Type.front)
+  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
 
-  const [start, setStart] = useState(practiceState)
-  //   const [dataSet, setDataSet] = useState([])
-  const [timeCnt, setTimeCnt] = useState(0)
-  const [counter, setCounter] = useState({
-    stage: 'none',
-    set: 1,
-    rep: 0,
-    score: 100,
-    correction: 'Good'
-  })
+  const dataset = useRef([])
+  const { counter, onUpdateCounter, practiceState, onUpdatePracticeState, item } = props
+  const counterRef = useRef(counter)
+  const renderRef = useRef(false)
+  const currAngles = useRef(null)
+  const prevAngles = useRef(null)
+  const timeCnt = useRef(0)
 
   useEffect(() => {
     async function prepare() {
@@ -141,25 +138,28 @@ const PoseDetectionApp = ({ practiceState, recordState, cameraState, item, onUpd
       }
     }
 
-    setStart(practiceState)
     fetchData()
-  }, [practiceState, IP_ADDRESS])
+  }, [])
 
   useEffect(() => {
-    //   onUpdateCounter(counter)
-  }, [timeCnt])
+    if (practiceState) {
+      renderRef.current = true
 
-//   useEffect(() => {
-//     if (start) {
-//       const intervalId = setInterval(() => {
-//         setTimeCnt((prev) => prev + 0.5)
-//       }, 500)
+      const intervalId = setInterval(() => {
+        if (counterRef.current.set === item.numOfSet && counterRef.current.rep === item.numOfRep) {
+          onUpdatePracticeState()
+        }
 
-//       return () => {
-//         clearInterval(intervalId)
-//       }
-//     }
-//   }, [start])
+        renderRef.current = true
+        timeCnt.current += 0.5
+        onUpdateCounter({ ...counterRef.current })
+      }, 500)
+
+      return () => {
+        clearInterval(intervalId)
+      }
+    }
+  }, [practiceState])
 
   const checkDeviation = (vectorFromDataset, inputVector, threshold, time) => {
     const bodyParts = [
@@ -182,18 +182,17 @@ const PoseDetectionApp = ({ practiceState, recordState, cameraState, item, onUpd
     var lines = ''
     deviation.forEach((value, index) => {
       if (Math.abs(value) > threshold) {
+        // console.log(Math.round(Math.abs(value) * 100 / 180))
+        // counterRef.current.score -= (Math.abs(value) / 180)
         const line = `${bodyParts[index]} - ${value > 0 ? 'larger' : 'smaller'}  ${Math.abs(
           value
         )} degrees\n`
         lines += line
-        useSpeech(bodyParts[index])
+        // useSpeech(bodyParts[index])
       }
     })
 
-    setCounter((prev) => ({
-      ...prev,
-      correction: lines === '' ? 'Good' : lines
-    }))
+    counterRef.current.correction = lines === '' ? 'Good' : lines
   }
 
   //   const startRecording = async () => {
@@ -237,10 +236,19 @@ const PoseDetectionApp = ({ practiceState, recordState, cameraState, item, onUpd
       const imageTensor = images.next().value
 
       //   const startTs = Date.now()
-      //   const poses = await model.estimatePoses(imageTensor, undefined, Date.now())
-      //   const latency = Date.now() - startTs
-      //   setFps(Math.floor(1000 / latency))
-      //   setPoses(poses)
+      // console.log('first')
+      if (renderRef.current === false) {
+        setPoses(null)
+      }
+
+      if (renderRef.current) {
+        // console.log(renderRef.current)
+        const poses = await model.estimatePoses(imageTensor, undefined, Date.now())
+        //   const latency = Date.now() - startTs
+        //   setFps(Math.floor(1000 / latency))
+        setPoses(poses)
+        renderRef.current = false
+      }
       tf.dispose([imageTensor])
 
       if (rafId.current === 0) {
@@ -264,61 +272,35 @@ const PoseDetectionApp = ({ practiceState, recordState, cameraState, item, onUpd
       const bp = new BodyPart()
       bp.cords = util.detectJoints(poses[0].keypoints)
 
-      currAngles = ja.bodyAngles(bp)
+      currAngles.current = ja.bodyAngles(bp)
+      const velocities = util.calculateVelocity(
+        prevAngles.current != null ? prevAngles.current : currAngles.current,
+        currAngles.current,
+        500
+      )
+      prevAngles.current = currAngles.current
+      //   console.log(timeCnt.current)
+      checkDeviation(data.Angles[timeCnt.current * 2], currAngles.current, 20, timeCnt.current)
 
-      currStartAt = Date.now()
-      prevStartAt = prevStartAt ? prevStartAt : currStartAt
-
-      if (prevAngles) {
-        const duration = currStartAt - prevStartAt
-        if (duration > 500) {
-          setTimeCnt((prev) => prev + 0.5)
-          prevStartAt = currStartAt
-          velocities = util.calculateVelocity(prevAngles, currAngles, duration)
-          prevAngles = currAngles
-          checkDeviation(data.Angles[timeCnt * 2], currAngles, 20, timeCnt)
-          //   const record = {
-          //     TimeCnt: timeCnt,
-          //     Angles: currAngles,
-          //     Velocities: velocities,
-          //   }
-          //   setDataSet((curr) => [...curr, record])
-
-          if (timeCnt * 2 + 1 === data.TimeCnt.length) {
-            setCounter((prev) => ({
-              ...prev,
-              rep: prev.rep + 1
-            }))
-
-            setTimeCnt(0)
-          }
-
-          if (counter.rep === item.numOfRep && counter.set < item.numOfSet) {
-            setCounter((prev) => ({
-              ...prev,
-              rep: 0,
-              set: prev.set + 1
-            }))
-          }
-
-          if (counter.set === item.numOfSet && counter.rep === item.numOfRep) {
-            setStart(!start)
-          }
-        }
-      } else {
-        const duration = 1
-        velocities = util.calculateVelocity(currAngles, currAngles, duration)
-        prevAngles = currAngles
-        checkDeviation(data.Angles[timeCnt * 2], currAngles, 20, timeCnt)
-        // const record = {
-        //   TimeCnt: timeCnt,
-        //   Angles: currAngles,
-        //   Velocities: velocities,
-        // }
-        // setDataSet((curr) => [...curr, record])
+      if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
+        counterRef.current.rep += 1
+        timeCnt.current = 0
       }
 
-      //   console.log("dataSet", dataSet)
+      if (counterRef.current.rep === item.numOfRep && counterRef.current.set < item.numOfSet) {
+        counterRef.current.rep = 0
+        counterRef.current.set += 1
+      }
+
+      // Create dataset
+        // const record = {
+        //   TimeCnt: timeCnt.current,
+        //   Angles: currAngles.current,
+        //   Velocities: velocities
+        // }
+        // dataset.current.push(record)
+
+        // console.log('dataset', dataset.current)
     } catch (error) {
       console.error(error)
     }
@@ -439,7 +421,7 @@ const PoseDetectionApp = ({ practiceState, recordState, cameraState, item, onUpd
           rotation={getTextureRotationAngleInDegrees()}
           onReady={handleCameraStream}
         />
-        {/* {start && renderPose()} */}
+        {renderRef.current && renderPose()}
         {/* {renderFps()} */}
         {renderCameraTypeSwitcher()}
       </View>

@@ -5,7 +5,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./productList.style"
 import ProductCard from "./product"
 import useFetch from "../../hook/useFetch"
