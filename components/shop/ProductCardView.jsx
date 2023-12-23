@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-import styles from './product.style'
+import styles from './productCardView.style'
 
 // Hàm chuyển đổi số thành chuỗi có định dạng ***.***VNĐ
 const formatPrice = (price) => {

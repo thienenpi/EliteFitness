@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     width: 240,
-    paddingHorizontal: 4
+    paddingHorizontal: 4,
   },
   searchBtn: {
     zIndex: 999

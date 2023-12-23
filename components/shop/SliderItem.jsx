@@ -1,9 +1,10 @@
 import { Image, StyleSheet, Text, View, Dimensions, Animated, Easing } from 'react-native'
 import React from 'react'
+import { SIZES } from '../../constants'
 
-const { width, height } = Dimensions.get('screen')
+const { width, height } = SIZES
 
-const SlideItem = ({ item }) => {
+const SliderItem = ({ item }) => {
   const translateYImage = new Animated.Value(40)
 
   //   Animated.timing(translateYImage, {
@@ -33,7 +34,7 @@ const SlideItem = ({ item }) => {
   )
 }
 
-export default SlideItem
+export default SliderItem
 
 const styles = StyleSheet.create({
   container: {
