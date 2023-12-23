@@ -2,7 +2,7 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS, IP_ADDRESS } from "../../constants";
-import styles from "./search.style";
+import styles from "./searchBar.style";
 import axios from "axios";
 
 const SearchBar = ({ onUpdateProductList }) => {

@@ -1,8 +1,8 @@
 import { StyleSheet, Animated, View, Dimensions } from 'react-native'
 import React from 'react'
-import { COLORS } from '../../constants'
+import { COLORS, SIZES } from '../../constants'
 
-const { width } = Dimensions.get('screen')
+const width = SIZES.width
 
 const Pagination = ({ data, scrollX, index }) => {
   return (

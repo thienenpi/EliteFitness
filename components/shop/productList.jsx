@@ -7,7 +7,7 @@ import {
 } from "react-native"
 import React, { useEffect, useState } from "react"
 import styles from "./productList.style"
-import ProductCard from "./product"
+import ProductCard from "./ProductCardView"
 import useFetch from "../../hook/useFetch"
 import { COLORS, SIZES } from "../../constants"
 

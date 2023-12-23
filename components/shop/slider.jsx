@@ -1,8 +1,9 @@
 import { Animated, FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useRef, useState } from 'react'
-import SlideItem from './slideItem'
-import Pagination from './pagination'
+import SlideItem from './SliderItem'
+import Pagination from './Pagination'
 import { COLORS } from '../../constants'
+
 const Slides = [
   {
     id: 1,
@@ -17,6 +18,7 @@ const Slides = [
     img: require('../../assets/images/banners/banner3.jpg')
   }
 ]
+
 const Slider = () => {
   const [index, setIndex] = useState(0)
   const scrollX = useRef(new Animated.Value(0)).current

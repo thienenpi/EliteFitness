@@ -2,10 +2,10 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import styles from "./styles/shop.style";
-import SearchBar from "../components/shop/search";
+import SearchBar from "../components/shop/SearchBar";
 import { COLORS } from "../constants";
-import Slider from "../components/shop/slider";
-import ProductList from "../components/shop/productList";
+import Slider from "../components/shop/Slider";
+import ProductList from "../components/shop/ProductList";
 import useFetch from "../hook/useFetch";
 
 const Shop = () => {
