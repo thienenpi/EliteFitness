@@ -1,6 +1,6 @@
 import { Image, Text, View } from 'react-native'
 import React from 'react'
-import styles from './Setting.style'
+import styles from './setting.style'
 import { AntDesign, Entypo } from '@expo/vector-icons'
 import { COLORS } from '../../constants'
 import { TouchableOpacity } from 'react-native'
