@@ -17,6 +17,7 @@ import { JointAngle } from '../../lib/jointAngles'
 import { BodyPart } from '../../lib/bodyPart'
 import axios from 'axios'
 import useSpeech from '../../hook/useSpeech'
+import uploadPicture from '../../hook/uploadPicture'
 
 const TensorCamera = cameraWithTensors(Camera)
 
@@ -166,7 +167,7 @@ const PoseDetectionApp = (props) => {
     }
   }, [practiceState])
 
-  const checkDeviation = (dataset, input, threshold, time) => {
+  const checkDeviation = async (dataset, input, threshold, time) => {
     const bodyParts = [
       'neck',
       'left arm',
@@ -214,27 +215,9 @@ const PoseDetectionApp = (props) => {
 
     counterRef.current.correction = lines === '' ? 'Good' : lines
     if (lines !== '') {
-      savePicture()
-    }
-  }
-
-  const savePicture = async () => {
-    try {
-      const endpoint = `http://${IP_ADDRESS}:3000/api/exercises/upload/`
-      const picture = await cameraRef.current.camera.takePictureAsync()
-
-      const response = await axios.post(endpoint, {
-        pictureUri: picture.uri,
-        title: item.title
-      })
-
-      if (response.status === 200) {
-        console.log(response.data)
-      } else {
-        console.log(response.statusText)
-      }
-    } catch (error) {
-      console.error(error)
+      const options = { quality: 0.5, base64: true }
+      const picture = await cameraRef.current.camera.takePictureAsync(options)
+      uploadPicture(picture, item.title)
     }
   }
 

@@ -2,6 +2,7 @@ const Exercise = require('../models/Exercises')
 const fs = require('fs')
 const { parse } = require('csv-parse')
 const path = require('path')
+const multer = require('multer')
 
 const countImagesInFolder = (folderPath, imageExtensions = ['.jpg', '.jpeg', '.png', '.gif']) => {
   try {
@@ -32,7 +33,26 @@ function convertToCamelCase(inputString) {
   return camelCaseString.charAt(0).toLowerCase() + camelCaseString.slice(1)
 }
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const folderName = convertToCamelCase(file.originalname)
+    const folderPath = path.join(__dirname, `../pictures/${folderName}/`)
+    if (!fs.existsSync(folderPath)) {
+      fs.mkdirSync(folderPath)
+    }
+    cb(null, folderPath)
+  },
+  filename: function (req, file, cb) {
+    const folderName = convertToCamelCase(file.originalname)
+    const folderPath = path.join(__dirname, `../pictures/${folderName}/`)
+    const imageCnt = countImagesInFolder(folderPath)
+    const imageName = `picture_${imageCnt}.jpg`
+    cb(null, imageName)
+  }
+})
+
 module.exports = {
+  upload: multer({ storage: storage }),
   createExercise: async (req, res) => {
     const newExercise = new Exercise(req.body)
 
@@ -46,17 +66,9 @@ module.exports = {
 
   uploadIncorrectPicture: async (req, res) => {
     try {
-      const { pictureUri, title } = req.body
-
-      const folderName = convertToCamelCase(title)
-      const folderPath = path.join(__dirname, '../pictures', folderName)
-
-      const imageCnt = countImagesInFolder(folderPath)
-      const imageName = `image_${imageCnt}.png`
-      const imagePath = path.join(folderPath, imageName)
-      const imageBuffer = Buffer.from(pictureUri, 'base64')
-
-      fs.writeFileSync(imagePath, imageBuffer)
+      //   const imageCnt = countImagesInFolder('handPlank')
+      //   const imageName = `image_${imageCnt}.png`
+      const imagePath = req.file.path
       res.status(200).json(imagePath)
     } catch (error) {
       console.error(error)
