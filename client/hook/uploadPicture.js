@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { IP_ADDRESS } from '../constants'
+import { HOST } from '../constants'
 
 const uploadPicture = async (picture, title) => {
   try {
-    const endpoint = `http://${IP_ADDRESS}:3000/api/exercises/upload/`
+    const endpoint = `${HOST}exercises/upload/`
     const formData = new FormData()
     formData.append('picture', {
       uri: picture.uri,
