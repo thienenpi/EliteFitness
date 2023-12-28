@@ -4,7 +4,7 @@ import styles from './styles/chatBot.style'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { Feather } from '@expo/vector-icons'
 import axios from 'axios'
-import { OPENAI_API_KEY, IP_ADDRESS } from '../constants'
+import { OPENAI_API_KEY, HOST } from '../constants'
 
 const chatHistory = []
 
@@ -14,7 +14,7 @@ const ChatBot = () => {
 
   useEffect(() => {
     async function fetch() {
-      const response = await axios.get(`http://${IP_ADDRESS}:3000/api/products`)
+      const response = await axios.get(`${HOST}products`)
       const trainData = response.data
       const title = trainData[0].title
       const description = trainData[0].description
