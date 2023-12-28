@@ -11,7 +11,7 @@ import * as ScreenOrientation from 'expo-screen-orientation'
 import { cameraWithTensors, bundleResourceIO } from '@tensorflow/tfjs-react-native'
 import Svg, { Circle } from 'react-native-svg'
 import styles from './poseDetectionApp.style'
-import { COLORS, SIZES, IP_ADDRESS } from '../../constants'
+import { COLORS, SIZES, HOST } from '../../constants'
 import * as util from '../../lib/utilities'
 import { JointAngle } from '../../lib/jointAngles'
 import { BodyPart } from '../../lib/bodyPart'
@@ -132,7 +132,7 @@ const PoseDetectionApp = (props) => {
       }
 
       try {
-        const response = await axios.get(`http://${IP_ADDRESS}:3000/api/exercises/${item._id}`)
+        const response = await axios.get(`${HOST}exercises/${item._id}`)
 
         if (response.status === 200) {
           data = response.data
@@ -202,18 +202,21 @@ const PoseDetectionApp = (props) => {
       }
     }
 
-    deviationAngles.forEach((value, index) => {
-      if (Math.abs(value) > threshold.Angles) {
-        counterRef.current.score -= 0.25
-        const line = `${bodyParts[index]}: ${value > 0 ? 'larger' : 'smaller'} ${Math.abs(
-          value
-        )} degrees\n`
-        lines += line
-        // useSpeech(bodyParts[index])
-      }
-    })
+    if (lines === '') {
+      deviationAngles.forEach((value, index) => {
+        if (Math.abs(value) > threshold.Angles) {
+          counterRef.current.score -= 0.25
+          const line = `${bodyParts[index]}: ${value > 0 ? 'larger' : 'smaller'} ${Math.abs(
+            value
+          )} degrees\n`
+          lines += line
+          useSpeech(bodyParts[index])
+        }
+      })
+    }
 
     counterRef.current.correction = lines === '' ? 'Good' : lines
+
     if (lines !== '') {
       const options = { quality: 0.5, base64: true }
       const picture = await cameraRef.current.camera.takePictureAsync(options)

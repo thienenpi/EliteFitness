@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 // Import external style.js file
 import styles from './styles/home.style'
 
-import { COLORS, IP_ADDRESS } from '../constants'
+import { COLORS, HOST } from '../constants'
 import MuscleRow from '../components/muscles/MuscleRow'
 import ExerciseColumn from '../components/exercises/ExerciseColumn'
 import axios from 'axios'
@@ -22,7 +22,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://${IP_ADDRESS}:3000/api/exercises/search/${searchKey || ''}`
+          `${HOST}/exercises/search/${searchKey || ''}`
         )
         setFoundExercises(response.data)
       } catch (error) {

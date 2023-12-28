@@ -16,6 +16,7 @@ mongoose
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ limit: '10mb', extended: true }))
 
+app.get('/', (req, res) => res.status(200).json('Welcome to Elite Fitness'))
 app.use('/api/muscles', muscleRouter)
 app.use('/api/exercises', exercisesRouter)
 app.use('/api/products', productsRouter)

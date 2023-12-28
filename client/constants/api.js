@@ -1,4 +1,4 @@
 const OPENAI_API_KEY = ''
-const IP_ADDRESS = '172.17.112.19'
+const HOST = 'https://eliteserver.azurewebsites.net/api/'
 
-export { OPENAI_API_KEY, IP_ADDRESS }
+export { OPENAI_API_KEY, HOST }
