@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Text, View, Platform, Switch, ActivityIndicator } from 'react-native'
 import { Camera } from 'expo-camera'
+import { Video, ResizeMode } from 'expo-av'
 import * as MediaLibrary from 'expo-media-library'
 import * as poseDetection from '@tensorflow-models/pose-detection'
 import * as tf from '@tensorflow/tfjs'
@@ -10,6 +11,7 @@ import '@tensorflow/tfjs-backend-webgl'
 import * as ScreenOrientation from 'expo-screen-orientation'
 import { cameraWithTensors, bundleResourceIO } from '@tensorflow/tfjs-react-native'
 import Svg, { Circle } from 'react-native-svg'
+
 import styles from './poseDetectionApp.style'
 import { COLORS, SIZES, HOST } from '../../constants'
 import * as util from '../../lib/utilities'
@@ -466,6 +468,20 @@ const PoseDetectionApp = (props) => {
     )
   }
 
+  const renderVideo = () => {
+    return (
+      <Video
+        style={styles.sampleVideo}
+        resizeMode={ResizeMode.CONTAIN}
+        source={require('../../assets/videos/handPlank.mp4')}
+        useNativeControls
+        isLooping={true}
+        shouldPlay={practiceState}
+        onPlaybackStatusUpdate={() => setTimeout(() => {}, 500)}
+      ></Video>
+    )
+  }
+
   if (!tfReady) {
     return (
       <ActivityIndicator
@@ -479,6 +495,7 @@ const PoseDetectionApp = (props) => {
       <View style={isPortrait() ? styles.containerPortrait : styles.containerLandscape}>
         {renderExerciseName()}
         {renderCamera()}
+        {renderVideo()}
         {renderRef.current && renderPose()}
         {/* {renderFps()} */}
         {renderCameraTypeSwitcher()}

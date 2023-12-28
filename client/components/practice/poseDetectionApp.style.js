@@ -74,6 +74,15 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
     fontFamily: 'rufner',
     color: COLORS.text
+  },
+  sampleVideo: {
+    position: 'absolute',
+    zIndex: 999,
+    backgroundColor: COLORS.accept,
+    bottom: 110,
+    left: 10,
+    width: 150,
+    height: 200,
   }
 })
 
