@@ -66,8 +66,6 @@ module.exports = {
 
   uploadIncorrectPicture: async (req, res) => {
     try {
-      //   const imageCnt = countImagesInFolder('handPlank')
-      //   const imageName = `image_${imageCnt}.png`
       const imagePath = req.file.path
       res.status(200).json(imagePath)
     } catch (error) {
