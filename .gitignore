@@ -11,7 +11,7 @@ dist/
 web-build/
 
 # asset
-**/videos/
+**/videos
 **/pictures
 
 # Native

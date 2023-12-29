@@ -78,8 +78,7 @@ const styles = StyleSheet.create({
   sampleVideo: {
     position: 'absolute',
     zIndex: 999,
-    backgroundColor: COLORS.accept,
-    bottom: 110,
+    bottom: 60,
     left: 10,
     width: 150,
     height: 200,
