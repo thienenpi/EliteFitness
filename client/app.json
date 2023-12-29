@@ -7,9 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/images/splash/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#255E5F"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -32,7 +32,12 @@
         "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone.",
         "NSPhotoLibraryUsageDescription": "We need access to your photo library"
       },
-      "bundleIdentifier": "com.anonymous.EliteFitness"
+      "bundleIdentifier": "com.anonymous.EliteFitness",
+      "splash": {
+        "image": "./assets/images/splash/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#255E5F"
+      },
     },
     "android": {
       "adaptiveIcon": {
