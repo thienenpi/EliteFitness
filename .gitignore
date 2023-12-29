@@ -13,6 +13,7 @@ web-build/
 # asset
 **/videos
 **/pictures
+**/dataset
 
 # Native
 *.orig.*
