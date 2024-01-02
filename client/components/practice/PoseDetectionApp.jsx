@@ -43,16 +43,16 @@ const orientation = ScreenOrientation.getOrientationAsync()
 let data
 
 const renderVideo = (practiceState, uri) => {
-    return (
-      <Video
-        style={styles.sampleVideo}
-        resizeMode={ResizeMode.CONTAIN}
-          source={{ uri: uri }}
-        isLooping={true}
-        shouldPlay={practiceState}
-      ></Video>
-    )
-  }
+  return (
+    <Video
+      style={styles.sampleVideo}
+      resizeMode={ResizeMode.CONTAIN}
+      source={{ uri: uri }}
+      isLooping={true}
+      shouldPlay={practiceState}
+    ></Video>
+  )
+}
 
 const isPortrait = async () => {
   return !(
@@ -297,8 +297,10 @@ const PoseDetectionApp = (props) => {
           const line = `${bodyParts[index]}: ${value > 0 ? 'larger' : 'smaller'} ${Math.abs(
             value
           )} degrees\n`
+          if (lines === '') {
+            useSpeech(bodyParts[index])
+          }
           lines += line
-          useSpeech(bodyParts[index])
         }
       })
     }
@@ -306,8 +308,10 @@ const PoseDetectionApp = (props) => {
     counterRef.current.correction = lines === '' ? 'Good' : lines
 
     if (lines !== '') {
-      const options = { quality: 0.5, base64: true }
-      const picture = await cameraRef.current.camera.takePictureAsync(options)
+      const picture = await cameraRef.current.camera.takePictureAsync({
+        quality: 0.5,
+        base64: true
+      })
       uploadPicture(picture, item.title)
     }
   }
@@ -407,7 +411,6 @@ const PoseDetectionApp = (props) => {
       const threshold = { Angles: 20, Velocities: 0.1 }
       checkDeviation(dataset, input, threshold)
 
-      console.log(timeCnt.current)
       if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
         counterRef.current.rep += 1
         timeCnt.current = 0
@@ -484,8 +487,6 @@ const PoseDetectionApp = (props) => {
       )
     }
   }
-
-
 
   if (!tfReady) {
     return (
