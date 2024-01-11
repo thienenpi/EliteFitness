@@ -68,12 +68,15 @@ const styles = StyleSheet.create({
     marginTop: SIZES.height / 2 - CAM_PREVIEW_HEIGHT / 2,
     alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    maxWidth: 250
   },
   exerciseNameTxt: {
     fontSize: SIZES.medium,
     fontFamily: 'rufner',
-    color: COLORS.text
+    color: COLORS.text,
+    textAlign: 'center',
+    lineHeight: SIZES.medium
   },
   sampleVideo: {
     position: 'absolute',
