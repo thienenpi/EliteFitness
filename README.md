@@ -30,21 +30,20 @@ Elite Fitness is an application that utilizes Machine Learning to assess user mo
 
 2. Install dependencies:
 
+   ```bash
+   cd client
+   ```
+
     ```bash
-    npm install
+    npm i --legacy-peer-deps
     ```
 
     or
 
     ```bash
-    yarn install
+    yarn
     ```
-3. Install dependencies backend
-     ```bash
-    cd .\backend\
-    npm install
-    ```
-4. Run the application:
+3. Run the application:
 
     ```bash
     npm start
@@ -55,6 +54,7 @@ Elite Fitness is an application that utilizes Machine Learning to assess user mo
     ```bash
     yarn start
     ```
+4. If you want to run the application on device (both Android and iOS), you need to install Expo Go from App Store or Google Play. Then, scan the QR code in your terminal.
 
 ## Contributors
 1. [Nguyen Phuoc Thien](https://github.com/thienenpi) - UIT K16 - TMDT2021 
