@@ -8,7 +8,8 @@ const ExerciseSchema = new mongoose.Schema(
     imageUrl: { type: String, required: true },
     videoUrls: [{ type: String, required: true }],
     muscles: [{ type: String, required: true }],
-    csvPath: { type: String, required: true }
+    csvPath: { type: String, required: true },
+    force: { type: String, required: true },
   },
   {
     timestamps: true

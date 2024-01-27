@@ -3,6 +3,8 @@ const fs = require('fs')
 const { parse } = require('csv-parse')
 const path = require('path')
 const multer = require('multer')
+const axios = require('axios')
+const stream = require('stream')
 
 const countImagesInFolder = (folderPath, imageExtensions = ['.jpg', '.jpeg', '.png', '.gif']) => {
   try {
@@ -85,27 +87,29 @@ module.exports = {
   getExercise: async (req, res) => {
     try {
       const exercise = await Exercise.findById(req.params.id)
-      const csvPath = path.join(__dirname, exercise.csvPath)
+      const csvUrl = exercise.csvPath
       var data = {
         TimeCnt: [],
         Angles: [],
         Velocities: []
       }
 
-      fs.createReadStream(csvPath)
-        .pipe(parse({ delimiter: ',', from_line: 2 }))
-        .on('data', function (row) {
-          data.TimeCnt.push(row[0])
-          data.Angles.push(JSON.parse(row[1]))
-          data.Velocities.push(JSON.parse(row[2]))
-        })
-        .on('end', function () {
-          res.status(200).json(data)
-          console.log('finished')
-        })
-        .on('error', function (error) {
-          res.status(500).json(error.message)
-        })
+      const response = await axios.get(csvUrl, { responseType: 'stream' })
+      const csvStream = response.data.pipe(parse({ delimiter: ',', from_line: 2 }))
+
+      csvStream
+      .on('data', function (row) {
+        data.TimeCnt.push(row[0]);
+        data.Angles.push(JSON.parse(row[1]));
+        data.Velocities.push(JSON.parse(row[2]));
+      })
+      .on('end', function () {
+        res.status(200).json(data);
+        console.log('finished');
+      })
+      .on('error', function (error) {
+        res.status(500).json(error.message);
+      });
     } catch (error) {
       res.status(500).json(error)
     }
