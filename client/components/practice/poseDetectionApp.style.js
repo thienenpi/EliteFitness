@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { COLORS, SIZES } from '../../constants'
 
 const IS_ANDROID = Platform.OS === 'android'
