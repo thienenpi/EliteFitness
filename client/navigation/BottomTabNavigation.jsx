@@ -48,7 +48,7 @@ const BottomTabNavigation = () => {
         component={Home}
         options={{
           tabBarIcon: ({ focus }) => {
-            return <Ionicons name="md-home" size={24} color={COLORS.btn} />
+            return <Ionicons name="home" size={24} color={COLORS.btn} />
           }
         }}
       ></Tab.Screen>

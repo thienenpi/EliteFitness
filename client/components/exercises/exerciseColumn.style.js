@@ -3,7 +3,8 @@ import { COLORS, SIZES } from '../../constants'
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: SIZES.xSmall
+    marginTop: SIZES.xSmall,
+    marginBottom: SIZES.medium * 5,
   },
 
   guideTxt: {
