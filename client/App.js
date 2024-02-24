@@ -1,12 +1,12 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useFonts } from "expo-font";
-import BottomTabNavigation from "./navigation/BottomTabNavigation";
-import { useCallback } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { CreateExercise, Practice } from "./screens";
-import * as SplashScreen from "expo-splash-screen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { useFonts } from "expo-font"
+import BottomTabNavigation from "./navigation/BottomTabNavigation"
+import { useCallback } from "react"
+import { NavigationContainer } from "@react-navigation/native"
+import { CreateExercise, Practice, BodyScan } from "./screens"
+import * as SplashScreen from "expo-splash-screen"
 // Create Stack Navigator
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   // Load fonts, change if you want
@@ -32,24 +32,24 @@ export default function App() {
     sfProSemiBoldItalic: require("./assets/fonts/SFPro/SFPRODISPLAYSEMIBOLDITALIC.otf"),
     sfProThinItalic: require("./assets/fonts/SFPro/SFPRODISPLAYTHINITALIC.otf"),
     sfProUltraLightItalic: require("./assets/fonts/SFPro/SFPRODISPLAYULTRALIGHTITALIC.otf"),
-  });
+  })
 
   // Unused code, but do not remove or cmd
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
-      await SplashScreen.hideAsync();
+      await SplashScreen.hideAsync()
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded])
 
   // Return null if can not load fonts
   if (!fontsLoaded) {
-    return null;
+    return null
   }
 
   // Create stack screen for each .jsx file in 'screens' folder
   // Search, Home, Profile is included in BottomTabNavigation
-  SplashScreen.preventAutoHideAsync();
-  setTimeout(SplashScreen.hideAsync, 1500);
+  SplashScreen.preventAutoHideAsync()
+  setTimeout(SplashScreen.hideAsync, 1500)
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -70,7 +70,13 @@ export default function App() {
           component={CreateExercise}
           options={{ headerShown: false }}
         ></Stack.Screen>
+
+        <Stack.Screen
+          name="BodyScan"
+          component={BodyScan}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }

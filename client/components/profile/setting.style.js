@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headerText: {
     fontFamily: 'rufner',
@@ -44,11 +45,13 @@ const styles = StyleSheet.create({
     color: COLORS.paragraphBg
   },
   optionDesc: {
+    maxWidth: SIZES.width * 0.7,
     fontFamily: 'poppinsRegular',
     fontSize: 13,
     color: COLORS.text,
     paddingLeft: 12,
-    marginTop: 4
+    marginTop: 4,
+    textAlign: 'justify'
   }
 })
 
