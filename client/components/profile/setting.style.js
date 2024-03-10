@@ -3,7 +3,7 @@ import { SIZES, COLORS } from '../../constants'
 
 const styles = StyleSheet.create({
   container: {
-    height: SIZES.height,
+    flex: 1,
     width: SIZES.width,
     flexDirection: 'column',
     backgroundColor: COLORS.primaryBg,
