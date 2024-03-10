@@ -1,6 +1,6 @@
 // Type 'rnfes' for quick-setup
 import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 // Import external style.js file
 import styles from './styles/home.style'

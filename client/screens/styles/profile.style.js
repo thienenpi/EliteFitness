@@ -3,10 +3,10 @@ import { SIZES, COLORS } from '../../constants'
 
 const styles = StyleSheet.create({
   container: {
-    height: SIZES.height,
+    flex: 1,
     width: SIZES.width,
     flexDirection: 'column',
-    backgroundColor: COLORS.primaryBg
+    backgroundColor: COLORS.primaryBg,
   },
   guideContainer: {
     paddingTop: 80,
@@ -27,7 +27,23 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: COLORS.text,
     marginHorizontal: SIZES.xSmall
-  }
+  },
+
+  btnContainer: (backgroundColor) => ({
+    backgroundColor: backgroundColor,
+    borderRadius: 99,
+    width: SIZES.width - SIZES.xxLarge * 4,
+    height: SIZES.xxLarge,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  }),
+
+  btnLabel: {
+    fontFamily: 'rufner',
+    fontSize: SIZES.large,
+    color: COLORS.secondary,
+  },
 })
 
 export default styles
