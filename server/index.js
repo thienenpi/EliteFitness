@@ -5,6 +5,7 @@ const app = express()
 const muscleRouter = require('./routes/muscles')
 const exercisesRouter = require('./routes/exercises')
 const productsRouter = require('./routes/products')
+const usersRouter = require('./routes/users')
 const port = 3000
 
 dotenv.config()
@@ -20,6 +21,7 @@ app.get('/', (req, res) => res.status(200).json('Welcome to Elite Fitness'))
 app.use('/api/muscles', muscleRouter)
 app.use('/api/exercises', exercisesRouter)
 app.use('/api/products', productsRouter)
+app.use('/api/users', usersRouter)
 
 app.listen(process.env.PORT || port, () =>
   console.log(`EliteFitness app listening on port ${port}!`)

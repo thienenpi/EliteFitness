@@ -4,7 +4,7 @@ import styles from './muscleRow.style'
 import { COLORS, SIZES } from '../../constants'
 import MuscleCardView from './MuscleCardView'
 import useFetch from '../../hook/useFetch'
-import Button from '../Button'
+import CustomButton from '../CustomButton'
 
 const MuscleRow = ({ onUpdateSelectedMuscles }) => {
   const { data, isLoading, error } = useFetch({ collection: 'muscles' })
@@ -54,12 +54,12 @@ const MuscleRow = ({ onUpdateSelectedMuscles }) => {
         ></FlatList>
       )}
 
-      <Button
+      <CustomButton
         styles={styles}
         onPress={generateExercise}
-        title={'Generate'}
+        label={'Generate'}
         isValid={selectedMuscles.length}
-      ></Button>
+      ></CustomButton>
     </View>
   )
 }

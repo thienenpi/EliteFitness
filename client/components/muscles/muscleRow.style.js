@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     marginTop: SIZES.medium
   },
 
-  btn: (backgroundColor) => ({
+  btnContainer: (backgroundColor) => ({
     height: 50,
     marginVertical: 10,
     marginHorizontal: SIZES.xxLarge * 2,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     borderRadius: 12
   }),
 
-  btnText: {
+  btnLabel: {
     fontFamily: 'sfProBlackItalic',
     color: COLORS.white,
     fontSize: 18

@@ -16,6 +16,7 @@ const useFetch = ({ collection }) => {
       setIsLoading(false)
     } catch (error) {
       setError(error)
+      console.error(error);
     } finally {
       setIsLoading(false)
     }
