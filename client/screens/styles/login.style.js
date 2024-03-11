@@ -1,42 +1,43 @@
-import { StyleSheet } from 'react-native';
-import { COLORS, SIZES } from '../../constants';
+import { StyleSheet } from "react-native";
+import { COLORS, SIZES } from "../../constants";
 
-const styles = StyleSheet.create({
+const styles1 = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "top",
+    paddingVertical: 120,
     width: SIZES.width,
-    backgroundColor: COLORS.secondary500,
+    backgroundColor: "#096C67",
   },
 
   headerText: {
-    fontFamily: 'rufner',
-    fontSize: SIZES.xLarge,
-    color: COLORS.exerciseBg
+    fontFamily: "rufner",
+    fontSize: SIZES.xxLarge,
+    color: COLORS.exerciseBg,
   },
 
   btnContainer: (backgroundColor) => ({
     backgroundColor: backgroundColor,
-    borderRadius: 99,
-    width: SIZES.width - SIZES.xxLarge * 4,
+    borderRadius: 12,
+    width: SIZES.width - SIZES.xxLarge * 5,
     height: SIZES.xxLarge,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   }),
 
   btnLabel: {
-    fontFamily: 'sfProBold',
+    fontFamily: "rufner",
     fontSize: SIZES.large,
-    color: COLORS.text,
+    color: COLORS.secondary,
   },
 
   ipfContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     width: SIZES.width - SIZES.xxLarge * 2,
     borderRadius: SIZES.medium,
-    borderColor: COLORS.text,
+    borderColor: "#D5D1CA",
     borderWidth: 1,
     paddingVertical: SIZES.small,
     paddingHorizontal: SIZES.small,
@@ -46,7 +47,36 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
     fontSize: SIZES.medium,
+    fontFamily: "poppinsRegular",
+  },
+
+  smallText: {
+    fontFamily: "sfProHeavyItalic",
+    color: COLORS.btn,
+  },
+
+  forgotPassText: {
+    fontFamily: "sfProHeavyItalic",
+    color: COLORS.exerciseBg,
   },
 });
 
-export default styles;
+const styles2 = StyleSheet.create({
+  btnContainer: (backgroundColor) => ({
+    backgroundColor: COLORS.exerciseBg,
+    borderRadius: 12,
+    width: SIZES.width - SIZES.xxLarge * 4,
+    height: SIZES.xxLarge,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 12,
+  }),
+
+  btnLabel: {
+    fontFamily: "sfProHeavyItalic",
+    fontSize: SIZES.medium,
+    color: COLORS.secondary,
+  },
+});
+export { styles1, styles2 };
