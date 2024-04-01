@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useRoute } from '@react-navigation/native'
 import styles from './styles/practice.style'
 import { COLORS } from '../constants'
-import Button from '../components/CustomButton'
+import CustomButton from '../components/CustomButton'
 import SettingRow from '../components/SettingRow'
 import VideoRecording from '../components/practice/VideoRecording'
 import PoseDetectionApp from '../components/practice/PoseDetectionApp'
@@ -99,12 +99,12 @@ const Practice = ({ navigation }) => {
           value={recordState}
         ></SettingRow>
 
-        <Button
+        <CustomButton
           styles={styles}
-          title={practiceState ? 'Done' : 'Start'}
+          label={practiceState ? 'Done' : 'Start'}
           isValid={true}
           onPress={updatePracticeState}
-        ></Button>
+        ></CustomButton>
       </View>
     </View>
   )

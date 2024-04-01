@@ -11,8 +11,9 @@
       "resizeMode": "cover",
       "backgroundColor": "#255E5F"
     },
-    "assetBundlePatterns": [
-      "**/*"
+    "assetBundlePatterns": ["**/*"],
+    "plugins": [
+        "@react-native-google-signin/google-signin"
     ],
     "ios": {
       "supportsTablet": true,
@@ -20,7 +21,14 @@
       "infoPlist": {
         "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
         "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone.",
-        "NSPhotoLibraryUsageDescription": "We need access to your photo library"
+        "NSPhotoLibraryUsageDescription": "We need access to your photo library",
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+                "com.googleusercontent.apps.636989636710-v0dbjqosmveq8fa47c1e6mv4es2p4p64"
+            ]
+          }
+        ]
       },
       "bundleIdentifier": "com.anonymous.EliteFitness",
       "splash": {

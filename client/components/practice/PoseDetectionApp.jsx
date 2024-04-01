@@ -320,13 +320,13 @@ const PoseDetectionApp = (props) => {
 
     counterRef.current.correction = lines === "" ? "Good" : lines
 
-    if (lines !== "") {
-      const picture = await cameraRef.current.camera.takePictureAsync({
-        quality: 0.5,
-        base64: true,
-      })
-      uploadPicture(picture, item.title)
-    }
+    // if (lines !== "") {
+    //   const picture = await cameraRef.current.camera.takePictureAsync({
+    //     quality: 0.5,
+    //     base64: true,
+    //   })
+    //   uploadPicture(picture, item.title)
+    // }
   }
 
   //   const startRecording = async () => {
