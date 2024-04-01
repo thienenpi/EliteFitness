@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     color: crtValueColor
   }),
 
-  btn: (backgroundColor) => ({
+  btnContainer: (backgroundColor) => ({
     height: 36,
     marginVertical: 10,
     backgroundColor: backgroundColor,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     marginBottom: SIZES.small
   }),
 
-  btnText: {
+  btnLabel: {
     fontFamily: 'sfProBlackItalic',
     color: COLORS.white,
     fontSize: SIZES.small,
