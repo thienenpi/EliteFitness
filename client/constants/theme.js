@@ -3,7 +3,7 @@ const { height, width } = Dimensions.get("window");
 
 const COLORS = {
   primaryBg: "#FEF9F1",
-  secondary: "#38474C", //đen
+  black: "#38474C", //đen
   secondary500: "#0E7D77",
   text: "#7C7773",
   paragraphBg: "#FF4C01", //orange
