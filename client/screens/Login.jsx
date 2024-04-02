@@ -67,35 +67,6 @@ const Login = () => {
             onSubmitEditing={handleSubmit}
           ></InputField>
           <View style={{ height: 20 }}></View>
-          {/* <InputField
-            icon={
-              <Ionicons
-                name="keypad"
-                size={24}
-                color={COLORS.primary}
-              ></Ionicons>
-            }
-            styles={styles1}
-            label={"Password"}
-            inputType={"password"}
-            value={password}
-            secureTextEntry={!showPassword}
-            onChangeText={(text) => {
-              setPassword(text);
-            }}
-            onSubmitEditing={handleSubmit}
-          >
-            <TouchableOpacity
-              onPress={toggleShowPassword}
-              style={styles1.iconContainer}
-            >
-              <Ionicons
-                name={showPassword ? "eye-off" : "eye"}
-                size={24}
-                color="black"
-              />
-            </TouchableOpacity>
-          </InputField> */}
           <View>
             <InputField
               icon={
@@ -169,15 +140,6 @@ const Login = () => {
             }}
           ></View>
 
-          {/* <CustomButton
-          icon={<Ionicons name="logo-google" size={16}></Ionicons>}
-          styles={styles2}
-          isValid={true}
-          label={'Continue with Google'}
-          onPress={() => {
-            handleSubmit();
-          }}
-        ></CustomButton> */}
           <GoogleSigninButton
             size={GoogleSigninButton.Size.Standard}
             color={GoogleSigninButton.Color.Light}

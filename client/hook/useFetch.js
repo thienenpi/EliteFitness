@@ -1,37 +1,44 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { HOST } from '../constants'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { HOST } from '../constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const useFetch = ({ collection }) => {
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const fetchData = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
-      const response = await axios.get(`${HOST}${collection}`)
-      setData(response.data)
-      setIsLoading(false)
+      const TOKEN = await AsyncStorage.getItem('userToken');
+      const response = await axios.get(`${HOST}${collection}`, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      //   const response = await axios.get(`${HOST}${collection}`)
+      setData(response.data);
+      setIsLoading(false);
     } catch (error) {
-      setError(error)
+      setError(error);
       console.error(error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const refetch = () => {
-    setIsLoading(true)
-    fetchData()
-  }
+    setIsLoading(true);
+    fetchData();
+  };
 
-  return { data, isLoading, error, refetch }
-}
+  return { data, isLoading, error, refetch };
+};
 
-export default useFetch
+export default useFetch;
