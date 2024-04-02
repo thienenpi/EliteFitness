@@ -5,6 +5,42 @@ const jwt = require('jsonwebtoken');
 
 dotenv.config();
 
+const verifyUser = (req, res, next) => {
+  let token;
+
+  if (req.body && req.body.token) {
+    token = req.body.token;
+  }
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer ')
+  ) {
+    token = req.headers.authorization.substring(7); // Loại bỏ prefix "Bearer "
+  }
+
+  if (!token) {
+    return res.json('The token was not available');
+  } else {
+    token = token.replace(/"/g, '');
+
+    jwt.verify(
+      token,
+      process.env.JWT_SEC,
+      { algorithm: 'HS256' },
+      (err, decoded) => {
+        if (err) {
+          return res.json('The token was wrong');
+        }
+
+        console.log(decoded);
+        req.decoded = decoded;
+        next();
+      }
+    );
+  }
+};
+
 const login = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -25,6 +61,7 @@ const login = async (req, res) => {
 
     const userToken = jwt.sign({ id: user.id }, process.env.JWT_SEC, {
       expiresIn: '7d',
+      algorithm: 'HS256',
     });
 
     const { __v, createdAt, updatedAt, ...userData } = user._doc;
@@ -63,4 +100,5 @@ const register = async (req, res) => {
 module.exports = {
   login,
   register,
+  verifyUser,
 };

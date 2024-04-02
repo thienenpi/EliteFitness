@@ -8,9 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import {
-  GoogleSigninButton,
-} from '@react-native-google-signin/google-signin';
+import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 import CustomButton from '../components/CustomButton';
 import InputField from '../components/InputField';
@@ -112,18 +110,8 @@ const Login = () => {
             borderTopWidth: 1,
           }}
         ></View>
-
-        {/* <CustomButton
-          icon={<Ionicons name="logo-google" size={16}></Ionicons>}
-          styles={styles2}
-          isValid={true}
-          label={'Continue with Google'}
-          onPress={() => {
-            handleSubmit();
-          }}
-        ></CustomButton> */}
         <GoogleSigninButton
-          size={GoogleSigninButton.Size.Standard}
+          size={GoogleSigninButton.Size.Wide}
           color={GoogleSigninButton.Color.Light}
           onPress={loginWithGoogle}
         ></GoogleSigninButton>

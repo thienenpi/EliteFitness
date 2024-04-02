@@ -1,28 +1,41 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const dotenv = require('dotenv')
-const app = express()
-const muscleRouter = require('./routes/muscles')
-const exercisesRouter = require('./routes/exercises')
-const productsRouter = require('./routes/products')
-const usersRouter = require('./routes/users')
-const port = 3000
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const app = express();
+const muscleRouter = require('./routes/muscles');
+const exercisesRouter = require('./routes/exercises');
+const productsRouter = require('./routes/products');
+const usersRouter = require('./routes/users');
+const port = 3000;
+const cookieParser = require('cookie-parser');
 
-dotenv.config()
+dotenv.config();
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log('db connected'))
-  .catch((error) => console.log(error))
+  .catch((error) => console.log(error));
 
-app.use(express.json({ limit: '10mb' }))
-app.use(express.urlencoded({ limit: '10mb', extended: true }))
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000/',
+      'https://eliteserver.azurewebsites.net/',
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 
-app.get('/', (req, res) => res.status(200).json('Welcome to Elite Fitness'))
-app.use('/api/muscles', muscleRouter)
-app.use('/api/exercises', exercisesRouter)
-app.use('/api/products', productsRouter)
-app.use('/api/users', usersRouter)
+app.get('/', (req, res) => res.status(200).json('Welcome to Elite Fitness'));
+app.use('/api/muscles', muscleRouter);
+app.use('/api/exercises', exercisesRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/users', usersRouter);
 
 app.listen(process.env.PORT || port, () =>
   console.log(`EliteFitness app listening on port ${port}!`)
-)
+);
