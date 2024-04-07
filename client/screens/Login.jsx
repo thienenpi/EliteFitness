@@ -1,12 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Text,
   TouchableOpacity,
   View,
   TouchableWithoutFeedback,
-  TextInput,
   Keyboard,
 } from "react-native";
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
@@ -14,7 +13,7 @@ import LinearGradient from "react-native-linear-gradient";
 import CustomButton from "../components/CustomButton";
 import InputField from "../components/InputField";
 import { AuthContext } from "../context/AuthContext";
-import { styles1, styles2, googleButton } from "./styles/login.style";
+import { styles1, googleButton } from "./styles/login.style";
 import { COLORS } from "../constants";
 
 const hideKeyboard = () => {
@@ -26,7 +25,6 @@ const Login = () => {
   const { login, loginWithGoogle } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //show password
   const [inputType, setInputType] = useState("password");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -117,17 +115,16 @@ const Login = () => {
             }}
           >
             <Text style={styles1.smallText}>Don't have an account yet?</Text>
-            <TouchableOpacity
-              isValid={true}
-              styles={styles1}
-              onPress={() => navigation.navigate("Register")}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
               <Text style={styles1.smallText}>Sign up</Text>
             </TouchableOpacity>
           </View>
 
           <View style={{ height: 20 }}></View>
-          <Text style={styles1.forgotPassText}>Forgot password?</Text>
+
+          <TouchableOpacity onPress={() => navigation.navigate("Reset Password")}>
+            <Text style={styles1.forgotPassText}>Forgot password?</Text>
+          </TouchableOpacity>
 
           <View
             style={{
