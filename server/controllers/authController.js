@@ -1,9 +1,26 @@
-const User = require('../models/Users');
-const CryptoJS = require('crypto-js');
-const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
+const User = require("../models/Users");
+const CryptoJS = require("crypto-js");
+const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
+const admin = require("firebase-admin");
+const serviceAccount = require("../firebaseServiceAccountKey.json");
 
 dotenv.config();
+
+admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+
+const verifyUserFirebase = async (userToken) => {
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(userToken);
+    // Token is valid
+    // console.log("Decoded token:", decodedToken);
+    return decodedToken;
+  } catch (error) {
+    // Token verification failed
+    console.error("Error verifying token:", error);
+    throw error;
+  }
+};
 
 const verifyUser = (req, res, next) => {
   let token;
@@ -14,31 +31,42 @@ const verifyUser = (req, res, next) => {
 
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer ')
+    req.headers.authorization.startsWith("Bearer ")
   ) {
     token = req.headers.authorization.substring(7); // Loại bỏ prefix "Bearer "
   }
 
   if (!token) {
-    return res.json('The token was not available');
+    return res.json("The token was not available");
   } else {
-    token = token.replace(/"/g, '');
+    token = token.replace(/"/g, "");
 
     jwt.verify(
       token,
       process.env.JWT_SEC,
-      { algorithm: 'HS256' },
+      { algorithm: "HS256" },
       (err, decoded) => {
         if (err) {
-          return res.json('The token was wrong');
+          verifyUserFirebase(token)
+            .then((decodedToken) => {
+              // Token is valid, you can proceed with your logic
+              // For example, you can get the UID of the user from decodedToken.uid
+              console.log("Token is valid. User UID:", decodedToken.uid);
+            })
+            .catch((error) => {
+              // Token verification failed
+              console.error("Token verification failed:", error);
+              return res.json("The token was wrong");
+            });
         }
 
         console.log(decoded);
         req.decoded = decoded;
-        next();
       }
     );
   }
+
+  next();
 };
 
 const login = async (req, res) => {
@@ -46,7 +74,7 @@ const login = async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
-      return res.status(401).json('Email not found');
+      return res.status(401).json("Email not found");
     }
 
     const decryptedPassword = CryptoJS.AES.decrypt(
@@ -56,12 +84,12 @@ const login = async (req, res) => {
     const pass = decryptedPassword.toString(CryptoJS.enc.Utf8);
 
     if (pass !== req.body.password) {
-      return res.status(401).json('Wrong password');
+      return res.status(401).json("Wrong password");
     }
 
     const userToken = jwt.sign({ id: user.id }, process.env.JWT_SEC, {
-      expiresIn: '7d',
-      algorithm: 'HS256',
+      expiresIn: "7d",
+      algorithm: "HS256",
     });
 
     const { __v, createdAt, updatedAt, ...userData } = user._doc;
@@ -85,14 +113,14 @@ const register = async (req, res) => {
     await newUser.save();
 
     const userToken = jwt.sign({ id: newUser.id }, process.env.JWT_SEC, {
-      expiresIn: '7d',
+      expiresIn: "7d",
     });
 
     const { __v, createdAt, updatedAt, ...userData } = newUser._doc;
 
     res.status(200).json({ ...userData, token: userToken });
   } catch (error) {
-    console.error('Failed to register: ', error);
+    console.error("Failed to register: ", error);
     res.status(500).json(error);
   }
 };
