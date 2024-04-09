@@ -13,7 +13,7 @@ const verifyUserFirebase = async (userToken) => {
   try {
     const decodedToken = await admin.auth().verifyIdToken(userToken);
     // Token is valid
-    console.log("Decoded token:", decodedToken);
+    // console.log("Decoded token:", decodedToken);
     return decodedToken;
   } catch (error) {
     // Token verification failed
@@ -52,7 +52,6 @@ const verifyUser = (req, res, next) => {
               // Token is valid, you can proceed with your logic
               // For example, you can get the UID of the user from decodedToken.uid
               console.log("Token is valid. User UID:", decodedToken.uid);
-              next();
             })
             .catch((error) => {
               // Token verification failed
@@ -63,10 +62,11 @@ const verifyUser = (req, res, next) => {
 
         console.log(decoded);
         req.decoded = decoded;
-        next();
       }
     );
   }
+
+  next();
 };
 
 const login = async (req, res) => {
