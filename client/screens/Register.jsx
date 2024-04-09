@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -8,13 +8,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
 import LinearGradient from "react-native-linear-gradient";
 
 import CustomButton from "../components/CustomButton";
 import InputField from "../components/InputField";
 import { AuthContext } from "../context/AuthContext";
-import { styles1, styles2, googleButton } from "./styles/register.style";
+import { styles1 } from "./styles/register.style";
 import { COLORS } from "../constants";
 
 const hideKeyboard = () => {
@@ -23,7 +22,7 @@ const hideKeyboard = () => {
 
 const Register = () => {
   const navigation = useNavigation();
-  const { login, loginWithGoogle } = useContext(AuthContext);
+  const { register } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -35,7 +34,7 @@ const Register = () => {
   };
 
   const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(showConfirmPassword  ? false : true);
+    setShowConfirmPassword(showConfirmPassword ? false : true);
   };
 
   const handleSubmit = () => {
@@ -44,7 +43,7 @@ const Register = () => {
       password: password,
     };
 
-    login({ data: data });
+    register({ data: data });
   };
 
   return (
@@ -81,8 +80,7 @@ const Register = () => {
               }
               styles={styles1}
               label={"Password"}
-              // inputType={"password"}
-              inputType={showPassword ? 'default' : 'password'}
+              inputType={showPassword ? "default" : "password"}
               value={password}
               onChangeText={(text) => {
                 setPassword(text);
@@ -112,7 +110,7 @@ const Register = () => {
               }
               styles={styles1}
               label={"Confirm Password"}
-              inputType={showConfirmPassword ? 'default' : 'password'}
+              inputType={showConfirmPassword ? "default" : "password"}
               value={confirmPassword}
               onChangeText={(text) => {
                 setConfirmPassword(text);
