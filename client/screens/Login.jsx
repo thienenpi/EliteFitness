@@ -76,7 +76,6 @@ const Login = () => {
               }
               styles={styles1}
               label={"Password"}
-              // inputType={"password"}
               inputType={inputType}
               value={password}
               onChangeText={(text) => {

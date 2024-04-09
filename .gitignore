@@ -38,11 +38,12 @@ yarn-error.*
 *.pem
 
 # local env files
-.env*.local
+.env
 .deployment
 .dockerignore
 compose.yaml
 Dockerfile
+firebaseServiceAccountKey.json
 
 # typescript
 *.tsbuildinfo

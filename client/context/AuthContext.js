@@ -36,10 +36,11 @@ export const AuthProvider = ({ children }) => {
       setUserInfo(responseData);
       setUserToken(responseData.token);
 
-      AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
-      AsyncStorage.setItem("userToken", JSON.stringify(userToken));
+      AsyncStorage.setItem("userInfo", JSON.stringify(responseData));
+      AsyncStorage.setItem("userToken", JSON.stringify(responseData.token));
 
       setIsLoading(false);
+      await auth().createUserWithEmailAndPassword(data.email, data.password);
     } else {
       Alert.alert(res.data, "Please try again", [
         {
@@ -65,12 +66,30 @@ export const AuthProvider = ({ children }) => {
 
       setIsLoading(false);
     } else {
-      Alert.alert(res.data, "Please try again with another password", [
-        {
-          text: "Try again",
-          style: "cancel",
-        },
-      ]);
+      const confirmation = await auth().signInWithEmailAndPassword(
+        data.email,
+        data.password
+      );
+      const userInfo = confirmation.user;
+      const userToken = await userInfo.getIdToken(true)
+
+      if (userInfo) {
+        setIsLoading(true);
+        setUserInfo(userInfo);
+        setUserToken(userToken);
+
+        AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
+        AsyncStorage.setItem("userToken", JSON.stringify(userToken));
+
+        setIsLoading(false);
+      } else {
+        Alert.alert(res.data, "Please try again with another password", [
+          {
+            text: "Try again",
+            style: "cancel",
+          },
+        ]);
+      }
     }
   };
 
@@ -94,12 +113,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const resetPasswordWithOTP = async ({ phoneNumber }) => {
+  const resetPasswordWithPhone = async ({ phoneNumber }) => {
     try {
       const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
       setConfirm(confirmation);
     } catch (error) {
       console.error("Sending code: ", error);
+    }
+  };
+
+  const resetPasswordWithEmail = async ({ email }) => {
+    try {
+      await auth().sendPasswordResetEmail(email);
+      alert("Password reset email sent");
+    } catch (error) {
+      alert(error);
     }
   };
 
@@ -122,7 +150,7 @@ export const AuthProvider = ({ children }) => {
         await firestore().collection("users").doc(user.uid).set({
           name,
         });
-        
+
         return false;
       }
     } catch (error) {
@@ -172,7 +200,8 @@ export const AuthProvider = ({ children }) => {
         loginWithGoogle,
         logout,
         register,
-        resetPasswordWithOTP,
+        resetPasswordWithPhone,
+        resetPasswordWithEmail,
         confirmCode,
         isLoading,
         userToken,
