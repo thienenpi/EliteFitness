@@ -1,12 +1,12 @@
-import ApiManager from './ApiManager';
+import ApiManager from "./ApiManager";
 
 const userLogin = async ({ data }) => {
   try {
-    const url = '/users/login/';
+    const url = "/users/login/";
     const config = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       data: data,
     };
@@ -24,11 +24,14 @@ const userLogin = async ({ data }) => {
 
 const userRegister = async ({ data }) => {
   try {
-    const url = '/users/register/';
+    data.role_id = "a";
+    data.status = "a";
+    data.name = "thien";
+    const url = "/users/register/";
     const config = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       data: data,
     };
@@ -44,4 +47,26 @@ const userRegister = async ({ data }) => {
   }
 };
 
-export { userLogin, userRegister };
+const updatePassword = async ({ data }) => {
+  try {
+    const url = "/users/updatePassword/";
+    const config = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    const res = await ApiManager(url, config);
+    return res;
+  } catch (error) {
+    if (error.response) {
+      return error.response;
+    } else {
+      throw error;
+    }
+  }
+};
+
+export { userLogin, userRegister, updatePassword };
