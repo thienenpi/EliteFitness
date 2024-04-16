@@ -11,6 +11,7 @@ import Login from "./Login";
 import Onboarding from "./Onboarding";
 import Register from "./Register";
 import ResetPassword from "./ResetPassword";
+import ProductDetails from "./ProductDetails";
 
 // Export to use in other parent directories
 
@@ -28,4 +29,5 @@ export {
   Onboarding,
   Register,
   ResetPassword,
+  ProductDetails,
 };

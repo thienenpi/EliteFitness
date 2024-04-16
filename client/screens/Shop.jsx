@@ -1,12 +1,11 @@
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import styles from "./styles/shop.style";
-import SearchBar from "../components/shop/SearchBar";
-import { COLORS } from "../constants";
-import Slider from "../components/shop/Slider";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import ProductList from "../components/shop/ProductList";
-import useFetch from "../hook/useFetch";
+import SearchBar from "../components/shop/SearchBar";
+import Slider from "../components/shop/Slider";
+import { COLORS } from "../constants";
+import styles from "./styles/shop.style";
 
 const Shop = () => {
   const [productList, setProductList] = useState(null)

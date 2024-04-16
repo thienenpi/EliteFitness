@@ -120,12 +120,12 @@ const TEXTS = {
     fontSize: 18,
   },
   bodyHeavy: {
-    fontFamily: "sfProRegular",
+    fontFamily: "sfProBold",
     fontSize: 18,
   },
   bodySmall: {
     fontFamily: "sfProRegular",
-    fontSize: 18,
+    fontSize: 14,
   },
   bodySmallHeavy: {
     fontFamily: "sfProRegular",
@@ -157,7 +157,11 @@ const TEXTS = {
   },
   captionHeavy: {
     fontFamily: "poppinsBold",
-    fontSize: 16,
+    fontSize: 14,
+  },
+  price: {
+    fontFamily: "poppinsBold",
+    fontSize: 20,
   },
 };
 

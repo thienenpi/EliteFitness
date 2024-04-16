@@ -1,8 +1,13 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import BottomNavigation from './BottomTabNavigation';
-import { Practice, CreateExercise, BodyScan } from '../screens';
-
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import BottomNavigation from "./BottomTabNavigation";
+import {
+  Practice,
+  CreateExercise,
+  BodyScan,
+  ProductDetails,
+  Shop,
+} from "../screens";
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
@@ -19,7 +24,11 @@ const AppStack = () => {
         component={Practice}
         options={{ headerShown: false }}
       ></Stack.Screen>
-
+      <Stack.Screen
+        name="Shop"
+        component={Shop}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
       <Stack.Screen
         name="CreateExercise"
         component={CreateExercise}
@@ -29,6 +38,11 @@ const AppStack = () => {
       <Stack.Screen
         name="BodyScan"
         component={BodyScan}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="ProductDetails"
+        component={ProductDetails}
         options={{ headerShown: false }}
       ></Stack.Screen>
     </Stack.Navigator>
