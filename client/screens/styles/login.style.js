@@ -68,6 +68,13 @@ const styles1 = StyleSheet.create({
     fontFamily: "sfProHeavyItalic",
     color: COLORS.exerciseBg,
   },
+
+  loader: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 
 const styles2 = StyleSheet.create({
