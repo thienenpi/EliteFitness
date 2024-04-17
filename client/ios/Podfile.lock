@@ -821,6 +821,7 @@ PODS:
   - AppAuth/Core (1.7.4)
   - AppAuth/ExternalUserAgent (1.7.4):
     - AppAuth/Core
+  - BEMCheckBox (1.4.1)
   - boost (1.83.0)
   - BoringSSL-GRPC (0.0.32):
     - BoringSSL-GRPC/Implementation (= 0.0.32)
@@ -2169,6 +2170,9 @@ PODS:
   - RecaptchaInterop (100.0.0)
   - RNCAsyncStorage (1.23.1):
     - React-Core
+  - RNCCheckbox (0.5.17):
+    - BEMCheckBox (~> 1.4)
+    - React-Core
   - RNCMaskedView (0.3.0):
     - React-Core
   - RNCPicker (2.6.1):
@@ -2284,6 +2288,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCCheckbox (from `../node_modules/@react-native-community/checkbox`)"
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
@@ -2300,6 +2305,7 @@ SPEC REPOS:
   trunk:
     - abseil
     - AppAuth
+    - BEMCheckBox
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAppCheckInterop
@@ -2471,6 +2477,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNCCheckbox:
+    :path: "../node_modules/@react-native-community/checkbox"
   RNCMaskedView:
     :path: "../node_modules/@react-native-masked-view/masked-view"
   RNCPicker:
@@ -2497,6 +2505,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   abseil: ebec4f56469dd7ce9ab08683c0319a68aa0ad86e
   AppAuth: 182c5b88630569df5acb672720534756c29b3358
+  BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
   BoringSSL-GRPC: 1e2348957acdbcad360b80a264a90799984b2ba6
   BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
@@ -2591,6 +2600,7 @@ SPEC CHECKSUMS:
   ReactCommon: e168ee1704806f10f47ee8c7f825b5850b18eaea
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
+  RNCCheckbox: a3ca9978cb0846b981d28da4e9914bd437403d77
   RNCMaskedView: f7c74478c83c4fdfc5cf4df51f80c0dd5cf125c6
   RNCPicker: b18aaf30df596e9b1738e7c1f9ee55402a229dca
   RNFBApp: 614f1621b49db54ebd258df8c45427370d8d84a2
