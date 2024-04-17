@@ -6,13 +6,15 @@ import SearchBar from "../components/shop/SearchBar";
 import Slider from "../components/shop/Slider";
 import { COLORS } from "../constants";
 import styles from "./styles/shop.style";
+import { useNavigation } from "@react-navigation/native";
 
 const Shop = () => {
-  const [productList, setProductList] = useState(null)
+  const [productList, setProductList] = useState(null);
+  const navigation = useNavigation();
 
   const updateProducts = (newProductList) => {
-    setProductList(newProductList)
-  }
+    setProductList(newProductList);
+  };
 
   return (
     <View style={styles.container}>
@@ -25,8 +27,8 @@ const Shop = () => {
         </View>
         <View
           style={{
-            flexDirection: 'row',
-            gap: 12
+            flexDirection: "row",
+            gap: 12,
           }}
         >
           <TouchableOpacity>
@@ -36,7 +38,7 @@ const Shop = () => {
               name="bell-badge"
             ></MaterialCommunityIcons>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
             <MaterialCommunityIcons
               size={24}
               color={COLORS.btn}
@@ -48,7 +50,7 @@ const Shop = () => {
 
       <ScrollView>
         <Slider />
-        <ProductList items={productList}/>
+        <ProductList items={productList} />
       </ScrollView>
     </View>
   );

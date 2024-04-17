@@ -40,7 +40,8 @@ const ProductDetails = () => {
                 name="bell-badge"
               ></MaterialCommunityIcons>
             </TouchableOpacity>
-            <TouchableOpacity>
+            {/* FIXME: khong navigate duoc */}
+            <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
               <MaterialCommunityIcons
                 size={24}
                 color={COLORS.btn}

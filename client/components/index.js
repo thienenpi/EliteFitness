@@ -14,6 +14,8 @@ import CustomButton from "./CustomButton";
 import User from "./profile/User";
 import Setting from "./profile/Setting";
 import CountryCode from "./resetPassword/CountryCode";
+import ProductCartItem from "./cart/ProductCartItem";
+
 export {
   MuscleRow,
   MuscleCardView,
@@ -31,4 +33,5 @@ export {
   User,
   Setting,
   CountryCode,
+  ProductCartItem,
 };

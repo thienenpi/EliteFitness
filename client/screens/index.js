@@ -12,6 +12,7 @@ import Onboarding from "./Onboarding";
 import Register from "./Register";
 import ResetPassword from "./ResetPassword";
 import ProductDetails from "./ProductDetails";
+import Cart from "./Cart";
 
 // Export to use in other parent directories
 
@@ -30,4 +31,5 @@ export {
   Register,
   ResetPassword,
   ProductDetails,
+  Cart,
 };
