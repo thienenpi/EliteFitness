@@ -8,6 +8,7 @@ import {
   ProductDetails,
   Shop,
   Cart,
+  Payment
 } from "../screens";
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,11 @@ const AppStack = () => {
       <Stack.Screen
         name="Cart"
         component={Cart}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
         options={{ headerShown: false }}
       ></Stack.Screen>
     </Stack.Navigator>
