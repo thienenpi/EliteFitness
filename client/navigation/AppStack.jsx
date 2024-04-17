@@ -8,6 +8,7 @@ import {
   ProductDetails,
   Shop,
   Cart,
+  Payment,
 } from "../screens";
 const Stack = createNativeStackNavigator();
 
@@ -25,11 +26,13 @@ const AppStack = () => {
         component={Practice}
         options={{ headerShown: false }}
       ></Stack.Screen>
+
       <Stack.Screen
         name="Shop"
         component={Shop}
         options={{ headerShown: false }}
       ></Stack.Screen>
+
       <Stack.Screen
         name="CreateExercise"
         component={CreateExercise}
@@ -41,14 +44,22 @@ const AppStack = () => {
         component={BodyScan}
         options={{ headerShown: false }}
       ></Stack.Screen>
+
       <Stack.Screen
         name="ProductDetails"
         component={ProductDetails}
         options={{ headerShown: false }}
       ></Stack.Screen>
+
       <Stack.Screen
         name="Cart"
         component={Cart}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
+
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
         options={{ headerShown: false }}
       ></Stack.Screen>
     </Stack.Navigator>

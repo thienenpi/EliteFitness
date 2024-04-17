@@ -13,6 +13,7 @@ import Register from "./Register";
 import ResetPassword from "./ResetPassword";
 import ProductDetails from "./ProductDetails";
 import Cart from "./Cart";
+import Payment from "./Payment";
 
 // Export to use in other parent directories
 
@@ -32,4 +33,5 @@ export {
   ResetPassword,
   ProductDetails,
   Cart,
+  Payment,
 };
