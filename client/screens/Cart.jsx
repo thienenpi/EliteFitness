@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, TouchableOpacity, ImageComponent } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import { COLORS } from "../constants";
 import styles from "./styles/cart.style";
