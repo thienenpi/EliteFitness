@@ -11,6 +11,8 @@ const ResetPassword = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const {
     resetPasswordWithPhone,
     resetPasswordWithEmail,
@@ -20,12 +22,18 @@ const ResetPassword = () => {
   } = useContext(AuthContext);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const navigation = useNavigation();
-
+  const checkPasswordsMatch = (newPassword, confirmPassword) => {
+    return (
+      newPassword === confirmPassword &&
+      newPassword.length > 0 &&
+      confirmPassword.length > 0
+    );
+  };
   const handleCountryChange = (country) => {
     setSelectedCountry(country);
   };
 
-  return !confirm ? (
+  return confirm ? (
     <View style={styles.container}>
       <InputField
         icon={<CountryCode onCountryChange={handleCountryChange}></CountryCode>}
@@ -100,6 +108,7 @@ const ResetPassword = () => {
     </View>
   ) : (
     <View style={styles.container}>
+      <Text style={styles.headerText}>Reset Password</Text>
       <InputField
         label={"OTP code"}
         styles={styles}
@@ -113,9 +122,23 @@ const ResetPassword = () => {
           }
         }}
       ></InputField>
-
       <View style={{ height: 20 }}></View>
+      <InputField
+        label={"New Password"}
+        styles={styles}
+        value={newPassword}
+        onChangeText={(text) => setNewPassword(text)}
+      ></InputField>
+      <View style={{ height: 20 }}></View>
+      <InputField
+        label={"Confirm New Password"}
+        styles={styles}
+        value={confirmPassword}
+        onChangeText={(text) => setConfirmPassword(text)}
+        isValid={checkPasswordsMatch(newPassword, confirmPassword)}
+      ></InputField>
 
+      <View style={{ height: 32 }}></View>
       <CustomButton
         onPress={async () => {
           const isExist = await confirmCode({ code: code });
@@ -126,7 +149,9 @@ const ResetPassword = () => {
         }}
         styles={styles}
         label={"Confirm"}
-        isValid={code.length >= 6}
+        isValid={
+          code.length >= 6 && checkPasswordsMatch(newPassword, confirmPassword)
+        }
       ></CustomButton>
     </View>
   );

@@ -105,7 +105,9 @@ const ProductDetails = () => {
       {/* Details */}
       <View style={{ marginHorizontal: 12 }}>
         <Text style={styles.productName}>{item.title}</Text>
-        <Text style={styles.productPrice}>{item.price} VND</Text>
+        <Text style={styles.productPrice}>
+          {item.price.toLocaleString("vi-VN")} VND
+        </Text>
         <View style={styles.ratingContainer}>
           <TouchableOpacity style={{ marginVertical: 4 }}>
             <AntDesign size={16} color={COLORS.btn} name="star"></AntDesign>

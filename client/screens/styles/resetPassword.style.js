@@ -1,12 +1,18 @@
 import { StyleSheet } from "react-native";
-import { COLORS, SIZES } from "../../constants";
+import { COLORS, SIZES, TEXTS } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: COLORS.primaryBg
+    backgroundColor: COLORS.primaryBg,
+  },
+  headerText: {
+    fontFamily: "rufner",
+    fontSize: SIZES.xLarge,
+    paddingVertical: SIZES.xLarge,
+    color: COLORS.primary,
   },
 
   ipfContainer: {
@@ -29,9 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   }),
 
-  countryPickerContainer: {
-    
-  }
+  countryPickerContainer: {},
 });
 
 export default styles;

@@ -101,7 +101,10 @@ const ProductCartItem = ({ item, isSelected, toggleItemSelection }) => {
         <Text style={styles.productName}>{item.title}</Text>
         <Text style={styles.productCategory}>{item.category}</Text>
         <View style={styles.productPriceContainer}>
-          <Text style={styles.productPrice}>{item.price} VND</Text>
+          <Text style={styles.productPrice}>
+            {item.price.toLocaleString("vi-VN")} VND
+          </Text>
+
           <View style={styles.quantityContainer}>
             <TouchableOpacity onPress={decreaseQuantity}>
               <Text style={styles.quantityBtn}>-</Text>

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { COLORS, SIZES } from "../../constants";
+import { COLORS, SIZES, TEXTS } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,9 +9,12 @@ const styles = StyleSheet.create({
   },
 
   notiText: {
-    color: COLORS.text,
-    fontSize: 24,
-    marginTop: 20,
+    color: COLORS.secondary500,
+    // fontSize: 24,
+    // marginTop: 20,
+    fontFamily: TEXTS.bodyHeavy.fontFamily,
+    fontSize: TEXTS.bodyHeavy.fontSize,
+    marginTop: SIZES.large,
   },
 });
 
