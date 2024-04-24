@@ -13,29 +13,6 @@ const styles = StyleSheet.create({
     width: 31,
   },
 
-  btnContainer: (borderColor) => ({
-    height: 40,
-    width: "32%",
-    borderColor: COLORS.primary,
-    borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 8,
-    backgroundColor: "white",
-    flexDirection: "row-reverse",
-    gap: 8,
-    position: "absolute",
-    right: 24,
-    bottom: 24,
-  }),
-  
-  btnLabel: {
-    fontFamily: TEXTS.captionHeavy.fontFamily,
-    fontSize: TEXTS.caption.fontSize,
-    color: COLORS.primary,
-
-  },
-
   header: {
     flex: 1,
     flexDirection: "row",

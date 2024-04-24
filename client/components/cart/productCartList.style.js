@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 15,
     alignItems: "center",
-    marginBottom: SIZES.xxLarge * 2,
   },
 
   notiText: {
@@ -15,6 +14,28 @@ const styles = StyleSheet.create({
     fontFamily: TEXTS.bodyHeavy.fontFamily,
     fontSize: TEXTS.bodyHeavy.fontSize,
     marginTop: SIZES.large,
+  },
+
+  btnContainer: (borderColor) => ({
+    height: 40,
+    width: "32%",
+    borderColor: COLORS.primary,
+    borderWidth: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+    backgroundColor: "white",
+    flexDirection: "row-reverse",
+    gap: 8,
+    position: "absolute",
+    right: 24,
+    bottom: 24,
+  }),
+
+  btnLabel: {
+    fontFamily: TEXTS.captionHeavy.fontFamily,
+    fontSize: TEXTS.caption.fontSize,
+    color: COLORS.primary,
   },
 });
 

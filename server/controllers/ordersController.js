@@ -6,7 +6,7 @@ const createOrder = async (req, res) => {
   try {
     const newOrder = new Order(req.body);
     await newOrder.save();
-    res.status(200).json("Created order");
+    res.status(200).json(newOrder._id);
   } catch (error) {
     res.status(500).json("Failed to create order", error);
   }
