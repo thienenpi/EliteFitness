@@ -5,8 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 
 // Hàm chuyển đổi số thành chuỗi có định dạng ***.***VNĐ
 const formatPrice = (price) => {
-  const formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  return `${formattedPrice} VNĐ`;
+  return price.toLocaleString("vi-VN") + " VND";
 };
 
 const ProductCard = ({ item }) => {

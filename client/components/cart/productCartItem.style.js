@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     height: 112,
     alignContent: "center",
     flexDirection: "row",
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: COLORS.text,
     padding: 8,
     borderRadius: 12,
@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 12,
     alignContent: "center",
-    borderColor: COLORS.text,
-    borderWidth: 1,
-    padding: 4,
+    // borderColor: COLORS.neutral200,
+    // borderWidth: 1,
+    // padding: 4,
     paddingHorizontal: 12,
     borderRadius: 8,
     justifyContent: "space-between",
@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
 
   quantityBtn: {
     color: COLORS.primary,
-    fontSize: TEXTS.bodyHeavy.fontSize,
+    fontSize: 20,
+    padding: 4,
     fontFamily: TEXTS.bodyHeavy.fontFamily,
   },
 
