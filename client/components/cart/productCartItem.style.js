@@ -1,51 +1,54 @@
 import { StyleSheet } from "react-native";
-import { SIZES, COLORS, TEXTS } from "../../constants";
-import CheckBox from "@react-native-community/checkbox";
+import { COLORS, SIZES, TEXTS } from "../../constants";
 
 const styles = StyleSheet.create({
   cartItemContainer: {
-    paddingHorizontal: 12,
     height: 112,
     alignContent: "center",
     flexDirection: "row",
     borderWidth: 1,
     borderColor: COLORS.text,
     padding: 8,
-    marginHorizontal: 12,
     borderRadius: 12,
-    gap: 12,
-  },
-  CheckBox:{
-    justifyContent:"center",
-    alignContent:"center",
   },
 
-  productInfoContainer:{
+  checkBox: {
+    justifyContent: "center",
+    alignContent: "center",
+  },
+
+  productInfoContainer: {
     gap: 4,
     paddingVertical: 4,
   },
-  productName:{
+
+  productName: {
     color: COLORS.primary,
     fontSize: TEXTS.bodyHeavy.fontSize,
     fontFamily: TEXTS.bodyHeavy.fontFamily,
   },
-  productCategory:{
+
+  productCategory: {
     color: COLORS.text,
     fontSize: TEXTS.bodySmall.fontSize,
     fontFamily: TEXTS.bodySmall.fontFamily,
   },
-  productPriceContainer:{
+
+  productPriceContainer: {
     flexDirection: "row",
-    width: "80%",
     alignContent: "center",
     justifyContent: "space-between",
-},
-  productPrice:{
+    width: SIZES.xxLarge * 6,
+  },
+
+  productPrice: {
     color: COLORS.secondary,
     marginTop: 4,
     fontSize: TEXTS.price.fontSize,
     fontFamily: TEXTS.price.fontFamily,
-  },quantityContainer:{
+  },
+
+  quantityContainer: {
     flexDirection: "row",
     gap: 12,
     alignContent: "center",
@@ -54,24 +57,29 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingHorizontal: 12,
     borderRadius: 8,
-    justifyContent:"space-between"
+    justifyContent: "space-between",
   },
-    quantityBtn:{
-        color: COLORS.primary,
-        fontSize: TEXTS.bodyHeavy.fontSize,
-        fontFamily: TEXTS.bodyHeavy.fontFamily,
-    },
-    quantity:{
-        color: COLORS.text,
-        fontSize: TEXTS.bodySmall.fontSize,
-        fontFamily: TEXTS.bodySmall.fontFamily,
-        alignSelf: "center",
-    },
-    productImage:{
-        width: 96,
-        height: 96,
-        borderRadius: 8,
-    }
+
+  quantityBtn: {
+    color: COLORS.primary,
+    fontSize: TEXTS.bodyHeavy.fontSize,
+    fontFamily: TEXTS.bodyHeavy.fontFamily,
+  },
+
+  quantity: {
+    color: COLORS.text,
+    fontSize: TEXTS.bodySmall.fontSize,
+    fontFamily: TEXTS.bodySmall.fontFamily,
+    alignSelf: "center",
+  },
+
+  productImage: {
+    margin: SIZES.small,
+    alignSelf: "center",
+    width: SIZES.xxLarge * 2,
+    height: SIZES.xxLarge * 2,
+    borderRadius: 8,
+  },
 });
 
 export default styles;

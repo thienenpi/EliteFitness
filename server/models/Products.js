@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     imageUrl: { type: String, required: true },
     description: { type: String, required: true },
-    muscles: [{ type: String, require: true }],
+    muscle: [{ type: String, require: true }],
     level: [{ type: String, require: true }]
   },
   { timestamps: true }

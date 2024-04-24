@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const ordersController = require("../controllers/ordersController");
+const { verifyUser } = require("../controllers/authController");
 
-router.post("/", ordersController.createOrder);
+router.post("/", verifyUser, ordersController.createOrder);
 router.get("/", ordersController.getAllOrders);
 router.get("/:order_id", ordersController.getOrder);
 router.put("/:order_id", ordersController.updateOrder);

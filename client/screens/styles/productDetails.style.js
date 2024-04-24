@@ -11,12 +11,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     alignItems: "center",
     justifyContent: "space-between",
-    paddingTop: 60,
     flexDirection: "row",
   },
 
   headerContainer: {
-    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
@@ -25,6 +23,7 @@ const styles = StyleSheet.create({
     marginTop: 56,
     justifyContent: "center",
   },
+
   sideIcon: {
     height: 14.92,
     width: 31,

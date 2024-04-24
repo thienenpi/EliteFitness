@@ -16,9 +16,7 @@ const ProductList = ({ items }) => {
   const [productList, setProductList] = useState(data);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => {}}>
       <ProductCard item={item}></ProductCard>
-    </TouchableOpacity>
   );
 
   useEffect(() => {

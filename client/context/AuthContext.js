@@ -66,30 +66,37 @@ export const AuthProvider = ({ children }) => {
 
       setIsLoading(false);
     } else {
-      const confirmation = await auth().signInWithEmailAndPassword(
-        data.email,
-        data.password
-      );
-      const userInfo = confirmation.user;
-      const userToken = await userInfo.getIdToken(true)
+      Alert.alert(res.data, "Please try again", [
+        {
+          text: "Try again",
+          style: "cancel",
+        },
+      ]);
 
-      if (userInfo) {
-        setIsLoading(true);
-        setUserInfo(userInfo);
-        setUserToken(userToken);
+      //   const confirmation = await auth().signInWithEmailAndPassword(
+      //     data.email,
+      //     data.password
+      //   );
+      //   const userInfo = confirmation.user;
+      //   const userToken = await userInfo.getIdToken(true)
 
-        AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
-        AsyncStorage.setItem("userToken", JSON.stringify(userToken));
+      //   if (userInfo) {
+      //     setIsLoading(true);
+      //     setUserInfo(userInfo);
+      //     setUserToken(userToken);
 
-        setIsLoading(false);
-      } else {
-        Alert.alert(res.data, "Please try again with another password", [
-          {
-            text: "Try again",
-            style: "cancel",
-          },
-        ]);
-      }
+      //     AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
+      //     AsyncStorage.setItem("userToken", JSON.stringify(userToken));
+
+      //     setIsLoading(false);
+      //   } else {
+      //     Alert.alert(res.data, "Please try again with another password", [
+      //       {
+      //         text: "Try again",
+      //         style: "cancel",
+      //       },
+      //     ]);
+      //   }
     }
   };
 
@@ -118,7 +125,12 @@ export const AuthProvider = ({ children }) => {
       const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
       setConfirm(confirmation);
     } catch (error) {
-      console.error("Sending code: ", error);
+      Alert.alert("Error", error.response, [
+        {
+          text: "Try again",
+          style: "cancel",
+        },
+      ]);
     }
   };
 
@@ -154,7 +166,12 @@ export const AuthProvider = ({ children }) => {
         return false;
       }
     } catch (error) {
-      console.error("Invalid code: ", error);
+      Alert.alert("Wrong code", "Please try again", [
+        {
+          text: "Try again",
+          style: "cancel",
+        },
+      ]);
     }
   };
 
@@ -209,6 +226,7 @@ export const AuthProvider = ({ children }) => {
         userToken,
         userInfo,
         confirm,
+        setConfirm,
       }}
     >
       {children}

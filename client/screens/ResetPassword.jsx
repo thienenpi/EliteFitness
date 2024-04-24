@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import styles from "./styles/resetPassword.style";
 import { CountryCode, CustomButton, InputField } from "../components";
@@ -16,6 +16,7 @@ const ResetPassword = () => {
     resetPasswordWithEmail,
     confirmCode,
     confirm,
+    setConfirm,
   } = useContext(AuthContext);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const navigation = useNavigation();
@@ -54,7 +55,10 @@ const ResetPassword = () => {
         onPress={async () => {
           let callingCode = selectedCountry.callingCode[0];
           callingCode = callingCode.replace(/\["|"\]/g, "");
-          await resetPasswordWithPhone({ phoneNumber: phoneNumber });
+          console.log(`+${callingCode}${phoneNumber}`);
+          await resetPasswordWithPhone({
+            phoneNumber: `+${callingCode}${phoneNumber}`,
+          });
         }}
       ></CustomButton>
 
@@ -101,6 +105,13 @@ const ResetPassword = () => {
         styles={styles}
         value={code}
         onChangeText={(text) => setCode(text)}
+        onSubmitEditing={async () => {
+          const isExist = await confirmCode({ code: code });
+          if (isExist) {
+            setConfirm(null);
+            navigation.navigate("Login");
+          }
+        }}
       ></InputField>
 
       <View style={{ height: 20 }}></View>
@@ -109,9 +120,8 @@ const ResetPassword = () => {
         onPress={async () => {
           const isExist = await confirmCode({ code: code });
           if (isExist) {
+            setConfirm(null);
             navigation.navigate("Login");
-          } else {
-            console.log("not exist");
           }
         }}
         styles={styles}

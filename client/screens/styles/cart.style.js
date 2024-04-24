@@ -3,6 +3,7 @@ import { SIZES, COLORS, TEXTS } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     height: SIZES.height,
     backgroundColor: COLORS.primaryBg,
   },
@@ -11,10 +12,9 @@ const styles = StyleSheet.create({
     height: 14.92,
     width: 31,
   },
+
   btnContainer: (borderColor) => ({
     height: 40,
-    // marginVertical: 10,
-    // marginHorizontal: SIZES.xxLarge * 2,
     width: "32%",
     borderColor: COLORS.primary,
     borderWidth: 2,
@@ -28,19 +28,21 @@ const styles = StyleSheet.create({
     right: 24,
     bottom: 24,
   }),
+  
   btnLabel: {
     fontFamily: TEXTS.captionHeavy.fontFamily,
     fontSize: TEXTS.caption.fontSize,
     color: COLORS.primary,
 
   },
-  headerBar: {
+
+  header: {
+    flex: 1,
     flexDirection: "row",
     marginTop: 56,
     justifyContent: "space-between",
     marginHorizontal: 16,
     borderBottomWidth: 1,
-    paddingBottom: 20,
     borderBottomColor: COLORS.neutral400,
   },
 

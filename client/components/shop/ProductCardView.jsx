@@ -11,11 +11,12 @@ const formatPrice = (price) => {
 
 const ProductCard = ({ item }) => {
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.productContainer}
-        onPress={() => navigation.navigate("ProductDetails")}
+        onPress={() => navigation.navigate("ProductDetails", { item: item })}
       >
         <Image
           source={{ uri: item.imageUrl }}

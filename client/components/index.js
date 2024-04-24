@@ -15,6 +15,7 @@ import User from "./profile/User";
 import Setting from "./profile/Setting";
 import CountryCode from "./resetPassword/CountryCode";
 import ProductCartItem from "./cart/ProductCartItem";
+import ProductCartList from "./cart/ProductCartList";
 
 export {
   MuscleRow,
@@ -34,4 +35,5 @@ export {
   Setting,
   CountryCode,
   ProductCartItem,
+  ProductCartList
 };

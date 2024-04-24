@@ -832,22 +832,22 @@ PODS:
   - BVLinearGradient (2.8.3):
     - React-Core
   - DoubleConversion (1.1.6)
-  - EXAV (13.10.5):
+  - EXAV (13.10.6):
     - ExpoModulesCore
     - ReactCommon/turbomodule/core
-  - EXConstants (15.4.5):
+  - EXConstants (15.4.6):
     - ExpoModulesCore
   - EXFont (11.10.3):
     - ExpoModulesCore
   - EXJSONUtils (0.12.3)
   - EXManifests (0.13.2):
     - ExpoModulesCore
-  - EXMediaLibrary (15.9.1):
+  - EXMediaLibrary (15.9.2):
     - ExpoModulesCore
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - Expo (50.0.15):
+  - Expo (50.0.17):
     - ExpoModulesCore
   - expo-dev-client (3.3.11):
     - EXManifests
@@ -920,11 +920,11 @@ PODS:
     - ExpoModulesCore
     - GoogleSignIn (~> 7.0)
     - React-Core
-  - ExpoCamera (14.1.2):
+  - ExpoCamera (14.1.3):
     - ExpoModulesCore
     - ZXingObjC/OneD
     - ZXingObjC/PDF417
-  - ExpoFileSystem (16.0.8):
+  - ExpoFileSystem (16.0.9):
     - ExpoModulesCore
   - ExpoGL (13.6.0):
     - ExpoModulesCore
@@ -945,7 +945,7 @@ PODS:
     - React-Core
   - ExpoSpeech (11.7.0):
     - ExpoModulesCore
-  - ExpoSystemUI (2.9.3):
+  - ExpoSystemUI (2.9.4):
     - ExpoModulesCore
   - EXSplashScreen (0.26.4):
     - ExpoModulesCore
@@ -2510,26 +2510,26 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 1e2348957acdbcad360b80a264a90799984b2ba6
   BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   DoubleConversion: fea03f2699887d960129cc54bba7e52542b6f953
-  EXAV: 07e50f934907fa8274dd06fbcd20ee4b9478c619
-  EXConstants: 988aa430ca0f76b43cd46b66e7fae3287f9cc2fc
+  EXAV: e4f6137431ddc4cb025895046bfefa9612025c35
+  EXConstants: a5f6276e565d98f9eb4280f81241fc342d641590
   EXFont: f20669cb266ef48b004f1eb1f2b20db96cd1df9f
   EXJSONUtils: 5c42959e87be238b045ef37cc5268b16a6c0ad4a
   EXManifests: 5e8c29f36c716af768a4ea47ec05e1b89ab93091
-  EXMediaLibrary: a62a2226559a5a62b18aec6fd686c54d11dd2b32
-  Expo: 0f04015e4254c8b7c74f3c4b2facdfd0b62152b0
+  EXMediaLibrary: 70cf1fb7028fda2d682090c9fe57568674e4abab
+  Expo: 2cdb5916749a1509cf88114f1f510bd458630eb4
   expo-dev-client: 29a32387346fe7b6d2a57918fae985bc48bfe9a2
   expo-dev-launcher: 957d62f7ec983d02091c97fca9ac73c115b54f77
   expo-dev-menu: 68ea53d923996e27b20ce02b51cc820fc2327a83
   expo-dev-menu-interface: 7ba029c9d1a82ac22b9b584c00514860b060553e
   ExpoAdapterGoogleSignIn: 6141872bcd2bc999fe7589b94a577d70cc4a3060
-  ExpoCamera: ed3dd4ae8e32603c91336ea8e27c5d1e2822d8f6
-  ExpoFileSystem: eecaf6796aed0f4dd20042dc2ca2cac6c4bc1185
+  ExpoCamera: f3f157db67e5a491e1104a2c0018c240242936e7
+  ExpoFileSystem: 74cc0fae916f9f044248433971dcfc8c3befd057
   ExpoGL: 085542f97b13f2428ac2edb077c9a90f4566944d
   ExpoKeepAwake: 0f5cad99603a3268e50af9a6eb8b76d0d9ac956c
   ExpoModulesCore: 370096473359f5f6aade0871400d063333747719
   ExpoScreenOrientation: 47c10dbd934cf76ba67c73652030432ea64b1151
   ExpoSpeech: 5e108798facd5e77e0ff040bdae6907aebeed6c5
-  ExpoSystemUI: 40e222dd9d52222fe1bce389724ac52e662158dc
+  ExpoSystemUI: 735278045c1a28de0018a300bb5abb3f9090652b
   EXSplashScreen: 6bd596128cd52fac91997ebc64f3d394c843a8f9
   EXUpdatesInterface: 3e444e2093e25b7ca0999a7d8c16e8392dee70c3
   FBLazyVector: f64d1e2ea739b4d8f7e4740cde18089cd97fe864
