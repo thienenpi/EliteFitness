@@ -7,7 +7,6 @@ import { CustomButton, ProductCartList } from "../components";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getProductById } from "../api/ProductApi";
-import { exp } from "@tensorflow/tfjs-core";
 
 const Cart = () => {
   const [productCartList, setProductCartList] = useState([]);
@@ -78,12 +77,7 @@ const Cart = () => {
 
       <ProductCartList items={productCartList}></ProductCartList>
 
-      <CustomButton
-        styles={styles}
-        isValid={true}
-        onPress={() => navigation.navigate("Payment")}
-        label={"Payment"}
-      ></CustomButton>
+
     </View>
   );
 };

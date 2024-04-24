@@ -1,3 +1,4 @@
+import { data } from "@tensorflow/tfjs";
 import ApiManager from "./ApiManager";
 
 const createOrder = async ({ data, token }) => {
@@ -23,9 +24,32 @@ const createOrder = async ({ data, token }) => {
   }
 };
 
-const createOrderDetails = async ({ data, token }) => {
+const updateOrderById = async ({ id, data, token }) => {
   try {
-    const url = "/order-details/";
+    const url = `/orders/${id}`;
+    const config = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
+    };
+
+    const res = await ApiManager(url, config);
+    return res;
+  } catch (error) {
+    if (error.response) {
+      return error.response;
+    } else {
+      throw error;
+    }
+  }
+};
+
+const createOrderDetail = async ({ data, token }) => {
+  try {
+    const url = "/orderDetails/";
     const config = {
       method: "POST",
       headers: {
@@ -48,4 +72,4 @@ const createOrderDetails = async ({ data, token }) => {
 
 // Export the functions
 
-export { createOrder, createOrderDetails };
+export { createOrder, createOrderDetail, updateOrderById };

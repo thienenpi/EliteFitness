@@ -9,13 +9,21 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primaryBg
   },
 
+  productList: {
+    flex: 1,
+    rowGap: SIZES.small,
+    top: SIZES.xxLarge * 2,
+  },
+
   btnContainer: (backgroundColor) => ({
     backgroundColor: backgroundColor,
-    borderRadius: 12,
+    borderRadius: SIZES.small,
     width: SIZES.width - SIZES.xxLarge * 5,
     height: SIZES.xxLarge,
     alignItems: "center",
     justifyContent: "center",
+    bottom: SIZES.xxLarge * 2,
+    left: SIZES.xxLarge * 2,
   }),
 });
 

@@ -25,7 +25,12 @@ const updateCartAsyncStorage = async ({ _id, quantity }) => {
   return parsedCartData;
 };
 
-const ProductCartItem = ({ item, isSelected, toggleItemSelection }) => {
+const ProductCartItem = ({
+  item,
+  showCheckBox = false,
+  isSelected,
+  toggleItemSelection,
+}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(isSelected);
   const [quantity, setQuantity] = useState(item.quantity); // Initial quantity is 1
 
@@ -82,20 +87,22 @@ const ProductCartItem = ({ item, isSelected, toggleItemSelection }) => {
 
   return (
     <TouchableOpacity style={styles.cartItemContainer}>
-      <TouchableOpacity
-        style={styles.checkBox}
-        onPress={() => setToggleCheckBox(!toggleCheckBox)}
-      >
-        <CheckBox
-          style={{ height: 20, width: 20 }}
-          disabled={false}
-          value={toggleCheckBox}
-          onValueChange={(newValue) => {
-            toggleItemSelection(item._id);
-            setToggleCheckBox(newValue);
-          }}
-        />
-      </TouchableOpacity>
+      {showCheckBox && (
+        <TouchableOpacity
+          style={styles.checkBox}
+          onPress={() => setToggleCheckBox(!toggleCheckBox)}
+        >
+          <CheckBox
+            style={{ height: 20, width: 20 }}
+            disabled={false}
+            value={toggleCheckBox}
+            onValueChange={(newValue) => {
+              toggleItemSelection({ itemId: item._id, quantity: quantity });
+              setToggleCheckBox(newValue);
+            }}
+          />
+        </TouchableOpacity>
+      )}
       <Image style={styles.productImage} source={{ uri: item.imageUrl }} />
       <View style={styles.productInfoContainer}>
         <Text style={styles.productName}>{item.title}</Text>
