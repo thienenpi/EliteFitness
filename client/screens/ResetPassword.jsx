@@ -33,7 +33,7 @@ const ResetPassword = () => {
     setSelectedCountry(country);
   };
 
-  return confirm ? (
+  return !confirm ? (
     <View style={styles.container}>
       <InputField
         icon={<CountryCode onCountryChange={handleCountryChange}></CountryCode>}
@@ -119,6 +119,7 @@ const ResetPassword = () => {
           if (isExist) {
             setConfirm(null);
             navigation.navigate("Login");
+            
           }
         }}
       ></InputField>
@@ -145,6 +146,7 @@ const ResetPassword = () => {
           if (isExist) {
             setConfirm(null);
             navigation.navigate("Login");
+          } else {
           }
         }}
         styles={styles}

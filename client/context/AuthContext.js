@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
       AsyncStorage.setItem("userToken", JSON.stringify(responseData.token));
 
       setIsLoading(false);
-      await auth().createUserWithEmailAndPassword(data.email, data.password);
+      await auth().signInWithPhoneNumber(data.phoneNumber);
     } else {
       Alert.alert(res.data, "Please try again", [
         {
@@ -158,11 +158,6 @@ export const AuthProvider = ({ children }) => {
       if (userDocument.exists) {
         return true;
       } else {
-        const name = useState("Thien");
-        await firestore().collection("users").doc(user.uid).set({
-          name,
-        });
-
         return false;
       }
     } catch (error) {

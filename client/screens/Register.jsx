@@ -68,7 +68,9 @@ const Register = () => {
             }}
             onSubmitEditing={handleSubmit}
           ></InputField>
+
           <View style={{ height: 20 }}></View>
+
           <View>
             <InputField
               icon={
@@ -98,7 +100,9 @@ const Register = () => {
               />
             </TouchableOpacity>
           </View>
+
           <View style={{ height: 20 }}></View>
+
           <View>
             <InputField
               icon={
@@ -128,7 +132,9 @@ const Register = () => {
               />
             </TouchableOpacity>
           </View>
+
           <View style={{ height: 42 }}></View>
+
           <CustomButton
             styles={styles1}
             isValid={true}
