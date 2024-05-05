@@ -22,7 +22,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${HOST}/exercises/search/${searchKey || ''}`
+          `${HOST}exercises/search/${searchKey || ''}`
         )
         setFoundExercises(response.data)
       } catch (error) {

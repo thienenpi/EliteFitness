@@ -298,7 +298,7 @@ const PoseDetectionApp = (props) => {
       if (Math.abs(value) > threshold.Velocities) {
         counterRef.current.score -= 0.25
         lines += `Too ${value > 0 ? "fast" : "slow"}\n`
-        useSpeech(lines)
+        // useSpeech(lines)
         break
       }
     }
@@ -311,7 +311,7 @@ const PoseDetectionApp = (props) => {
             value
           )} degrees\n`
           if (lines === "") {
-            useSpeech(bodyParts[index])
+            // useSpeech(bodyParts[index])
           }
           lines += line
         }
@@ -320,13 +320,13 @@ const PoseDetectionApp = (props) => {
 
     counterRef.current.correction = lines === "" ? "Good" : lines
 
-    if (lines !== "") {
-      const picture = await cameraRef.current.camera.takePictureAsync({
-        quality: 0.5,
-        base64: true,
-      })
-      uploadPicture(picture, item.title)
-    }
+    // if (lines !== "") {
+    //   const picture = await cameraRef.current.camera.takePictureAsync({
+    //     quality: 0.5,
+    //     base64: true,
+    //   })
+    //   uploadPicture(picture, item.title)
+    // }
   }
 
   //   const startRecording = async () => {
@@ -529,7 +529,7 @@ const PoseDetectionApp = (props) => {
       >
         {renderExerciseName(item.title)}
         {renderCamera()}
-        {renderVideo(practiceState, item.videoUrls[0])}
+        {/* {renderVideo(practiceState, item.videoUrls[0])} */}
         {renderPose(posesRef, cameraType)}
         {/* {renderFps()} */}
         {renderCameraTypeSwitcher()}

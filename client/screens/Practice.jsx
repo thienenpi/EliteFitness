@@ -1,42 +1,40 @@
-import { TouchableOpacity, SafeAreaView, Text, View, Image } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
-import { useRoute } from '@react-navigation/native'
-import styles from './styles/practice.style'
-import { COLORS } from '../constants'
-import Button from '../components/CustomButton'
-import SettingRow from '../components/SettingRow'
-import VideoRecording from '../components/practice/VideoRecording'
-import PoseDetectionApp from '../components/practice/PoseDetectionApp'
+import { Text, View, Image } from "react-native";
+import React, { useState } from "react";
+import { useRoute } from "@react-navigation/native";
+import styles from "./styles/practice.style";
+import { COLORS } from "../constants";
+import PoseDetectionApp from "../components/practice/PoseDetectionApp";
+import { CustomButton, SettingRow } from "../components/";
 
 const Practice = ({ navigation }) => {
-  const route = useRoute()
-  const { item } = route.params
-  const [cameraState, setCameraState] = useState(true)
-  const [recordState, setRecordState] = useState(false)
-  const [practiceState, setPracticeState] = useState(false)
+  const route = useRoute();
+  const { item } = route.params;
+  const [cameraState, setCameraState] = useState(true);
+  const [recordState, setRecordState] = useState(false);
+  const [practiceState, setPracticeState] = useState(false);
   const [counter, setCounter] = useState({
-    stage: 'none',
+    stage: "none",
     set: 1,
     rep: 0,
     score: 100,
-    correction: 'Good'
-  })
+    correction: "Good",
+  });
 
   const updateCounter = (newCounter) => {
-    setCounter(newCounter)
-  }
+    setCounter(newCounter);
+  };
 
   const updateCameraState = () => {
-    setCameraState((prevState) => !prevState)
-  }
+    setCameraState((prevState) => !prevState);
+  };
 
   const updateRecordState = () => {
-    setRecordState((prevState) => !prevState)
-  }
+    setRecordState((prevState) => !prevState);
+  };
 
   const updatePracticeState = () => {
-    setPracticeState((prevState) => !prevState)
-  }
+    setPracticeState((prevState) => !prevState);
+  };
 
   return (
     <View style={styles.container}>
@@ -60,54 +58,56 @@ const Practice = ({ navigation }) => {
 
             <Text style={styles.trackTitle}> Set </Text>
             <Text style={styles.trackValue}>
-              {' '}
-              {counter.set}/{item.numOfSet}{' '}
+              {" "}
+              {counter.set}/{item.numOfSet}{" "}
             </Text>
           </View>
 
           <View style={styles.trackContainer}>
             <Text style={styles.trackTitle}> Reps </Text>
             <Text style={styles.trackValue}>
-              {' '}
-              {counter.rep}/{item.numOfRep}{' '}
+              {" "}
+              {counter.rep}/{item.numOfRep}{" "}
             </Text>
 
             <Text style={styles.trackTitle}> Score </Text>
             <Text style={styles.trackValue}> {counter.score} </Text>
           </View>
 
-          <Image source={require('../assets/icons/divider/1x.png')}></Image>
+          <Image source={require("../assets/icons/divider/1x.png")}></Image>
           <View style={styles.crtContainer}>
             <Text style={styles.crtTitle}>Correction</Text>
-            <Text style={styles.crtValue(COLORS.accept)}>{counter.correction}</Text>
+            <Text style={styles.crtValue(COLORS.accept)}>
+              {counter.correction}
+            </Text>
           </View>
         </View>
 
         <SettingRow
           styles={styles}
-          title={'Turn off your camera'}
-          iconName={'camera'}
+          title={"Turn off your camera"}
+          iconName={"camera"}
           onChange={updateCameraState}
           value={!cameraState}
         ></SettingRow>
 
         <SettingRow
           styles={styles}
-          title={'Record your workout'}
-          iconName={'clipboard-file'}
+          title={"Record your workout"}
+          iconName={"clipboard-file"}
           onChange={updateRecordState}
           value={recordState}
         ></SettingRow>
 
-        <Button
+        <CustomButton
           styles={styles}
-          title={practiceState ? 'Done' : 'Start'}
+          label={practiceState ? "Done" : "Start"}
           isValid={true}
           onPress={updatePracticeState}
-        ></Button>
+        ></CustomButton>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default Practice
+export default Practice;
