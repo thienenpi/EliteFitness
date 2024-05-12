@@ -43,6 +43,12 @@ const Login = () => {
     login({ data: data });
   };
 
+  const checkEmailValidation = () => {
+    // check if email is in the correct format
+    const emailPattern = /\S+@\S+\.\S+/;
+    return emailPattern.test(email);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={hideKeyboard}>
       <LinearGradient
@@ -70,7 +76,15 @@ const Login = () => {
               }}
               onSubmitEditing={handleSubmit}
             ></InputField>
+
+            {email.length > 0 && !checkEmailValidation() && (
+              <Text style={styles1.errorText}>
+                Please enter a valid email address
+              </Text>
+            )}
+
             <View style={{ height: 20 }}></View>
+
             <View>
               <InputField
                 icon={
@@ -104,7 +118,7 @@ const Login = () => {
             <View style={{ height: 42 }}></View>
             <CustomButton
               styles={styles1}
-              isValid={true}
+              isValid={email.length > 0 && password.length > 0 && checkEmailValidation()}
               label={"LOGIN"}
               onPress={() => {
                 handleSubmit();

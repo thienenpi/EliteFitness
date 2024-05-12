@@ -46,6 +46,12 @@ const Register = () => {
     register({ data: data });
   };
 
+  const checkEmailValidation = () => {
+    // check if email is in the correct format
+    const emailPattern = /\S+@\S+\.\S+/;
+    return emailPattern.test(email);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={hideKeyboard}>
       <LinearGradient
@@ -68,6 +74,12 @@ const Register = () => {
             }}
             onSubmitEditing={handleSubmit}
           ></InputField>
+
+          {email.length > 0 && !checkEmailValidation() && (
+            <Text style={styles1.errorText}>
+              Please enter a valid email address
+            </Text>
+          )}
 
           <View style={{ height: 20 }}></View>
 
@@ -137,7 +149,7 @@ const Register = () => {
 
           <CustomButton
             styles={styles1}
-            isValid={true}
+            isValid={checkEmailValidation() && password === confirmPassword}
             label={"SIGN UP"}
             color={{ color: COLORS.black }}
             onPress={() => {

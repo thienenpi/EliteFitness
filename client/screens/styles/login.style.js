@@ -75,6 +75,14 @@ const styles1 = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
+  errorText: {
+    marginTop: SIZES.small,
+    fontFamily: "sfProHeavy",
+    fontSize: SIZES.medium,
+    color: "red",
+    alignSelf: "flex-start",
+  },
 });
 
 const styles2 = StyleSheet.create({

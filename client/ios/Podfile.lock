@@ -978,7 +978,7 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - Expo (50.0.17):
+  - Expo (50.0.18):
     - ExpoModulesCore
   - expo-dev-client (3.3.11):
     - EXManifests
@@ -1078,7 +1078,7 @@ PODS:
     - ExpoModulesCore
   - ExpoSystemUI (2.9.4):
     - ExpoModulesCore
-  - EXSplashScreen (0.26.4):
+  - EXSplashScreen (0.26.5):
     - ExpoModulesCore
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -2647,7 +2647,7 @@ SPEC CHECKSUMS:
   EXJSONUtils: 5c42959e87be238b045ef37cc5268b16a6c0ad4a
   EXManifests: 5e8c29f36c716af768a4ea47ec05e1b89ab93091
   EXMediaLibrary: 70cf1fb7028fda2d682090c9fe57568674e4abab
-  Expo: 2cdb5916749a1509cf88114f1f510bd458630eb4
+  Expo: 09bd48f31bb7f1a3c97fd5a6cb28feae89cb4e40
   expo-dev-client: 29a32387346fe7b6d2a57918fae985bc48bfe9a2
   expo-dev-launcher: 957d62f7ec983d02091c97fca9ac73c115b54f77
   expo-dev-menu: 68ea53d923996e27b20ce02b51cc820fc2327a83
@@ -2661,7 +2661,7 @@ SPEC CHECKSUMS:
   ExpoScreenOrientation: 47c10dbd934cf76ba67c73652030432ea64b1151
   ExpoSpeech: 5e108798facd5e77e0ff040bdae6907aebeed6c5
   ExpoSystemUI: 735278045c1a28de0018a300bb5abb3f9090652b
-  EXSplashScreen: 6bd596128cd52fac91997ebc64f3d394c843a8f9
+  EXSplashScreen: 0fabdcf746d29e7f8b8969879cb09125cdd365d2
   EXUpdatesInterface: 3e444e2093e25b7ca0999a7d8c16e8392dee70c3
   FBLazyVector: f64d1e2ea739b4d8f7e4740cde18089cd97fe864
   FBReactNativeSpec: 9f2b8b243131565335437dba74923a8d3015e780

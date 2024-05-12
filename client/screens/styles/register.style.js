@@ -67,6 +67,14 @@ const styles1 = StyleSheet.create({
     fontFamily: "sfProHeavyItalic",
     color: COLORS.exerciseBg,
   },
+
+  errorText: {
+    marginTop: SIZES.small,
+    fontFamily: "sfProHeavy",
+    fontSize: SIZES.medium,
+    color: 'red',
+    alignSelf: "flex-start",
+  },
 });
 
 const styles2 = StyleSheet.create({
