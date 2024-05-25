@@ -37,7 +37,7 @@ const verifyUser = (req, res, next) => {
   }
 
   if (!token) {
-    return res.json("The token was not available");
+    return res.status(401).json("The token was not available");
   } else {
     token = token.replace(/"/g, "");
 
@@ -47,6 +47,7 @@ const verifyUser = (req, res, next) => {
       { algorithm: "HS256" },
       (err, decoded) => {
         if (err) {
+          // xác thực người dùng bằng firebase
           verifyUserFirebase(token)
             .then((decodedToken) => {
               // Token is valid, you can proceed with your logic
@@ -69,8 +70,18 @@ const verifyUser = (req, res, next) => {
   next();
 };
 
+// check email validation
+const validateEmail = (email) => {
+  const emailRegex = /\S+@\S+\.\S+/;
+  return emailRegex.test(email);
+};
+
 const login = async (req, res) => {
   try {
+    if (!validateEmail(req.body.email)) {
+      return res.status(401).json("Invalid email");
+    }
+
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
@@ -87,10 +98,19 @@ const login = async (req, res) => {
       return res.status(401).json("Wrong password");
     }
 
-    const userToken = jwt.sign({ id: user.id }, process.env.JWT_SEC, {
-      expiresIn: "7d",
-      algorithm: "HS256",
-    });
+    const userToken = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        role_id: user.role_id,
+        status: user.status,
+      },
+      process.env.JWT_SEC,
+      {
+        expiresIn: "7d",
+        algorithm: "HS256",
+      }
+    );
 
     const { __v, createdAt, updatedAt, ...userData } = user._doc;
 
@@ -102,6 +122,10 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   try {
+    if (!validateEmail(req.body.email)) {
+      return res.status(401).json("Invalid email");
+    }
+
     const newUser = new User(req.body);
     const password = newUser.password;
     const encryptedPassword = CryptoJS.AES.encrypt(
@@ -112,9 +136,18 @@ const register = async (req, res) => {
     newUser.password = encryptedPassword;
     await newUser.save();
 
-    const userToken = jwt.sign({ id: newUser.id }, process.env.JWT_SEC, {
-      expiresIn: "7d",
-    });
+    const userToken = jwt.sign(
+      {
+        id: newUser.id,
+        email: newUser.email,
+        role_id: newUser.role_id,
+        status: newUser.status,
+      },
+      process.env.JWT_SEC,
+      {
+        expiresIn: "7d",
+      }
+    );
 
     const { __v, createdAt, updatedAt, ...userData } = newUser._doc;
 
