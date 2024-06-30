@@ -1,5 +1,5 @@
 import { ActivityIndicator, FlatList, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './exerciseColumn.style'
 import { COLORS, SIZES } from '../../constants'
 import ExerciseCardView from './ExerciseCardView'

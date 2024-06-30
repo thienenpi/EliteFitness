@@ -10,7 +10,7 @@ const Welcome = () => {
     <View style={styles.container}>
       <TouchableOpacity>
         <Image
-          source={require('../../assets/icons/profile/3x.png')}
+          source={require('../../../assets/icons/profile/3x.png')}
           style={styles.profileImage}
         ></Image>
       </TouchableOpacity>
@@ -20,7 +20,7 @@ const Welcome = () => {
       </View>
       <TouchableOpacity style={{ width: 52 }}>
         <Image
-          source={require('../../assets/icons/setting/3x.png')}
+          source={require('../../../assets/icons/setting/3x.png')}
           style={styles.settingIcon}
         ></Image>
       </TouchableOpacity>

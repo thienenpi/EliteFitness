@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 // Import external style.js file
 import styles from './styles/home.style';
@@ -58,12 +58,12 @@ const Home = () => {
       <Welcome></Welcome>
       <View style={styles.guideContainer}>
         <Image
-          source={require('../assets/icons/greater/3x.png')}
+          source={require('../../assets/icons/greater/3x.png')}
           style={styles.sideIcon}
         ></Image>
         <Text style={styles.guideTxt}>SELECT YOUR TRAINING</Text>
         <Image
-          source={require('../assets/icons/lower/3x.png')}
+          source={require('../../assets/icons/lower/3x.png')}
           style={styles.sideIcon}
         ></Image>
       </View>
@@ -85,7 +85,7 @@ const Home = () => {
         <View style={styles.exerciseHeader}>
           <Text style={styles.title}>Exercise</Text>
           <TouchableOpacity
-            onPress={() => navigation.navigate('CreateExercise')}
+            onPress={() => navigation.navigate('Generate Exercises')}
           >
             <MaterialCommunityIcons
               size={24}

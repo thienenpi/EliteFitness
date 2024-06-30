@@ -12,7 +12,7 @@ const User = () => {
     <View style={styles.guideContainer}>
       <View style={styles.userContainer}>
         <Image
-          source={require("../../assets/icons/profile/3x.png")}
+          source={require("../../../assets/icons/profile/3x.png")}
           style={styles.sideIcon}
         ></Image>
         <Text style={styles.guideTxt}> {userInfo.name} </Text>

@@ -158,12 +158,12 @@ const Login = () => {
               }}
             ></View>
 
-            <GoogleSigninButton
+            {/* <GoogleSigninButton
               size={GoogleSigninButton.Size.Standard}
               color={GoogleSigninButton.Color.Light}
               onPress={loginWithGoogle}
               style={googleButton.btnContainer}
-            ></GoogleSigninButton>
+            ></GoogleSigninButton> */}
           </View>
         ) : (
           <ActivityIndicator

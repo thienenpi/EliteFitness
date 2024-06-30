@@ -8,5 +8,6 @@ router.post('/upload/', upload.single('picture'), exerciseController.uploadIncor
 router.get('/', exerciseController.getAllExercises)
 router.get('/:id', exerciseController.getExercise)
 router.get('/search/:key', verifyUser, exerciseController.searchExercise)
+router.post('/generate', exerciseController.generateExercises)
 
 module.exports = router

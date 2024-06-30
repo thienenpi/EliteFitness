@@ -4,23 +4,22 @@ import SlideItem from "./SliderItem";
 import Pagination from "./Pagination";
 import { COLORS } from "../../constants";
 
-const Images = [
-  //TODO: Gắn images sản phẩm vô đây (array images)
+const Slides = [
   {
     id: 1,
-    img: require("../../assets/images/banners/banner1.jpg"),
+    img: require("../../../assets/images/banners/banner1.jpg"),
   },
   {
     id: 2,
-    img: require("../../assets/images/banners/banner2.jpg"),
+    img: require("../../../assets/images/banners/banner2.jpg"),
   },
   {
     id: 3,
-    img: require("../../assets/images/banners/banner3.jpg"),
+    img: require("../../../assets/images/banners/banner3.jpg"),
   },
 ];
 
-const ProductSlider = () => {
+const Slider = () => {
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
 
@@ -59,7 +58,7 @@ const ProductSlider = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={Images}
+        data={Slides}
         renderItem={({ item }) => <SlideItem item={item} />}
         horizontal
         pagingEnabled
@@ -69,16 +68,16 @@ const ProductSlider = () => {
         onViewableItemsChanged={handleOnViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}
       />
-      <Pagination data={Images} scrollX={scrollX} index={index} />
+      <Pagination data={Slides} scrollX={scrollX} index={index} />
     </View>
   );
 };
 
-export default ProductSlider;
+export default Slider;
 
 const styles = StyleSheet.create({
   container: {
-    // marginHorizontal: 40,
+    marginHorizontal: 40,
     height: 240,
     justifyContent: "center",
     alignItems: "center",

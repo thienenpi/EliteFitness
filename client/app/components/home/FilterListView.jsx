@@ -19,7 +19,7 @@ const FilterListView = ({ item }) => {
         ))}
       </Picker> */}
       <Image
-        source={require('../../assets/icons/dropdown/3x.png')}
+        source={require('../../../assets/icons/dropdown/3x.png')}
         style={styles.dropdownIcon}
       ></Image>
     </View>

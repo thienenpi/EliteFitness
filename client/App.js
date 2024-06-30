@@ -2,8 +2,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import { AuthProvider } from './context/AuthContext';
-import AppNavigation from './navigation/AppNavigation';
+import { AuthProvider } from './app/context/AuthContext';
+import AppNavigation from './app/navigation/AppNavigation';
 // Create Stack Navigator
 const Stack = createNativeStackNavigator();
 

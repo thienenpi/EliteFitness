@@ -76,7 +76,7 @@ const Practice = ({ navigation }) => {
             <Text style={styles.trackValue}> {counter.score} </Text>
           </View>
 
-          <Image source={require('../assets/icons/divider/1x.png')}></Image>
+          <Image source={require('../../assets/icons/divider/1x.png')}></Image>
           <View style={styles.crtContainer}>
             <Text style={styles.crtTitle}>Correction</Text>
             <Text style={styles.crtValue(COLORS.accept)}>{counter.correction}</Text>

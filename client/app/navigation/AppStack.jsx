@@ -9,6 +9,7 @@ import {
   Shop,
   Cart,
   Payment,
+  GenerateExercises,
 } from "../screens";
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +61,12 @@ const AppStack = () => {
       <Stack.Screen
         name="Payment"
         component={Payment}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
+
+      <Stack.Screen
+        name="Generate Exercises"
+        component={GenerateExercises}
         options={{ headerShown: false }}
       ></Stack.Screen>
     </Stack.Navigator>

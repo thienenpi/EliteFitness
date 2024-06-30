@@ -14,6 +14,7 @@ import ResetPassword from "./ResetPassword";
 import ProductDetails from "./ProductDetails";
 import Cart from "./Cart";
 import Payment from "./Payment";
+import GenerateExercises from "./GenerateExercises";
 
 // Export to use in other parent directories
 
@@ -34,4 +35,5 @@ export {
   ProductDetails,
   Cart,
   Payment,
+  GenerateExercises,
 };

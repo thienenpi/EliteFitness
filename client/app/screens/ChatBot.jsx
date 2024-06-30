@@ -150,7 +150,7 @@ const ChatBot = () => {
 
   const renderAvatar = () => {
     return (
-      <Image style={styles.botAvatar} source={require('../assets/icons/app-icon/3x.png')}></Image>
+      <Image style={styles.botAvatar} source={require('../../assets/icons/app-icon/3x.png')}></Image>
     )
   }
 

@@ -12,6 +12,7 @@ const COLORS = {
   accept: "#0E7D77",
   productBg: "rgba(248,192,109,0.1)",
   neutral700: "#ADA9A4",
+  linearGradient: ["#F8C06D", "#FBDEB3"],
 
   //color pallette
   // mac dinh 500
