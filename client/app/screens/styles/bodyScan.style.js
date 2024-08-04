@@ -1,22 +1,26 @@
-import { Platform, StyleSheet } from "react-native"
-import { COLORS, SIZES } from "../../constants"
-
-const IS_IOS = Platform.OS === "ios"
-
-const CAM_PREVIEW_WIDTH = SIZES.width
-const CAM_PREVIEW_HEIGHT = CAM_PREVIEW_WIDTH / (IS_IOS ? 9 / 16 : 3 / 4)
+import { StyleSheet } from "react-native";
+import { COLORS, SIZES } from "../../constants";
 
 const styles = StyleSheet.create({
-  containerPortrait: {
-    position: "relative",
-    width: CAM_PREVIEW_WIDTH,
-    height: CAM_PREVIEW_HEIGHT,
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
-  containerLandscape: {
-    position: "relative",
-    width: CAM_PREVIEW_HEIGHT,
-    height: CAM_PREVIEW_WIDTH,
+  workoutContainer: {
+    flex: 8,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  menuContainer: {
+    flex: 2,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
   },
 
   loader: {
@@ -33,25 +37,22 @@ const styles = StyleSheet.create({
     zIndex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: COLORS.exerciseBg,
   },
 
-  btn: (backgroundColor) => ({
-    height: 36,
-    marginTop: SIZES.large,
-    marginHorizontal: SIZES.width * 0.35,
+  btnContainer: (backgroundColor) => ({
+    padding: SIZES.small,
     backgroundColor: backgroundColor,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: SIZES.large,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: SIZES.medium,
   }),
 
-  btnText: {
-    fontFamily: 'sfProBlackItalic',
-    color: COLORS.white,
-    fontSize: SIZES.small,
-    marginHorizontal: SIZES.large
+  btnLabel: {
+    fontFamily: "sfProBlackItalic",
+    color: "black",
+    fontSize: SIZES.medium,
+    marginHorizontal: SIZES.large,
   },
-})
+});
 
-export default styles
+export default styles;

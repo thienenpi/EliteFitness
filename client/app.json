@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "EliteFitness",
+    "name": "Elite Fitness",
     "slug": "EliteFitness",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -41,7 +41,7 @@
           }
         ]
       },
-      "bundleIdentifier": "com.anonymous.EliteFitness",
+      "bundleIdentifier": "com.thiennp03.EliteFitness",
       "splash": {
         "image": "./assets/images/splash/splash.png",
         "resizeMode": "cover",
@@ -63,7 +63,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.anonymous.EliteFitness"
+      "package": "com.thiennp03.EliteFitness"
     },
     "web": {
       "favicon": "./assets/favicon.png"

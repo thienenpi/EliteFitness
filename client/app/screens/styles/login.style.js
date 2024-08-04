@@ -7,6 +7,7 @@ const styles1 = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   linearGradient: {
     flex: 1,
     alignItems: "center",
@@ -14,6 +15,7 @@ const styles1 = StyleSheet.create({
     paddingVertical: 120,
     width: "100%",
   },
+
   iconContainer: {
     position: "absolute",
     right: 16,
@@ -55,6 +57,7 @@ const styles1 = StyleSheet.create({
   ipfTextInput: {
     flex: 1,
     paddingHorizontal: 10,
+    color: "white",
     fontSize: SIZES.medium,
     fontFamily: "poppinsRegular",
   },

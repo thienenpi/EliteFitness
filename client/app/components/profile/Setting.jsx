@@ -1,10 +1,10 @@
-import { Image, Text, View } from "react-native"
-import React from "react"
-import styles from "./setting.style"
-import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons"
-import { COLORS } from "../../constants"
-import { TouchableOpacity } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { Image, Text, View } from "react-native";
+import React from "react";
+import styles from "./setting.style";
+import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
+import { COLORS } from "../../constants";
+import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const gymEquipmentOptions = [
   {
@@ -13,7 +13,7 @@ const gymEquipmentOptions = [
     desc: "Perform exercises based on the available equipment at your gym, work, or home.",
   },
   // Add more gym equipment options if needed
-]
+];
 
 const workoutSettingOptions = [
   {
@@ -36,7 +36,7 @@ const workoutSettingOptions = [
     selected: "1 Hour",
     desc: "Perform exercises based on the available equipment at your gym, work, or home.",
   },
-]
+];
 
 const SettingOption = ({ header, selected, desc }) => {
   return (
@@ -52,11 +52,11 @@ const SettingOption = ({ header, selected, desc }) => {
         <Text style={styles.optionDesc}>{desc}</Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const Forward = () => {
-    const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <View style={styles.optionItem}>
@@ -64,13 +64,17 @@ const Forward = () => {
         <Text style={styles.optionDesc}>
           Generate inbody test with camera by clicking the shape beside.
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('BodyScan')}>
-          <Ionicons name="body-outline" size={35} color={COLORS.paragraphBg}></Ionicons>
+        <TouchableOpacity onPress={() => navigation.navigate("BodyScan")}>
+          <Ionicons
+            name="body-outline"
+            size={35}
+            color={COLORS.paragraphBg}
+          ></Ionicons>
         </TouchableOpacity>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const SettingSection = ({ title, options }) => {
   return (
@@ -91,8 +95,8 @@ const SettingSection = ({ title, options }) => {
         )}
       </View>
     </View>
-  )
-}
+  );
+};
 
 const Setting = () => {
   return (
@@ -101,7 +105,7 @@ const Setting = () => {
       <SettingSection title="Workout Setting" options={workoutSettingOptions} />
       <SettingSection title="Inbody Test with Camera" options={null} />
     </View>
-  )
-}
+  );
+};
 
-export default Setting
+export default Setting;
