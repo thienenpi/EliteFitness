@@ -50,3 +50,4 @@ firebaseServiceAccountKey.json
 # prettier
 .prettierrc
 .yarnrc.yml
+.yarn

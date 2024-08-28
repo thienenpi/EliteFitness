@@ -281,7 +281,27 @@ const PoseDetectionApp = (props) => {
     }
 
     if (angleName === "right leg") {
-      return deviation < 0 ? "Bend your right leg" : "Stretch your left leg out";
+      return deviation < 0
+        ? "Bend your right leg"
+        : "Stretch your left leg out";
+    }
+
+    if (angleName === "left armpit") {
+      return deviation < 0 ? "Raise your left arm" : "Lower your left arm";
+    }
+
+    if (angleName === "right armpit") {
+      return deviation < 0 ? "Raise your right arm" : "Lower your right arm";
+    }
+
+    if (angleName === "left arm") {
+      return deviation < 0 ? "Bend your left arm" : "Stretch your left arm out";
+    }
+
+    if (angleName === "right arm") {
+      return deviation < 0
+        ? "Bend your right arm"
+        : "Stretch your right arm out";
     }
 
     return "";
@@ -404,7 +424,6 @@ const PoseDetectionApp = (props) => {
       //   }
 
       if (renderRef.current) {
-        // console.log(renderRef.current);
         posesRef.current = await model.estimatePoses(
           imageTensor,
           undefined,
