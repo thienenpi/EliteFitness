@@ -7,20 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:636989636710:android:5609eab4379d3478296da7",
+        "mobilesdk_app_id": "1:636989636710:android:740dcec585ed4999296da7",
         "android_client_info": {
-          "package_name": "com.anonymous.EliteFitness"
+          "package_name": "com.thiennp03.EliteFitness"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "636989636710-0oum0d2d47v6ugu8vu5t3en2677t5afv.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.anonymous.EliteFitness",
-            "certificate_hash": "07a60cd702171c70aaa4194b602852f14810e7b0"
-          }
-        },
         {
           "client_id": "636989636710-kk5dg4qqol95b48krus62j696o2gaie2.apps.googleusercontent.com",
           "client_type": 3
