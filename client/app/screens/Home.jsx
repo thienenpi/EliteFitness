@@ -11,7 +11,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 // Import external style.js file
 import styles from './styles/home.style';
 
-import { COLORS, HOST } from '../constants';
+import { COLORS, HOST_NODEJS } from '../constants';
 import MuscleRow from '../components/muscles/MuscleRow';
 import ExerciseColumn from '../components/exercises/ExerciseColumn';
 import axios from 'axios';
@@ -30,7 +30,7 @@ const Home = () => {
       try {
         const TOKEN = await AsyncStorage.getItem('userToken');
         const response = await axios.get(
-          `${HOST}exercises/search/${searchKey || ''}`,
+          `${HOST_NODEJS}exercises/search/${searchKey || ''}`,
           {
             headers: {
               Authorization: `Bearer ${TOKEN}`,

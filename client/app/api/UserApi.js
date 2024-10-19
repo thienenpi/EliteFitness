@@ -1,4 +1,4 @@
-import ApiManager from "./ApiManager";
+import { ApiManagerNodeJS, ApiManagerFlask } from "./ApiManager";
 
 const userLogin = async ({ data }) => {
   try {
@@ -11,7 +11,7 @@ const userLogin = async ({ data }) => {
       data: data,
     };
 
-    const res = await ApiManager(url, config);
+    const res = await ApiManagerNodeJS(url, config);
     return res;
   } catch (error) {
     if (error.response) {
@@ -26,7 +26,7 @@ const userRegister = async ({ data }) => {
   try {
     data.role_id = "a";
     data.status = "a";
-    data.name = "thien";
+    data.name = "New user";
     const url = "/users/register/";
     const config = {
       method: "POST",
@@ -36,7 +36,7 @@ const userRegister = async ({ data }) => {
       data: data,
     };
 
-    const res = await ApiManager(url, config);
+    const res = await ApiManagerNodeJS(url, config);
     return res;
   } catch (error) {
     if (error.response) {
@@ -58,7 +58,7 @@ const updatePassword = async ({ data }) => {
       data: data,
     };
 
-    const res = await ApiManager(url, config);
+    const res = await ApiManagerNodeJS(url, config);
     return res;
   } catch (error) {
     if (error.response) {
@@ -71,7 +71,7 @@ const updatePassword = async ({ data }) => {
 
 const calculateBMI = async ({ userId, uri }) => {
   try {
-    const url = `/model?id=2`;
+    const url = `/bmi?id=2`;
     let formData = new FormData();
 
     const fileType = uri.split(".").pop();
@@ -91,7 +91,7 @@ const calculateBMI = async ({ userId, uri }) => {
       data: formData,
     };
 
-    const res = await ApiManager(url, config);
+    const res = await ApiManagerFlask(url, config);
     return res;
   } catch (error) {
     if (error.response) {

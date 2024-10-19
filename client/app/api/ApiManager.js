@@ -1,10 +1,16 @@
-import axios from 'axios';
-import { HOST } from '../constants';
+import axios from "axios";
+import { HOST_NODEJS, HOST_FLASK } from "../constants";
 
-const ApiManager = axios.create({
-  baseURL: HOST,
-  responseType: 'json',
+const ApiManagerNodeJS = axios.create({
+  baseURL: HOST_NODEJS,
+  responseType: "json",
   withCredentials: true,
 });
 
-export default ApiManager;
+const ApiManagerFlask = axios.create({
+  baseURL: HOST_FLASK,
+  responseType: "json",
+  withCredentials: true,
+});
+
+export { ApiManagerNodeJS, ApiManagerFlask };

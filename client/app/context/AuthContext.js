@@ -73,6 +73,8 @@ export const AuthProvider = ({ children }) => {
         },
       ]);
 
+    //   console.log(res);
+
       //   const confirmation = await auth().signInWithEmailAndPassword(
       //     data.email,
       //     data.password

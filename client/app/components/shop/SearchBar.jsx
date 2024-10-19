@@ -1,7 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { COLORS, HOST } from "../../constants";
+import { COLORS, HOST_NODEJS } from "../../constants";
 import styles from "./searchBar.style";
 import axios from "axios";
 
@@ -11,7 +11,7 @@ const SearchBar = ({ onUpdateProductList }) => {
 
   const fetch = async () => {
     try {
-      const endPoint = `${HOST}products/search/${
+      const endPoint = `${HOST_NODEJS}products/search/${
         searchKey || ""
       }`;
       const response = await axios.get(endPoint);

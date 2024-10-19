@@ -1,5 +1,3 @@
-// File path: BodyScan.js
-
 import { Button, Image, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles/bodyScan.style";
@@ -35,6 +33,7 @@ const renderCamera = ({ cameraRef }) => {
   );
 };
 
+// TODO: Design the BodyScan screen. @buubuu203
 const BodyScan = () => {
   const [countDown, setCountDown] = useState(null);
   const [bmi, setBmi] = useState(null);
@@ -86,9 +85,8 @@ const BodyScan = () => {
   useEffect(() => {
     const getBMI = async () => {
       const res = await calculateBMI({ userId: 1, uri: selectedImage });
-      //   console.log(selectedImage)
       const bmi = Math.round(res.data.bmi);
-    //   console.log(bmi);
+      //   console.log(bmi);
       setBmi(bmi);
     };
 

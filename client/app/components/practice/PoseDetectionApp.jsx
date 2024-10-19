@@ -16,13 +16,14 @@ import {
 import Svg, { Circle } from "react-native-svg";
 
 import styles from "./poseDetectionApp.style";
-import { COLORS, SIZES, HOST } from "../../constants";
+import { COLORS, SIZES, HOST_NODEJS } from "../../constants";
 import * as util from "../../lib/utilities";
 import { JointAngle } from "../../lib/jointAngles";
 import { BodyPart } from "../../lib/bodyPart";
 import axios from "axios";
 import useSpeech from "../../hook/useSpeech";
 import uploadPicture from "../../hook/uploadPicture";
+import { calculateBMI, predictHeight } from "../../api";
 
 const TensorCamera = cameraWithTensors(Camera);
 
@@ -41,11 +42,18 @@ const AUTO_RENDER = false;
 
 const LOAD_MODEL_FROM_BUNDLE = true;
 
+const testVideo =
+  "https://elitefitness.blob.core.windows.net/videos/barbellCurl.mp4";
+const userImage = [
+  "https://elitefitness.blob.core.windows.net/images/barbellCurl.png",
+  "https://elitefitness.blob.core.windows.net/images/testImage.png",
+];
+
 const orientation = ScreenOrientation.getOrientationAsync();
 
 let data;
 
-const renderVideo = (practiceState, uri) => {
+const renderSampleVideo = (practiceState, uri) => {
   return (
     <Video
       style={styles.sampleVideo}
@@ -137,14 +145,16 @@ const getTextureRotationAngleInDegrees = (cameraType) => {
 const PoseDetectionApp = (props) => {
   const rafId = useRef(null);
   const cameraRef = useRef(null);
+  const videoRef = useRef(null);
   const [tfReady, setTfReady] = useState(false);
   const [model, setModel] = useState();
   //   const [poses, setPoses] = useState(null)
-  //   const [fps, setFps] = useState(0)
+  const [fps, setFps] = useState(0);
   //   const [orientation, setOrientation] = useState()
+  const [zoomFactor, setZoomFactor] = useState(0);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
-
-  //   const dataset = useRef([])
+  let scale_factor = 1.0;
+  //   const dataset = useRef([]);
 
   const {
     counter,
@@ -232,11 +242,11 @@ const PoseDetectionApp = (props) => {
       }
 
       try {
-        const response = await axios.get(`${HOST}exercises/${item._id}`);
+        const response = await axios.get(`${HOST_NODEJS}exercises/${item._id}`);
 
         if (response.status === 200) {
           data = response.data;
-          console.log(data)
+          //   console.log(data);
         } else {
           console.error(response.statusText);
         }
@@ -249,6 +259,37 @@ const PoseDetectionApp = (props) => {
   }, []);
 
   useEffect(() => {
+    const calculateScaleFactor = async () => {
+      const realTrainerHeight = 1.8;
+      let realUserHeight = await predictHeight({
+        userId: 1,
+        uri: userImage[1],
+      });
+
+      let objectTrainerHeight = await calculateBMI({
+        userId: 0,
+        uri: userImage[0],
+      });
+      let objectUserHeight = await calculateBMI({
+        userId: 1,
+        uri: userImage[1],
+      });
+
+      realUserHeight = realUserHeight.data.height;
+      objectTrainerHeight = objectTrainerHeight.data.object_height;
+      objectUserHeight = objectUserHeight.data.object_height;
+
+      const zoom_factor =
+        (realUserHeight * objectTrainerHeight) /
+        (objectUserHeight * realTrainerHeight);
+      console.log("Zoom factor: ", zoom_factor);
+      const scaled_zoom = Math.min(Math.max((zoom_factor - 1) / 150, 0), 1);
+      console.log("Scaled zoom: ", scaled_zoom);
+      setZoomFactor(scaled_zoom);
+    };
+
+    calculateScaleFactor();
+
     if (practiceState) {
       renderRef.current = true;
 
@@ -261,7 +302,7 @@ const PoseDetectionApp = (props) => {
         }
 
         renderRef.current = true;
-        timeCnt.current += 0.5;
+        timeCnt.current += 0.05;
         onUpdateCounter({ ...counterRef.current });
       }, 500);
 
@@ -411,11 +452,22 @@ const PoseDetectionApp = (props) => {
   //     }
   //   }
 
+  const handleVideoFrame = async (frame) => {
+    if (!model || !frame) return;
+
+    console.log("Frame: ", frame);
+    const frameTensor = tf.browser.fromPixels(frame);
+    const poses = await model.estimatePoses(frameTensor);
+    posesRef.current = poses;
+    extractData();
+    tf.dispose(frameTensor);
+  };
+
   const handleCameraStream = async (images, updatePreview, gl) => {
     const loop = async () => {
       const imageTensor = images.next().value;
 
-      //   const startTs = Date.now()
+      const startTs = Date.now();
       //   console.log('first')
       //   console.log(poses)
       //   if (renderRef.current === false && poses != null) {
@@ -429,8 +481,8 @@ const PoseDetectionApp = (props) => {
           undefined,
           Date.now()
         );
-        //   const latency = Date.now() - startTs
-        //   setFps(Math.floor(1000 / latency))
+        const latency = Date.now() - startTs;
+        setFps(Math.floor(1000 / latency));
         renderRef.current = false;
         extractData();
       }
@@ -465,13 +517,13 @@ const PoseDetectionApp = (props) => {
       );
       prevAngles.current = currAngles.current;
 
-      const dataset = {
-        Angles: data.Angles[timeCnt.current * 2],
-        Velocities: data.Velocities[timeCnt.current * 2],
-      };
-      const input = { Angles: currAngles.current, Velocities: velocities };
-      const threshold = { Angles: 5, Velocities: 0.1 };
-      checkDeviation(dataset, input, threshold);
+      //   const dataset = {
+      //     Angles: data.Angles[timeCnt.current * 2],
+      //     Velocities: data.Velocities[timeCnt.current * 2],
+      //   };
+      //   const input = { Angles: currAngles.current, Velocities: velocities };
+      //   const threshold = { Angles: 5, Velocities: 0.1 };
+      //   checkDeviation(dataset, input, threshold);
 
       if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
         counterRef.current.rep += 1;
@@ -486,27 +538,27 @@ const PoseDetectionApp = (props) => {
         counterRef.current.set += 1;
       }
 
-      // Create dataset
-      // const record = {
-      //   TimeCnt: timeCnt.current,
-      //   Angles: currAngles.current,
-      //   Velocities: velocities
-      // }
-      // dataset.current.push(record)
+      //   Create dataset
+      //   const record = {
+      //     TimeCnt: timeCnt.current,
+      //     Angles: currAngles.current,
+      //     Velocities: velocities,
+      //   };
+      //   dataset.current.push(record);
 
-      // console.log('dataset', dataset.current)
+      //   console.log("dataset", dataset.current);
     } catch (error) {
       console.error(error);
     }
   };
 
-  //   const renderFps = () => {
-  //     return (
-  //       <View style={styles.fpsContainer}>
-  //         <Text>FPS: {fps}</Text>
-  //       </View>
-  //     )
-  //   }
+  const renderFps = () => {
+    return (
+      <View style={styles.fpsContainer}>
+        <Text>FPS: {fps}</Text>
+      </View>
+    );
+  };
 
   const renderCameraTypeSwitcher = () => {
     return (
@@ -533,6 +585,28 @@ const PoseDetectionApp = (props) => {
     );
   };
 
+  const renderVideo = () => {
+    if (!cameraState) {
+      return (
+        <View style={styles.camera}>
+          <Text style={styles.notiTxt}>Camera is turn off</Text>
+        </View>
+      );
+    } else {
+      return (
+        <Video
+          ref={videoRef}
+          style={styles.camera}
+          resizeMode={ResizeMode.CONTAIN}
+          source={{ uri: testVideo }}
+          shouldPlay={practiceState}
+          isLooping={false}
+          onPlaybackStatusUpdate={handleVideoFrame}
+        />
+      );
+    }
+  };
+
   const renderCamera = () => {
     if (!cameraState) {
       return (
@@ -544,6 +618,7 @@ const PoseDetectionApp = (props) => {
       return (
         <TensorCamera
           ref={cameraRef}
+          zoom={zoomFactor}
           style={styles.camera}
           autorender={AUTO_RENDER}
           type={cameraType}
@@ -574,9 +649,10 @@ const PoseDetectionApp = (props) => {
       >
         {renderExerciseName(item.title)}
         {renderCamera()}
-        {renderVideo(practiceState, item.videoUrls[0])}
+        {/* {renderVideo()} */}
+        {renderSampleVideo(practiceState, item.videoUrls[0])}
         {renderPose(posesRef, cameraType)}
-        {/* {renderFps()} */}
+        {renderFps()}
         {renderCameraTypeSwitcher()}
       </View>
     );

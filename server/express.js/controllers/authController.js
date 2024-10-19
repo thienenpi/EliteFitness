@@ -116,6 +116,7 @@ const login = async (req, res) => {
 
     res.status(200).json({ ...userData, token: userToken });
   } catch (error) {
+    console.log("Failed to login: ", error);
     res.status(500).json(error);
   }
 };

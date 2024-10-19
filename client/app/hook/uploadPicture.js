@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { HOST } from '../constants'
+import { HOST_NODEJS } from '../constants'
 
 const uploadPicture = async (picture, title) => {
   try {
-    const endpoint = `${HOST}exercises/upload/`
+    const endpoint = `${HOST_NODEJS}exercises/upload/`
     const formData = new FormData()
     formData.append('picture', {
       uri: picture.uri,

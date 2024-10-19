@@ -51,3 +51,6 @@ firebaseServiceAccountKey.json
 .prettierrc
 .yarnrc.yml
 .yarn
+
+# python
+__pycache__
