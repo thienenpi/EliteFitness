@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 
 model_h = HUNet(128)
-pretrained_model_h = torch.load('/Users/thiennguyen/Documents/GitHub/HeightWeightFinder/models/model_ep_48.pth.tar', map_location=torch.device('cpu'))
+pretrained_model_h = torch.load('models/model_ep_48.pth.tar', map_location=torch.device('cpu'))
 model_h.load_state_dict(pretrained_model_h["state_dict"])
 model = model_h
 model.eval()

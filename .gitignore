@@ -8,6 +8,7 @@ node_modules/
 .vscode/
 dist/
 web-build/
+models/
 
 # asset
 **/videos

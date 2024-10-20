@@ -1,5 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Text, View, Platform, Switch, ActivityIndicator } from "react-native";
+import {
+  Text,
+  View,
+  Platform,
+  Switch,
+  ActivityIndicator,
+  Modal,
+} from "react-native";
 import { Camera } from "expo-camera";
 import { Video, ResizeMode } from "expo-av";
 import * as MediaLibrary from "expo-media-library";
@@ -42,25 +49,21 @@ const AUTO_RENDER = false;
 
 const LOAD_MODEL_FROM_BUNDLE = true;
 
-const testVideo =
-  "https://elitefitness.blob.core.windows.net/videos/barbellCurl.mp4";
-const userImage = [
-  "https://elitefitness.blob.core.windows.net/images/barbellCurl.png",
-  "https://elitefitness.blob.core.windows.net/images/testImage.png",
-];
+const trainerImage =
+  "https://elitefitness.blob.core.windows.net/images/barbellCurl.png";
 
 const orientation = ScreenOrientation.getOrientationAsync();
 
 let data;
 
-const renderSampleVideo = (practiceState, uri) => {
+const renderSampleVideo = (practiceState, isScale, uri) => {
   return (
     <Video
       style={styles.sampleVideo}
       resizeMode={ResizeMode.CONTAIN}
       source={{ uri: uri }}
       isLooping={true}
-      shouldPlay={practiceState}
+      shouldPlay={practiceState && isScale !== false}
     ></Video>
   );
 };
@@ -145,7 +148,6 @@ const getTextureRotationAngleInDegrees = (cameraType) => {
 const PoseDetectionApp = (props) => {
   const rafId = useRef(null);
   const cameraRef = useRef(null);
-  const videoRef = useRef(null);
   const [tfReady, setTfReady] = useState(false);
   const [model, setModel] = useState();
   //   const [poses, setPoses] = useState(null)
@@ -153,7 +155,7 @@ const PoseDetectionApp = (props) => {
   //   const [orientation, setOrientation] = useState()
   const [zoomFactor, setZoomFactor] = useState(0);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
-  let scale_factor = 1.0;
+  const [isScale, setIsScale] = useState(null);
   //   const dataset = useRef([]);
 
   const {
@@ -260,37 +262,49 @@ const PoseDetectionApp = (props) => {
 
   useEffect(() => {
     const calculateScaleFactor = async () => {
-      const realTrainerHeight = 1.8;
-      let realUserHeight = await predictHeight({
-        userId: 1,
-        uri: userImage[1],
+      const userImage = await cameraRef.current.camera.takePictureAsync({
+        quality: 0.5,
+        base64: true,
       });
 
-      let objectTrainerHeight = await calculateBMI({
-        userId: 0,
-        uri: userImage[0],
-      });
-      let objectUserHeight = await calculateBMI({
-        userId: 1,
-        uri: userImage[1],
-      });
+      try {
+        const [
+          realTrainerHeightRes,
+          realUserHeightRes,
+          objectTrainerHeightRes,
+          objectUserHeightRes,
+        ] = await Promise.all([
+          // userId = 0 for trainer, userId = 1 for user
+          predictHeight({ userId: 0, uri: trainerImage }),
+          predictHeight({ userId: 1, uri: userImage.uri }),
+          calculateBMI({ userId: 0, uri: trainerImage }),
+          calculateBMI({ userId: 1, uri: userImage.uri }),
+        ]);
 
-      realUserHeight = realUserHeight.data.height;
-      objectTrainerHeight = objectTrainerHeight.data.object_height;
-      objectUserHeight = objectUserHeight.data.object_height;
+        // Extract necessary data after all promises resolve
+        const realTrainerHeight = realTrainerHeightRes.data.height;
+        const realUserHeight = realUserHeightRes.data.height;
+        const objectTrainerHeight = objectTrainerHeightRes.data.object_height;
+        const objectUserHeight = objectUserHeightRes.data.object_height;
 
-      const zoom_factor =
-        (realUserHeight * objectTrainerHeight) /
-        (objectUserHeight * realTrainerHeight);
-      console.log("Zoom factor: ", zoom_factor);
-      const scaled_zoom = Math.min(Math.max((zoom_factor - 1) / 150, 0), 1);
-      console.log("Scaled zoom: ", scaled_zoom);
-      setZoomFactor(scaled_zoom);
+        const zoom_factor =
+          (realUserHeight * objectTrainerHeight) /
+          (objectUserHeight * realTrainerHeight);
+        console.log("Zoom factor: ", zoom_factor);
+
+        const scaled_zoom = Math.min(Math.max((zoom_factor - 1) / 150, 0), 1);
+        console.log("Scaled zoom: ", scaled_zoom);
+
+        setZoomFactor(scaled_zoom);
+        setIsScale(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
-    calculateScaleFactor();
-
     if (practiceState) {
+      setIsScale(false);
+      calculateScaleFactor();
       renderRef.current = true;
 
       const intervalId = setInterval(() => {
@@ -452,16 +466,16 @@ const PoseDetectionApp = (props) => {
   //     }
   //   }
 
-  const handleVideoFrame = async (frame) => {
-    if (!model || !frame) return;
+  //   const handleVideoFrame = async (frame) => {
+  //     if (!model || !frame) return;
 
-    console.log("Frame: ", frame);
-    const frameTensor = tf.browser.fromPixels(frame);
-    const poses = await model.estimatePoses(frameTensor);
-    posesRef.current = poses;
-    extractData();
-    tf.dispose(frameTensor);
-  };
+  //     console.log("Frame: ", frame);
+  //     const frameTensor = tf.browser.fromPixels(frame);
+  //     const poses = await model.estimatePoses(frameTensor);
+  //     posesRef.current = poses;
+  //     extractData();
+  //     tf.dispose(frameTensor);
+  //   };
 
   const handleCameraStream = async (images, updatePreview, gl) => {
     const loop = async () => {
@@ -523,7 +537,7 @@ const PoseDetectionApp = (props) => {
       //   };
       //   const input = { Angles: currAngles.current, Velocities: velocities };
       //   const threshold = { Angles: 5, Velocities: 0.1 };
-      //   checkDeviation(dataset, input, threshold);
+      // checkDeviation(dataset, input, threshold);
 
       if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
         counterRef.current.rep += 1;
@@ -585,27 +599,27 @@ const PoseDetectionApp = (props) => {
     );
   };
 
-  const renderVideo = () => {
-    if (!cameraState) {
-      return (
-        <View style={styles.camera}>
-          <Text style={styles.notiTxt}>Camera is turn off</Text>
-        </View>
-      );
-    } else {
-      return (
-        <Video
-          ref={videoRef}
-          style={styles.camera}
-          resizeMode={ResizeMode.CONTAIN}
-          source={{ uri: testVideo }}
-          shouldPlay={practiceState}
-          isLooping={false}
-          onPlaybackStatusUpdate={handleVideoFrame}
-        />
-      );
-    }
-  };
+  //   const renderVideo = () => {
+  //     if (!cameraState) {
+  //       return (
+  //         <View style={styles.camera}>
+  //           <Text style={styles.notiTxt}>Camera is turn off</Text>
+  //         </View>
+  //       );
+  //     } else {
+  //       return (
+  //         <Video
+  //           ref={videoRef}
+  //           style={styles.camera}
+  //           resizeMode={ResizeMode.CONTAIN}
+  //           source={{ uri: testVideo }}
+  //           shouldPlay={practiceState}
+  //           isLooping={false}
+  //           onPlaybackStatusUpdate={handleVideoFrame}
+  //         />
+  //       );
+  //     }
+  //   };
 
   const renderCamera = () => {
     if (!cameraState) {
@@ -650,10 +664,21 @@ const PoseDetectionApp = (props) => {
         {renderExerciseName(item.title)}
         {renderCamera()}
         {/* {renderVideo()} */}
-        {renderSampleVideo(practiceState, item.videoUrls[0])}
+        {renderSampleVideo(practiceState, isScale, item.videoUrls[0])}
         {renderPose(posesRef, cameraType)}
         {renderFps()}
         {renderCameraTypeSwitcher()}
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={isScale === false}
+        >
+          <ActivityIndicator
+            style={styles.loader}
+            size={SIZES.xxLarge}
+            color={COLORS.btn}
+          ></ActivityIndicator>
+        </Modal>
       </View>
     );
   }
