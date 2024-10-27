@@ -1,4 +1,4 @@
-package com.anonymous.EliteFitness
+package com.thiennp03.EliteFitness
 
 import android.app.Application
 import android.content.res.Configuration
