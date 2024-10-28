@@ -1,5 +1,5 @@
 import { COLORS, SIZES, TEXTS, images, SHADOWS } from "./theme";
-import { OPENAI_API_KEY, HOST } from "./api";
+import { AZURE_OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT, HOST_FLASK, HOST_NODEJS } from "./api";
 
 export { TEXTS, COLORS, SIZES, images, SHADOWS };
-export { OPENAI_API_KEY, HOST };
+export { AZURE_OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT, HOST_NODEJS, HOST_FLASK };

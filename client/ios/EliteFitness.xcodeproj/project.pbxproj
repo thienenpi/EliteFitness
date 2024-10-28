@@ -411,7 +411,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thiennp03.EliteFitness;
-				PRODUCT_NAME = EliteFitness;
+				PRODUCT_NAME = "EliteFitness";
 				SWIFT_OBJC_BRIDGING_HEADER = "EliteFitness/EliteFitness-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -443,7 +443,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thiennp03.EliteFitness;
-				PRODUCT_NAME = EliteFitness;
+				PRODUCT_NAME = "EliteFitness";
 				SWIFT_OBJC_BRIDGING_HEADER = "EliteFitness/EliteFitness-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

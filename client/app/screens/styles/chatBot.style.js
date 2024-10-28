@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.btn,
     borderWidth: 1,
     padding: 10,
-    marginBottom: SIZES.xxLarge,
+    marginBottom: SIZES.height * 0.01,
     justifyContent: 'space-between',
     alignItems: 'flex-end'
   },
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: user === 1 ? COLORS.exerciseBg : COLORS.btn,
     borderRadius: 10,
     padding: 10,
-    maxWidth: 250
+    maxWidth: SIZES.width * 0.7
   }),
 
   separator: {

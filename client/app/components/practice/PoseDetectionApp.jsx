@@ -249,6 +249,47 @@ const PoseDetectionApp = (props) => {
   }, []);
 
   useEffect(() => {
+    const calculateScaleFactor = async () => {
+      const userImage = await cameraRef.current.camera.takePictureAsync({
+        quality: 0.5,
+        base64: true,
+      });
+
+      try {
+        const [
+          realTrainerHeightRes,
+          realUserHeightRes,
+          objectTrainerHeightRes,
+          objectUserHeightRes,
+        ] = await Promise.all([
+          // userId = 0 for trainer, userId = 1 for user
+          predictHeight({ userId: 0, uri: trainerImage }),
+          predictHeight({ userId: 1, uri: userImage.uri }),
+          calculateBMI({ userId: 0, uri: trainerImage }),
+          calculateBMI({ userId: 1, uri: userImage.uri }),
+        ]);
+
+        // Extract necessary data after all promises resolve
+        const realTrainerHeight = realTrainerHeightRes.data.height;
+        const realUserHeight = realUserHeightRes.data.height;
+        const objectTrainerHeight = objectTrainerHeightRes.data.object_height;
+        const objectUserHeight = objectUserHeightRes.data.object_height;
+
+        const zoom_factor =
+          (realUserHeight * objectTrainerHeight) /
+          (objectUserHeight * realTrainerHeight);
+        console.log("Zoom factor: ", zoom_factor);
+
+        const scaled_zoom = Math.min(Math.max((zoom_factor - 1) / 200, 0), 1);
+        console.log("Scaled zoom: ", scaled_zoom);
+
+        setZoomFactor(scaled_zoom);
+        setIsScale(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
     if (practiceState) {
       renderRef.current = true;
 
