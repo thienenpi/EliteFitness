@@ -292,7 +292,7 @@ const PoseDetectionApp = (props) => {
           (objectUserHeight * realTrainerHeight);
         console.log("Zoom factor: ", zoom_factor);
 
-        const scaled_zoom = Math.min(Math.max((zoom_factor - 1) / 150, 0), 1);
+        const scaled_zoom = Math.min(Math.max((zoom_factor - 1) / 200, 0), 1);
         console.log("Scaled zoom: ", scaled_zoom);
 
         setZoomFactor(scaled_zoom);
