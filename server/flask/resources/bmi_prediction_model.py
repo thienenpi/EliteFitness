@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import request
 from tf_bodypix.api import download_model, load_model, BodyPixModelPaths
-from common.util import get_overall_ratio, get_image_data
+from common.util import get_overall_ratio, get_image_data, get_object_height
 import pickle, requests, tempfile, base64
 import tensorflow.keras.preprocessing.image as Image
 
@@ -26,7 +26,7 @@ def load_pretrained_model(file_path: str):
 
 bodypix_model = load_bodypix()
 
-class Model(Resource):
+class BMIPredictionModel(Resource):
     def __init__(self):
         self.models = [
             {
@@ -83,6 +83,7 @@ class Model(Resource):
         mask = result.get_mask(threshold=0.75)
         poses = result.get_poses()
         image_data = get_image_data(mask)
+        object_height = get_object_height(image_data)
 
         if len(poses) == 0:
             return {'message': 'No person detected'}, 400
@@ -101,6 +102,6 @@ class Model(Resource):
 
             # convert bmi to string
             bmi = ','.join(map(str, bmi))
-            return {"bmi": bmi}
+            return {"bmi": bmi, "object_height": object_height}
         else:
             return {'message': 'Model not found'}, 404

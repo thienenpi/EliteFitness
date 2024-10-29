@@ -39,7 +39,10 @@
               "com.googleusercontent.apps.636989636710-v0dbjqosmveq8fa47c1e6mv4es2p4p64"
             ]
           }
-        ]
+        ],
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
       },
       "bundleIdentifier": "com.thiennp03.EliteFitness",
       "splash": {

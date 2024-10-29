@@ -1,4 +1,4 @@
-import ApiManager from "./ApiManager";
+import ApiManagerNodeJS from "./ApiManager";
 
 const createOrder = async ({ data, token }) => {
   try {
@@ -12,7 +12,7 @@ const createOrder = async ({ data, token }) => {
       data: data,
     };
 
-    const res = await ApiManager(url, config);
+    const res = await ApiManagerNodeJS(url, config);
     return res;
   } catch (error) {
     if (error.response) {
@@ -35,7 +35,7 @@ const updateOrderById = async ({ id, data, token }) => {
       data: data,
     };
 
-    const res = await ApiManager(url, config);
+    const res = await ApiManagerNodeJS(url, config);
     return res;
   } catch (error) {
     if (error.response) {
@@ -58,7 +58,7 @@ const createOrderDetail = async ({ data, token }) => {
       data: data,
     };
 
-    const res = await ApiManager(url, config);
+    const res = await ApiManagerNodeJS(url, config);
     return res;
   } catch (error) {
     if (error.response) {

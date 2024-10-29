@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { HOST } from '../constants';
+import { HOST_NODEJS } from '../constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const useFetch = ({ collection }) => {
@@ -13,12 +13,11 @@ const useFetch = ({ collection }) => {
 
     try {
       const TOKEN = await AsyncStorage.getItem('userToken');
-      const response = await axios.get(`${HOST}${collection}`, {
+      const response = await axios.get(`${HOST_NODEJS}${collection}`, {
         headers: {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
-      //   const response = await axios.get(`${HOST}${collection}`)
       setData(response.data);
       setIsLoading(false);
     } catch (error) {

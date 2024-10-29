@@ -1,4 +1,4 @@
-import ApiManager from "./ApiManager";
+import ApiManagerNodeJS from "./ApiManager";
 
 const generateExercise = async ({ data }) => {
   console.log("generateExercise", data);
@@ -13,7 +13,7 @@ const generateExercise = async ({ data }) => {
       data: data,
     };
 
-    const res = await ApiManager(url, config);
+    const res = await ApiManagerNodeJS(url, config);
     return res;
   } catch (error) {
     if (error.response) {

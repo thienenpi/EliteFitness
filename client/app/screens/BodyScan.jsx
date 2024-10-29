@@ -1,4 +1,4 @@
-import { Button, Image, Text, View } from "react-native";
+import { Button, Image, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { CustomButton } from "../components";
 import { Camera } from "expo-camera";
@@ -67,6 +67,7 @@ const BMIModal = ({ bmi, onClose }) => (
   </Modal>
 );
 
+// TODO: Design the BodyScan screen. @buubuu203
 const BodyScan = () => {
   // State management
   const [countDown, setCountDown] = useState(null);
@@ -110,6 +111,7 @@ const BodyScan = () => {
     const getBMI = async () => {
       const res = await calculateBMI({ userId: 1, uri: selectedImage });
       const bmi = Math.round(res.data.bmi);
+      //   console.log(bmi);
       setBmi(bmi);
     };
 

@@ -13,6 +13,29 @@ skeleton_parts = {
   'knee': ['leftKnee', 'rightKnee']
 }
 
+def get_object_height(image_data):
+    first_white_pixel = None
+    last_white_pixel = None
+    height = image_data.shape[0]
+    
+    for i in range(height):
+        for x in range(image_data.shape[1]):
+            if first_white_pixel is None and not is_black_pixel(image_data, x, i):
+                first_white_pixel = i
+
+        for x in range(image_data.shape[1]):
+            if last_white_pixel is None and not is_black_pixel(image_data, x, height - 1 - i):
+                last_white_pixel = height - 1 - i
+
+        if first_white_pixel is not None and last_white_pixel is not None:
+            break
+
+    if first_white_pixel is None or last_white_pixel is None:
+        return 0
+
+    return abs(last_white_pixel - first_white_pixel)
+
+
 # def function get position of keypoint by name, round to integer
 def get_keypoint_position(keypoints, name):
   for idx in keypoints:

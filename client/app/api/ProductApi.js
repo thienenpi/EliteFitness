@@ -1,4 +1,4 @@
-import ApiManager from "./ApiManager";
+import ApiManagerNodeJS from "./ApiManager";
 
 const getProductById = async ({ id, token }) => {
   try {
@@ -11,7 +11,7 @@ const getProductById = async ({ id, token }) => {
       },
     };
 
-    const res = await ApiManager(url, config);
+    const res = await ApiManagerNodeJS(url, config);
     return res;
   } catch (error) {
     if (error.response) {

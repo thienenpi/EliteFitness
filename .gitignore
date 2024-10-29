@@ -2,12 +2,14 @@
 
 # dependencies
 node_modules/
+yarn.lock
 
 # Expo
 .expo/
 .vscode/
 dist/
 web-build/
+models/
 
 # asset
 **/videos
@@ -51,3 +53,6 @@ firebaseServiceAccountKey.json
 .prettierrc
 .yarnrc.yml
 .yarn
+
+# python
+__pycache__
