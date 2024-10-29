@@ -5,7 +5,7 @@ import { COLORS } from '../constants'
 const CustomButton = ({ icon, styles, label, onPress, isValid, loader }) => {
   return (
     <TouchableOpacity
-      style={styles.btnContainer(isValid ? COLORS.btn : COLORS.text)}
+      style={styles.btnContainer(isValid ? COLORS.btn : COLORS.neutral700)}
       onPress={isValid ? onPress : () => {}}
     >
     {icon}

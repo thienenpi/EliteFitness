@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
 
   btnContainer: (backgroundColor) => ({
     backgroundColor: backgroundColor,
-    borderRadius: 99,
-    width: SIZES.width - SIZES.xxLarge * 4,
+    borderRadius: 12,
+    width: SIZES.width - SIZES.xxLarge * 5,
     height: SIZES.xxLarge,
     alignItems: "center",
     justifyContent: "center",

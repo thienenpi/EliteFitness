@@ -12,7 +12,7 @@ const Profile = () => {
       <Setting></Setting>
 
       <CustomButton
-        label={'LOG OUT'}
+        label={'Log out'}
         styles={styles}
         isValid={true}
         onPress={logout}
