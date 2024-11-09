@@ -1,39 +1,45 @@
 import { StyleSheet } from "react-native";
-import { COLORS, SIZES } from "../../constants";
+import { COLORS, SIZES, TEXTS } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.primaryBg,
+    // backgroundColor: COLORS.primaryBg,
+    backgroundColor: COLORS.neutral100,
+
   },
+  
 
   body: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  
   },
 
   pickerText: {
-    fontSize: 16,
-    padding: 10,
-    backgroundColor: COLORS.exerciseBg,
-    borderRadius: 5,
+    paddingVertical:8,
+    paddingHorizontal:12,
+    borderBottomWidth:1,
+    borderColor: COLORS.neutral600,
     width: "100%",
+    fontSize: TEXTS.body.fontSize,
+    fontFamily: TEXTS.body.fontFamily,
   },
 
   modalView: {
     flex: 1,
-    marginTop: 50,
+    marginTop: '60%',
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    shadowColor: "#000",
+    shadowColor: COLORS.neutral900,
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
     elevation: 5,
   },
 
@@ -41,14 +47,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     alignItems: "center",
-    padding: 10,
-    borderRadius: 0,
+    justifyContent:'center',
+    gap: 20,
+    fontFamily: TEXTS.body.fontFamily,
+    fontSize: TEXTS.body.fontSize
   },
 
   btnContainer: (backgroundColor) => ({
+    marginTop:20,
     backgroundColor: backgroundColor,
-    padding: 10,
-    borderRadius: SIZES.large,
+    paddingHorizontal:16,
+    paddingVertical: 12,
+    borderRadius: SIZES.small,
     alignItems: "center",
     justifyContent: "center",
     width: "50%",
@@ -56,8 +66,13 @@ const styles = StyleSheet.create({
   }),
 
   btnLabel: {
-    color: COLORS.exerciseBg,
-    fontSize: SIZES.large,
+    // color: COLORS.exerciseBg,
+    // fontSize: SIZES.large,
+    color: COLORS.neutral900,
+    fontSize: TEXTS.buttonSmall.fontSize,
+    textTransform: "capitalize",
+    fontFamily:TEXTS.bodyHeavy.fontFamily
+
   },
 
   workout: {
