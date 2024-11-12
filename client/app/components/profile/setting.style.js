@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   optionSelected: {
     fontFamily: "sfProHeavyItalic",
     fontSize: 13,
-    color: COLORS.paragraphBg,
+    color: COLORS.warning200,
   },
   optionDesc: {
     maxWidth: SIZES.width * 0.7,

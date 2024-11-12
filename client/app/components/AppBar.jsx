@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Pressable, Platform, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { COLORS } from "../constants";
+import { COLORS, TEXTS } from "../constants";
 
 const AppBar = ({
   title,
@@ -52,23 +52,25 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingBottom: 15,
     paddingHorizontal: 16,
     width: "100%",
     backgroundColor: COLORS.primaryBg,
   },
 
   headerContent: {
+    paddingVertical:12,
+    paddingBottom:24,
     flexDirection: "row",
     alignItems: "center",
+    gap: 24,
   },
 
   headerText: {
-    fontSize: 20,
-    marginLeft: 16,
+    // fontSize: 20,
+    // marginLeft: 16,
+    fontFamily: TEXTS.bodyHeavy.fontFamily,
+    fontSize: TEXTS.price.fontSize,
+    textTransform: "uppercase",
   },
 
   iconRight: {

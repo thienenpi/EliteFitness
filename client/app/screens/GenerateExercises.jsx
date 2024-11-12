@@ -12,6 +12,7 @@ import { AppBar, CustomButton, ExerciseColumn } from "../components";
 import { useNavigation } from "@react-navigation/native";
 import { CheckBox } from "react-native-elements";
 import { generateExercise } from "../api";
+import { COLORS, TEXTS } from "../constants";
 
 const typeOptions = [
   { label: "Strength", value: "Strength" },
@@ -155,7 +156,7 @@ const GenerateExercises = () => {
             onRequestClose={() => setModalTypeVisible(false)}
           >
             <View style={styles.modalView}>
-              <Text>Select Type</Text>
+              <Text style ={{marginBottom:12, marginLeft:12, fontFamily: TEXTS.bodyHeavy.fontFamily, fontSize: TEXTS.bodyHeavy.fontSize, color: COLORS.primary}}>Select Type</Text>
               <ScrollView>
                 {typeOptions.map((option) => (
                   <CheckBox
@@ -172,7 +173,12 @@ const GenerateExercises = () => {
                   />
                 ))}
               </ScrollView>
-              <Button title="Done" onPress={() => setModalTypeVisible(false)} />
+              <CustomButton
+            isValid={true}
+            styles={styles}
+            label={"Done"}
+            onPress={() => setModalTypeVisible(false)}
+          />
             </View>
           </Modal>
 
@@ -195,7 +201,7 @@ const GenerateExercises = () => {
             onRequestClose={() => setModalMuscleVisible(false)}
           >
             <View style={styles.modalView}>
-              <Text>Select Target Muscles</Text>
+              <Text style ={{marginBottom:12, marginLeft:12, fontFamily: TEXTS.bodyHeavy.fontFamily, fontSize: TEXTS.bodyHeavy.fontSize, color: COLORS.primary}}>Select Target Muscles</Text>
 
               <ScrollView>
                 {muscleOptions.map((option) => (
@@ -213,10 +219,12 @@ const GenerateExercises = () => {
                   />
                 ))}
               </ScrollView>
-              <Button
-                title="Done"
-                onPress={() => setModalMuscleVisible(false)}
-              />
+              <CustomButton
+            isValid={true}
+            styles={styles}
+            label={"Done"}
+            onPress={() => setModalMuscleVisible(false)}
+          />
             </View>
           </Modal>
 
@@ -239,7 +247,7 @@ const GenerateExercises = () => {
             onRequestClose={() => setModalEquipmentVisible(false)}
           >
             <View style={styles.modalView}>
-              <Text>Select Equipments</Text>
+              <Text style ={{marginBottom:12, marginLeft:12, fontFamily: TEXTS.bodyHeavy.fontFamily, fontSize: TEXTS.bodyHeavy.fontSize, color: COLORS.primary}}>Select Equipments</Text>
 
               <ScrollView>
                 {equipmentOptions.map((option) => (
@@ -257,10 +265,13 @@ const GenerateExercises = () => {
                   />
                 ))}
               </ScrollView>
-              <Button
-                title="Done"
-                onPress={() => setModalEquipmentVisible(false)}
-              />
+              <CustomButton
+            isValid={true}
+            styles={styles}
+            label={"Done"}
+            onPress={() => setModalEquipmentVisible(false)}
+          />
+             
             </View>
           </Modal>
 
@@ -283,7 +294,7 @@ const GenerateExercises = () => {
             onRequestClose={() => setModalLevelVisible(false)}
           >
             <View style={styles.modalView}>
-              <Text>Select Level</Text>
+              <Text style ={{marginBottom:12, marginLeft:12, fontFamily: TEXTS.bodyHeavy.fontFamily, fontSize: TEXTS.bodyHeavy.fontSize, color: COLORS.primary}}>Select Level</Text>
 
               <ScrollView>
                 {levelOptions.map((option) => (
@@ -301,10 +312,13 @@ const GenerateExercises = () => {
                   />
                 ))}
               </ScrollView>
-              <Button
-                title="Done"
-                onPress={() => setModalLevelVisible(false)}
-              />
+              <CustomButton
+            isValid={true}
+            styles={styles}
+            label={"Done"}
+            onPress={() => setModalLevelVisible(false)}
+          />
+          
             </View>
           </Modal>
 

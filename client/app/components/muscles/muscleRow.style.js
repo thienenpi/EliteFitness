@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { SIZES, COLORS } from '../../constants'
+import { SIZES, COLORS, TEXTS } from '../../constants'
 
 const styles = StyleSheet.create({
   container: {
@@ -17,9 +17,11 @@ const styles = StyleSheet.create({
   }),
 
   btnLabel: {
-    fontFamily: 'sfProBlackItalic',
-    color: COLORS.white,
-    fontSize: 18
+   
+    fontFamily: "sfProBlackItalic",
+    color: COLORS.neutral900,
+    fontSize: SIZES.medium,
+    marginHorizontal: SIZES.large,
   }
 })
 

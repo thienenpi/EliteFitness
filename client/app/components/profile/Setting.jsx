@@ -67,8 +67,8 @@ const Forward = () => {
         <TouchableOpacity onPress={() => navigation.navigate("BodyScan")}>
           <Ionicons
             name="body-outline"
-            size={35}
-            color={COLORS.paragraphBg}
+            size={32}
+            color={COLORS.warning200}
           ></Ionicons>
         </TouchableOpacity>
       </View>

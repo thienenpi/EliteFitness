@@ -1,57 +1,91 @@
 import { Button, Image, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./styles/bodyScan.style";
 import { CustomButton } from "../components";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import { Modal } from "react-native";
 import { calculateBMI } from "../api";
+import { COLORS } from "../constants";
+import styles from "./styles/bodyScan.style";
 
-const renderScanButton = ({ startCountdown }) => {
-  return (
-    <CustomButton
-      title={"Scan"}
-      styles={styles}
-      isValid={true}
-      label={"Scan"}
-      onPress={startCountdown}
-    ></CustomButton>
-  );
-};
+// Subcomponents
+const ScanButton = ({ startCountdown, canScan }) => (
+  <CustomButton
+    title="Scan"
+    styles={styles}
+    isValid={canScan}
+    label="Scan"
+    onPress={startCountdown}
+  />
+);
 
-const renderCamera = ({ cameraRef }) => {
-  return (
-    <Camera
-      type={Camera.Constants.Type.front}
-      style={styles.camera}
-      ref={cameraRef}
-    >
-      <View style={styles.cameraOverlay}>
-        {/* <Text style={styles.cameraText}>Body Scan</Text> */}
+const CameraView = ({ cameraRef }) => (
+  <Camera
+    type={Camera.Constants.Type.front}
+    style={styles.camera}
+    ref={cameraRef}
+  >
+    <View style={styles.cameraOverlay} />
+  </Camera>
+);
+
+const CountdownModal = ({ countDown, onClose }) => (
+  <Modal
+    transparent={true}
+    animationType="slide"
+    visible={countDown !== null}
+    onRequestClose={onClose}
+  >
+    <View style={styles.modalBackground}>
+      <View style={styles.modalContainer}>
+        <Text style={styles.countdownText}>{countDown}</Text>
       </View>
-    </Camera>
-  );
-};
+    </View>
+  </Modal>
+);
+
+const BMIModal = ({ bmi, onClose }) => (
+  <Modal
+    transparent={true}
+    animationType="slide"
+    visible={bmi !== null}
+    onRequestClose={onClose}
+  >
+    <View style={styles.modalBackground}>
+      <View style={styles.modalContainer}>
+        <Text style={styles.bmiText}>Your BMI: {bmi}</Text>
+        <CustomButton
+          title="Close"
+          styles={styles}
+          backgroundColor={COLORS.primary400}
+          isValid={true}
+          label="Close"
+          onPress={onClose}
+        />
+      </View>
+    </View>
+  </Modal>
+);
 
 // TODO: Design the BodyScan screen. @buubuu203
 const BodyScan = () => {
+  // State management
   const [countDown, setCountDown] = useState(null);
   const [bmi, setBmi] = useState(null);
   const [hasPermission, setHasPermission] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [canScan, setCanScan] = useState(false);
   const cameraRef = useRef(null);
 
+  // Event handlers
   const startCountdown = () => {
-    setCountDown(5);
-  };
-
-  const checkPermissions = async () => {
-    const { status } = await Camera.requestCameraPermissionsAsync();
-    setHasPermission(status === "granted");
+    if (canScan) {
+      setCountDown(5);
+    }
   };
 
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: false,
       aspect: [3, 4],
@@ -60,27 +94,18 @@ const BodyScan = () => {
 
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
+      setCanScan(true);
     }
   };
 
-  const takePicture = async () => {
-    if (cameraRef.current) {
-      let photo = await cameraRef.current.takePictureAsync();
-      console.log(photo.uri);
-      //   const res = await calculateBMI({ userId: 1, uri: photo.uri });
-
-      //   console.log(res.data.bmi);
-      // You can handle the photo uri here (e.g., save it, send it to server, etc.)
-    }
-  };
-
-  //   if (hasPermission === null) {
-  //     return <View />;
-  //   }
-
-  //   if (hasPermission === false) {
-  //     return <Text>No access to camera</Text>;
-  //   }
+  // Effects
+  useEffect(() => {
+    const checkPermissions = async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      setHasPermission(status === "granted");
+    };
+    checkPermissions();
+  }, []);
 
   useEffect(() => {
     const getBMI = async () => {
@@ -94,95 +119,46 @@ const BodyScan = () => {
       const timer = setTimeout(() => setCountDown(countDown - 1), 1000);
       return () => clearTimeout(timer);
     } else if (countDown === 0) {
-      //   takePicture();
       getBMI();
       setCountDown(null);
     }
-  }, [countDown]);
-
-  useEffect(() => {
-    checkPermissions();
-  }, []);
+  }, [countDown, selectedImage]);
 
   return (
     <View style={styles.container}>
       <View style={styles.workoutContainer}>
-        {/* {renderCamera({ cameraRef: cameraRef })} */}
-        {/* <Text>{countDown !== null ? countDown : ""}</Text> */}
         {selectedImage && (
           <Image
             resizeMode="contain"
             source={{ uri: selectedImage }}
-            style={{
-              position: "absolute",
-              //   top: 0,
-              //   left: 0,
-              //   right: 0,
-              width: "100%",
-              height: "100%",
-            }}
+            style={styles.selectedImage}
           />
         )}
       </View>
+      
       <View style={styles.menuContainer}>
-        {renderScanButton({ startCountdown })}
-        <Button title="Pick an image from camera roll" onPress={pickImage} />
+        <ScanButton startCountdown={startCountdown} canScan={canScan} />
+        <CustomButton
+          title="Pick an image from camera roll"
+          styles={styles}
+          backgroundColor={COLORS.neutral400}
+          isValid={true}
+          label="Pick an image from camera roll"
+          onPress={pickImage}
+        />
       </View>
 
-      <Modal
-        transparent={true}
-        animationType="slide"
-        visible={countDown !== null}
-        onRequestClose={() => setCountDown(null)}
-      >
-        <View style={modalStyles.modalBackground}>
-          <View style={modalStyles.modalContainer}>
-            <Text style={modalStyles.countdownText}>{countDown}</Text>
-          </View>
-        </View>
-      </Modal>
-
-      <Modal
-        transparent={true}
-        animationType="slide"
-        visible={bmi !== null}
-        onRequestClose={() => setBmi(null)}
-      >
-        <View style={modalStyles.modalBackground}>
-          <View style={modalStyles.modalContainer}>
-            <Text style={modalStyles.bmiText}>Your BMI: {bmi}</Text>
-            <Button title="Close" onPress={() => setBmi(null)} />
-          </View>
-        </View>
-      </Modal>
+      <CountdownModal 
+        countDown={countDown} 
+        onClose={() => setCountDown(null)} 
+      />
+      
+      <BMIModal 
+        bmi={bmi} 
+        onClose={() => setBmi(null)} 
+      />
     </View>
   );
 };
-
-const modalStyles = StyleSheet.create({
-  modalBackground: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-
-  modalContainer: {
-    backgroundColor: "white",
-    padding: 20,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-
-  countdownText: {
-    fontSize: 48,
-    fontWeight: "bold",
-  },
-
-  bmiText: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-});
 
 export default BodyScan;
