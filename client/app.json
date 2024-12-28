@@ -1,6 +1,7 @@
 {
   "expo": {
-    "name": "Elite Fitness",
+    "name": "Elite Fitness FTISU",
+    "scheme": "com.onioned.elitefitness",
     "slug": "EliteFitness",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,9 +24,25 @@
             "useFrameworks": "static"
           }
         }
-      ]
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "This app requires access to your photos to allow you to select and share images within the app. Your photos will only be used for this purpose and will not be shared with third parties.",
+          "cameraPermission": "This app requires access to your camera to allow you to capture and upload images directly from the app. Camera access will only be used for in-app functions and will not be used for tracking or advertising."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "The Elite Fitness app requires access to your camera to allow you to capture and upload images or videos directly from the app. Camera access will only be used for in-app functions and is unrelated to tracking or advertising.",
+          "microphonePermission": "The Elite Fitness app requires access to your microphone to record audio or capture video within the app. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.",
+          "recordAudioAndroid": true
+        }
+      ]      
     ],
     "ios": {
+      "buildNumber": "1",
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "icon": "./assets/icon.png",
@@ -44,7 +61,7 @@
           "NSAllowsArbitraryLoads": true
         }
       },
-      "bundleIdentifier": "com.thiennp03.EliteFitness",
+      "bundleIdentifier": "com.onioned.elitefitness",
       "splash": {
         "image": "./assets/images/splash/splash.png",
         "resizeMode": "cover",
@@ -66,7 +83,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.thiennp03.EliteFitness"
+      "package": "com.onioned.elitefitness"
     },
     "web": {
       "favicon": "./assets/favicon.png"

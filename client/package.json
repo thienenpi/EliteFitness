@@ -81,6 +81,5 @@
   "jest": {
     "preset": "react-native"
   },
-  "private": true,
-  "packageManager": "yarn@4.5.1"
+  "private": true
 }

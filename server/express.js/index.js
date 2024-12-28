@@ -36,6 +36,9 @@ app.use(
 app.use(cookieParser());
 
 app.get("/", (req, res) => res.status(200).json("Welcome to Elite Fitness"));
+app.get("/privacy-policy", (req, res) => {
+  res.status(200).sendFile(__dirname + "/privacy-policy.html");
+});
 app.use("/api/muscles", muscleRouter);
 app.use("/api/exercises", exercisesRouter);
 app.use("/api/products", productsRouter);

@@ -156,7 +156,7 @@ const PoseDetectionApp = (props) => {
   const [zoomFactor, setZoomFactor] = useState(0);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [isScale, setIsScale] = useState(null);
-  //   const dataset = useRef([]);
+  const dataset = useRef([]);
 
   const {
     counter,
@@ -303,8 +303,8 @@ const PoseDetectionApp = (props) => {
     };
 
     if (practiceState) {
-      setIsScale(false);
-      calculateScaleFactor();
+      //   setIsScale(false);
+      //   calculateScaleFactor();
       renderRef.current = true;
 
       const intervalId = setInterval(() => {
@@ -318,7 +318,7 @@ const PoseDetectionApp = (props) => {
         renderRef.current = true;
         timeCnt.current += 0.05;
         onUpdateCounter({ ...counterRef.current });
-      }, 500);
+      }, 50);
 
       return () => {
         clearInterval(intervalId);
@@ -531,36 +531,36 @@ const PoseDetectionApp = (props) => {
       );
       prevAngles.current = currAngles.current;
 
-      //   const dataset = {
-      //     Angles: data.Angles[timeCnt.current * 2],
-      //     Velocities: data.Velocities[timeCnt.current * 2],
-      //   };
-      //   const input = { Angles: currAngles.current, Velocities: velocities };
-      //   const threshold = { Angles: 5, Velocities: 0.1 };
-      // checkDeviation(dataset, input, threshold);
+    //   const dataset = {
+    //     Angles: data.Angles[timeCnt.current * 2],
+    //     Velocities: data.Velocities[timeCnt.current * 2],
+    //   };
+    //   const input = { Angles: currAngles.current, Velocities: velocities };
+    //   const threshold = { Angles: 5, Velocities: 0.1 };
+    //   checkDeviation(dataset, input, threshold);
 
-      if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
-        counterRef.current.rep += 1;
-        timeCnt.current = 0;
-      }
+    //   if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
+    //     counterRef.current.rep += 1;
+    //     timeCnt.current = 0;
+    //   }
 
-      if (
-        counterRef.current.rep === item.numOfRep &&
-        counterRef.current.set < item.numOfSet
-      ) {
-        counterRef.current.rep = 0;
-        counterRef.current.set += 1;
-      }
+    //   if (
+    //     counterRef.current.rep === item.numOfRep &&
+    //     counterRef.current.set < item.numOfSet
+    //   ) {
+    //     counterRef.current.rep = 0;
+    //     counterRef.current.set += 1;
+    //   }
 
       //   Create dataset
-      //   const record = {
-      //     TimeCnt: timeCnt.current,
-      //     Angles: currAngles.current,
-      //     Velocities: velocities,
-      //   };
-      //   dataset.current.push(record);
+      const record = {
+        TimeCnt: timeCnt.current,
+        Angles: currAngles.current,
+        Velocities: velocities,
+      };
+      dataset.current.push(record);
 
-      //   console.log("dataset", dataset.current);
+      console.log("dataset", dataset.current);
     } catch (error) {
       console.error(error);
     }
@@ -668,7 +668,7 @@ const PoseDetectionApp = (props) => {
         {renderPose(posesRef, cameraType)}
         {renderFps()}
         {renderCameraTypeSwitcher()}
-        <Modal
+        {/* <Modal
           transparent={true}
           animationType="slide"
           visible={isScale === false}
@@ -678,7 +678,7 @@ const PoseDetectionApp = (props) => {
             size={SIZES.xxLarge}
             color={COLORS.btn}
           ></ActivityIndicator>
-        </Modal>
+        </Modal> */}
       </View>
     );
   }
