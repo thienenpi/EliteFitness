@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "EliteFitness.app"
-               BlueprintName = "EliteFitness"
-               ReferencedContainer = "container:EliteFitness.xcodeproj">
+               BuildableName = "EliteFitnessFTISU.app"
+               BlueprintName = "EliteFitnessFTISU"
+               ReferencedContainer = "container:EliteFitnessFTISU.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "EliteFitnessTests.xctest"
-               BlueprintName = "EliteFitnessTests"
-               ReferencedContainer = "container:EliteFitness.xcodeproj">
+               BuildableName = "EliteFitnessFTISUTests.xctest"
+               BlueprintName = "EliteFitnessFTISUTests"
+               ReferencedContainer = "container:EliteFitnessFTISU.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "EliteFitness.app"
-            BlueprintName = "EliteFitness"
-            ReferencedContainer = "container:EliteFitness.xcodeproj">
+            BuildableName = "EliteFitnessFTISU.app"
+            BlueprintName = "EliteFitnessFTISU"
+            ReferencedContainer = "container:EliteFitnessFTISU.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "EliteFitness.app"
-            BlueprintName = "EliteFitness"
-            ReferencedContainer = "container:EliteFitness.xcodeproj">
+            BuildableName = "EliteFitnessFTISU.app"
+            BlueprintName = "EliteFitnessFTISU"
+            ReferencedContainer = "container:EliteFitnessFTISU.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

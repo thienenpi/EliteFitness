@@ -87,7 +87,7 @@ const getOutputTensorHeight = () => {
     : OUTPUT_TENSOR_WIDTH;
 };
 
-const renderPose = (posesRef, cameraType) => {
+const renderPose = (posesRef, cameraType, practiceState) => {
   if (posesRef.current != null && posesRef.current.length > 0) {
     const keypoints = posesRef.current[0].keypoints
       .filter((k) => (k.score ?? 0) > MIN_KEYPOINT_SCORE)
@@ -116,7 +116,20 @@ const renderPose = (posesRef, cameraType) => {
 
     return <Svg style={styles.svg}>{keypoints}</Svg>;
   } else {
-    return <View></View>;
+    return (
+      <Modal transparent={true} animationType="fade" visible={practiceState}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ color: "white", fontSize: 20 }}>No pose detected</Text>
+        </View>
+      </Modal>
+    );
   }
 };
 
@@ -156,7 +169,7 @@ const PoseDetectionApp = (props) => {
   const [zoomFactor, setZoomFactor] = useState(0);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [isScale, setIsScale] = useState(null);
-  const dataset = useRef([]);
+  //   const dataset = useRef([]);
 
   const {
     counter,
@@ -226,15 +239,6 @@ const PoseDetectionApp = (props) => {
       }
     };
   }, []);
-
-  //   useEffect(() => {
-  //     if (recordState) {
-  //       startRecording()
-  //     } else {
-  //       stopRecording()
-  //     }
-  //     console.log(recordState)
-  //   }, [recordState])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -314,11 +318,14 @@ const PoseDetectionApp = (props) => {
         ) {
           onUpdatePracticeState();
         }
-
+        
         renderRef.current = true;
-        timeCnt.current += 0.05;
+
+        if (posesRef.current != null && posesRef.current.length > 0) {
+          timeCnt.current += 0.5;
+        }
         onUpdateCounter({ ...counterRef.current });
-      }, 50);
+      }, 500);
 
       return () => {
         clearInterval(intervalId);
@@ -430,53 +437,6 @@ const PoseDetectionApp = (props) => {
     // }
   };
 
-  //   const startRecording = async () => {
-  //     if (cameraRef.current) {
-  //       try {
-  //         const videoOptions = {
-  //           quality: Camera.Constants.VideoQuality["720p"],
-  //           // maxDuration: 60, // 60 seconds
-  //         }
-
-  //         const videoRecordPromise = cameraRef.current.recordAsync(videoOptions)
-  //         const videoRecordData = await videoRecordPromise
-
-  //         await saveVideoToLibrary(videoRecordData.uri)
-  //       } catch (error) {
-  //         console.error("Error recording video:", error)
-  //       }
-  //     } else {
-  //       console.error("cameraRef is not available")
-  //     }
-  //   }
-
-  //   const saveVideoToLibrary = async (videoUri) => {
-  //     try {
-  //       const asset = await MediaLibrary.createAssetAsync(videoUri)
-  //       await MediaLibrary.createAlbumAsync("Expo Videos", asset, false)
-  //       console.log("Video saved to Photos")
-  //     } catch (error) {
-  //       console.error("Error saving video to Photos:", error)
-  //     }
-  //   }
-
-  //   const stopRecording = async () => {
-  //     if (cameraRef.current) {
-  //       cameraRef.current.stopRecording()
-  //     }
-  //   }
-
-  //   const handleVideoFrame = async (frame) => {
-  //     if (!model || !frame) return;
-
-  //     console.log("Frame: ", frame);
-  //     const frameTensor = tf.browser.fromPixels(frame);
-  //     const poses = await model.estimatePoses(frameTensor);
-  //     posesRef.current = poses;
-  //     extractData();
-  //     tf.dispose(frameTensor);
-  //   };
-
   const handleCameraStream = async (images, updatePreview, gl) => {
     const loop = async () => {
       const imageTensor = images.next().value;
@@ -521,46 +481,48 @@ const PoseDetectionApp = (props) => {
     try {
       const ja = new JointAngle();
       const bp = new BodyPart();
-      bp.cords = util.detectJoints(posesRef.current[0].keypoints);
+      if (posesRef.current != null && posesRef.current.length > 0) {
+        bp.cords = util.detectJoints(posesRef.current[0].keypoints);
 
-      currAngles.current = ja.bodyAngles(bp);
-      const velocities = util.calculateVelocity(
-        prevAngles.current != null ? prevAngles.current : currAngles.current,
-        currAngles.current,
-        500
-      );
-      prevAngles.current = currAngles.current;
+        currAngles.current = ja.bodyAngles(bp);
+        const velocities = util.calculateVelocity(
+          prevAngles.current != null ? prevAngles.current : currAngles.current,
+          currAngles.current,
+          500
+        );
+        prevAngles.current = currAngles.current;
 
-      //   const dataset = {
-      //     Angles: data.Angles[timeCnt.current * 2],
-      //     Velocities: data.Velocities[timeCnt.current * 2],
-      //   };
-      //   const input = { Angles: currAngles.current, Velocities: velocities };
-      //   const threshold = { Angles: 5, Velocities: 0.1 };
-      //   checkDeviation(dataset, input, threshold);
+        const dataset = {
+          Angles: data.Angles[timeCnt.current * 2],
+          Velocities: data.Velocities[timeCnt.current * 2],
+        };
+        const input = { Angles: currAngles.current, Velocities: velocities };
+        const threshold = { Angles: 5, Velocities: 0.1 };
+        checkDeviation(dataset, input, threshold);
 
-      //   if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
-      //     counterRef.current.rep += 1;
-      //     timeCnt.current = 0;
-      //   }
+        if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
+          counterRef.current.rep += 1;
+          timeCnt.current = 0;
+        }
 
-      //   if (
-      //     counterRef.current.rep === item.numOfRep &&
-      //     counterRef.current.set < item.numOfSet
-      //   ) {
-      //     counterRef.current.rep = 0;
-      //     counterRef.current.set += 1;
-      //   }
+        if (
+          counterRef.current.rep === item.numOfRep &&
+          counterRef.current.set < item.numOfSet
+        ) {
+          counterRef.current.rep = 0;
+          counterRef.current.set += 1;
+        }
 
-      //   Create dataset
-      const record = {
-        TimeCnt: timeCnt.current,
-        Angles: currAngles.current,
-        Velocities: velocities,
-      };
-      dataset.current.push(record);
+        //   Create dataset
+        //   const record = {
+        //     TimeCnt: timeCnt.current,
+        //     Angles: currAngles.current,
+        //     Velocities: velocities,
+        //   };
+        //   dataset.current.push(record);
 
-      console.log("dataset", dataset.current);
+        //   console.log("dataset", dataset.current);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -598,28 +560,6 @@ const PoseDetectionApp = (props) => {
         : Camera.Constants.Type.back
     );
   };
-
-  //   const renderVideo = () => {
-  //     if (!cameraState) {
-  //       return (
-  //         <View style={styles.camera}>
-  //           <Text style={styles.notiTxt}>Camera is turn off</Text>
-  //         </View>
-  //       );
-  //     } else {
-  //       return (
-  //         <Video
-  //           ref={videoRef}
-  //           style={styles.camera}
-  //           resizeMode={ResizeMode.CONTAIN}
-  //           source={{ uri: testVideo }}
-  //           shouldPlay={practiceState}
-  //           isLooping={false}
-  //           onPlaybackStatusUpdate={handleVideoFrame}
-  //         />
-  //       );
-  //     }
-  //   };
 
   const renderCamera = () => {
     if (!cameraState) {
@@ -665,10 +605,10 @@ const PoseDetectionApp = (props) => {
         {renderCamera()}
         {/* {renderVideo()} */}
         {renderSampleVideo(practiceState, isScale, item.videoUrls[0])}
-        {renderPose(posesRef, cameraType)}
+        {renderPose(posesRef, cameraType, practiceState)}
         {renderFps()}
         {renderCameraTypeSwitcher()}
-        {/* <Modal
+        <Modal
           transparent={true}
           animationType="slide"
           visible={isScale === false}
@@ -678,7 +618,7 @@ const PoseDetectionApp = (props) => {
             size={SIZES.xxLarge}
             color={COLORS.btn}
           ></ActivityIndicator>
-        </Modal> */}
+        </Modal>
       </View>
     );
   }

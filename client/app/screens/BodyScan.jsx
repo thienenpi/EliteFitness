@@ -1,5 +1,5 @@
-import { Button, Image, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import { Image, Text, View } from "react-native";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { CustomButton } from "../components";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
@@ -7,6 +7,7 @@ import { Modal } from "react-native";
 import { calculateBMI } from "../api";
 import { COLORS } from "../constants";
 import styles from "./styles/bodyScan.style";
+import { AuthContext } from "../context/AuthContext";
 
 // Subcomponents
 const ScanButton = ({ startCountdown, canScan }) => (
@@ -53,7 +54,7 @@ const BMIModal = ({ bmi, onClose }) => (
   >
     <View style={styles.modalBackground}>
       <View style={styles.modalContainer}>
-        <Text style={styles.bmiText}>Your BMI: {bmi}</Text>
+        <Text style={styles.bmiText}>Your BMI is: {bmi}</Text>
         <CustomButton
           title="Close"
           styles={styles}
@@ -70,6 +71,7 @@ const BMIModal = ({ bmi, onClose }) => (
 // TODO: Design the BodyScan screen. @buubuu203
 const BodyScan = () => {
   // State management
+  const { setIsLoading } = useContext(AuthContext);
   const [countDown, setCountDown] = useState(null);
   const [bmi, setBmi] = useState(null);
   const [hasPermission, setHasPermission] = useState(null);
@@ -80,7 +82,7 @@ const BodyScan = () => {
   // Event handlers
   const startCountdown = () => {
     if (canScan) {
-      setCountDown(5);
+      setCountDown(2);
     }
   };
 
@@ -109,9 +111,11 @@ const BodyScan = () => {
 
   useEffect(() => {
     const getBMI = async () => {
+      setIsLoading(true);
       const res = await calculateBMI({ userId: 1, uri: selectedImage });
       const bmi = Math.round(res.data.bmi);
       //   console.log(bmi);
+      setIsLoading(false);
       setBmi(bmi);
     };
 
@@ -135,7 +139,7 @@ const BodyScan = () => {
           />
         )}
       </View>
-      
+
       <View style={styles.menuContainer}>
         <ScanButton startCountdown={startCountdown} canScan={canScan} />
         <CustomButton
@@ -148,15 +152,12 @@ const BodyScan = () => {
         />
       </View>
 
-      <CountdownModal 
-        countDown={countDown} 
-        onClose={() => setCountDown(null)} 
+      <CountdownModal
+        countDown={countDown}
+        onClose={() => setCountDown(null)}
       />
-      
-      <BMIModal 
-        bmi={bmi} 
-        onClose={() => setBmi(null)} 
-      />
+
+      <BMIModal bmi={bmi} onClose={() => setBmi(null)} />
     </View>
   );
 };

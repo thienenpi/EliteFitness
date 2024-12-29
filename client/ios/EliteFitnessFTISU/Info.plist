@@ -7,7 +7,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>Elite Fitness</string>
+    <string>Elite Fitness FTISU</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -24,6 +24,13 @@
     <string>????</string>
     <key>CFBundleURLTypes</key>
     <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.onioned.elitefitness</string>
+          <string>com.onioned.elitefitness</string>
+        </array>
+      </dict>
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
@@ -47,13 +54,13 @@
       <true/>
     </dict>
     <key>NSCameraUsageDescription</key>
-    <string>$(PRODUCT_NAME) needs access to your Camera.</string>
+    <string>This app requires access to your camera to allow you to capture and upload images directly from the app. Camera access will only be used for in-app functions and will not be used for tracking or advertising.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>$(PRODUCT_NAME) needs access to your Microphone.</string>
+    <string>The Elite Fitness app requires access to your microphone to record audio or capture video within the app. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
     <string>Allow $(PRODUCT_NAME) to save photos</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>We need access to your photo library</string>
+    <string>This app requires access to your photos to allow you to select and share images within the app. Your photos will only be used for this purpose and will not be shared with third parties.</string>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>

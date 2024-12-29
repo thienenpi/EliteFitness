@@ -1,4 +1,4 @@
-import ApiManagerNodeJS from "./ApiManager";
+import { ApiManagerNodeJS } from "./ApiManager";
 
 const getProductById = async ({ id, token }) => {
   try {
