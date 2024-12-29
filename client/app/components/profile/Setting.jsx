@@ -103,7 +103,7 @@ const Setting = () => {
     <View style={styles.container}>
       <SettingSection title="Gym equipment" options={gymEquipmentOptions} />
       <SettingSection title="Workout Setting" options={workoutSettingOptions} />
-      <SettingSection title="Inbody Test with Camera" options={null} />
+      <SettingSection title="Measure BMI with Camera" options={null} />
     </View>
   );
 };

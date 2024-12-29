@@ -180,8 +180,8 @@ export const AuthProvider = ({ children }) => {
     AsyncStorage.removeItem("userToken");
     AsyncStorage.removeItem("userInfo");
 
-    GoogleSignin.revokeAccess();
-    GoogleSignin.signOut();
+    // GoogleSignin.revokeAccess();
+    // GoogleSignin.signOut();
 
     setIsLoading(false);
   };
@@ -221,6 +221,7 @@ export const AuthProvider = ({ children }) => {
         resetPasswordWithEmail,
         confirmCode,
         isLoading,
+        setIsLoading,
         userToken,
         userInfo,
         confirm,
