@@ -52,7 +52,7 @@ const BottomTabNavigation = () => {
         }}
       ></Tab.Screen>
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Chatbot"
         component={ChatBot}
         options={{
@@ -62,7 +62,7 @@ const BottomTabNavigation = () => {
             );
           },
         }}
-      ></Tab.Screen>
+      ></Tab.Screen> */}
 
       <Tab.Screen
         name="Shop"

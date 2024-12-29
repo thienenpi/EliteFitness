@@ -77,6 +77,7 @@ const styles1 = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
 
   errorText: {

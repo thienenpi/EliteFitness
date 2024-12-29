@@ -27,12 +27,11 @@ export const AuthProvider = ({ children }) => {
   const [confirm, setConfirm] = useState(null);
 
   const register = async ({ data }) => {
+    setIsLoading(true);
     const res = await userRegister({ data: data });
 
     if (res.status === 200) {
       const responseData = res.data;
-
-      setIsLoading(true);
       setUserInfo(responseData);
       setUserToken(responseData.token);
 
@@ -40,8 +39,10 @@ export const AuthProvider = ({ children }) => {
       AsyncStorage.setItem("userToken", JSON.stringify(responseData.token));
 
       setIsLoading(false);
-      await auth().signInWithPhoneNumber(data.phoneNumber);
+      //   await auth().signInWithPhoneNumber(data.phoneNumber);
     } else {
+      setIsLoading(false);
+
       Alert.alert(res.data, "Please try again", [
         {
           text: "Try again",
@@ -52,20 +53,20 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async ({ data }) => {
+    setIsLoading(true);
     const res = await userLogin({ data: data });
 
     if (res.status === 200) {
       const responseData = res.data;
 
-      setIsLoading(true);
       setUserInfo(responseData);
       setUserToken(responseData.token);
 
       AsyncStorage.setItem("userInfo", JSON.stringify(responseData));
       AsyncStorage.setItem("userToken", JSON.stringify(responseData.token));
-
       setIsLoading(false);
     } else {
+      setIsLoading(false);
       Alert.alert(res.data, "Please try again", [
         {
           text: "Try again",
@@ -73,7 +74,7 @@ export const AuthProvider = ({ children }) => {
         },
       ]);
 
-    //   console.log(res);
+      //   console.log(res);
 
       //   const confirmation = await auth().signInWithEmailAndPassword(
       //     data.email,

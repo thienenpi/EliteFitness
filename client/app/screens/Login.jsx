@@ -7,7 +7,6 @@ import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
-  ActivityIndicator,
 } from "react-native";
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
 import LinearGradient from "react-native-linear-gradient";
@@ -15,7 +14,7 @@ import CustomButton from "../components/CustomButton";
 import InputField from "../components/InputField";
 import { AuthContext } from "../context/AuthContext";
 import { styles1, googleButton } from "./styles/login.style";
-import { COLORS, SIZES } from "../constants";
+import { COLORS } from "../constants";
 
 const hideKeyboard = () => {
   Keyboard.dismiss();
@@ -55,123 +54,113 @@ const Login = () => {
         colors={["#0E403D", "#00B7AF"]}
         style={styles1.linearGradient}
       >
-        {!isLoading ? (
-          <View style={styles1.container}>
-            <Text style={styles1.headerText}>LOG IN</Text>
-            <View style={{ height: 42 }}></View>
+        <View style={styles1.container}>
+          <Text style={styles1.headerText}>LOG IN</Text>
+          <View style={{ height: 42 }}></View>
+          <InputField
+            icon={
+              <Ionicons name="mail" color={COLORS.primary} size={24}></Ionicons>
+            }
+            styles={styles1}
+            label={"Email"}
+            keyboardType={"email-address"}
+            value={email}
+            onChangeText={(text) => {
+              setEmail(text);
+            }}
+            onSubmitEditing={handleSubmit}
+          ></InputField>
+
+          {email.length > 0 && !checkEmailValidation() && (
+            <Text style={styles1.errorText}>
+              Please enter a valid email address
+            </Text>
+          )}
+
+          <View style={{ height: 20 }}></View>
+
+          <View>
             <InputField
               icon={
                 <Ionicons
-                  name="mail"
-                  color={COLORS.primary}
+                  name="keypad"
                   size={24}
+                  color={COLORS.primary}
                 ></Ionicons>
               }
               styles={styles1}
-              label={"Email"}
-              keyboardType={"email-address"}
-              value={email}
+              label={"Password"}
+              inputType={inputType}
+              value={password}
               onChangeText={(text) => {
-                setEmail(text);
+                setPassword(text);
               }}
               onSubmitEditing={handleSubmit}
-            ></InputField>
-
-            {email.length > 0 && !checkEmailValidation() && (
-              <Text style={styles1.errorText}>
-                Please enter a valid email address
-              </Text>
-            )}
-
-            <View style={{ height: 20 }}></View>
-
-            <View>
-              <InputField
-                icon={
-                  <Ionicons
-                    name="keypad"
-                    size={24}
-                    color={COLORS.primary}
-                  ></Ionicons>
-                }
-                styles={styles1}
-                label={"Password"}
-                inputType={inputType}
-                value={password}
-                onChangeText={(text) => {
-                  setPassword(text);
-                }}
-                onSubmitEditing={handleSubmit}
-              />
-              <TouchableOpacity
-                onPress={toggleShowPassword}
-                style={styles1.iconContainer}
-              >
-                <Ionicons
-                  name={showPassword ? "eye-off" : "eye"}
-                  size={24}
-                  color={COLORS.primary}
-                />
-              </TouchableOpacity>
-            </View>
-
-            <View style={{ height: 42 }}></View>
-            <CustomButton
-              styles={styles1}
-              isValid={email.length > 0 && password.length > 0 && checkEmailValidation()}
-              label={"LOGIN"}
-              onPress={() => {
-                handleSubmit();
-              }}
-            ></CustomButton>
-            <View
-              style={{
-                height: 20,
-                marginTop: 28,
-                display: "flex",
-                flexDirection: "row",
-                gap: 32,
-              }}
-            >
-              <Text style={styles1.smallText}>Don't have an account yet?</Text>
-              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                <Text style={styles1.smallText}>Sign up</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={{ height: 20 }}></View>
-
+            />
             <TouchableOpacity
-              onPress={() => navigation.navigate("Reset Password")}
+              onPress={toggleShowPassword}
+              style={styles1.iconContainer}
             >
-              <Text style={styles1.forgotPassText}>Forgot password?</Text>
+              <Ionicons
+                name={showPassword ? "eye-off" : "eye"}
+                size={24}
+                color={COLORS.primary}
+              />
             </TouchableOpacity>
+          </View>
 
-            <View
-              style={{
-                height: 20,
-                marginTop: 28,
-                marginBottom: 12,
-                width: "80%",
-                borderTopColor: COLORS.exerciseBg,
-                borderTopWidth: 1,
-              }}
-            ></View>
+          <View style={{ height: 42 }}></View>
+          <CustomButton
+            styles={styles1}
+            isValid={
+              email.length > 0 && password.length > 0 && checkEmailValidation()
+            }
+            label={"LOGIN"}
+            onPress={() => {
+              handleSubmit();
+            }}
+          ></CustomButton>
+          <View
+            style={{
+              height: 20,
+              marginTop: 28,
+              display: "flex",
+              flexDirection: "row",
+              gap: 32,
+            }}
+          >
+            <Text style={styles1.smallText}>Don't have an account yet?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+              <Text style={styles1.smallText}>Sign up</Text>
+            </TouchableOpacity>
+          </View>
 
-            {/* <GoogleSigninButton
+          <View style={{ height: 20 }}></View>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Reset Password")}
+          >
+            <Text style={styles1.forgotPassText}>Forgot password?</Text>
+          </TouchableOpacity>
+
+          <View
+            style={{
+              height: 20,
+              marginTop: 28,
+              marginBottom: 12,
+              width: "80%",
+              borderTopColor: COLORS.exerciseBg,
+              borderTopWidth: 1,
+            }}
+          ></View>
+
+          {/* <GoogleSigninButton
               size={GoogleSigninButton.Size.Standard}
               color={GoogleSigninButton.Color.Light}
               onPress={loginWithGoogle}
               style={googleButton.btnContainer}
             ></GoogleSigninButton> */}
-          </View>
-        ) : (
-          <ActivityIndicator
-            style={styles1.loader}
-            size={SIZES.xxLarge}
-            color={COLORS.btn}
-          ></ActivityIndicator>
-        )}
+        </View>
       </LinearGradient>
     </TouchableWithoutFeedback>
   );

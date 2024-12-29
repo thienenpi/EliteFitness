@@ -531,26 +531,26 @@ const PoseDetectionApp = (props) => {
       );
       prevAngles.current = currAngles.current;
 
-    //   const dataset = {
-    //     Angles: data.Angles[timeCnt.current * 2],
-    //     Velocities: data.Velocities[timeCnt.current * 2],
-    //   };
-    //   const input = { Angles: currAngles.current, Velocities: velocities };
-    //   const threshold = { Angles: 5, Velocities: 0.1 };
-    //   checkDeviation(dataset, input, threshold);
+      //   const dataset = {
+      //     Angles: data.Angles[timeCnt.current * 2],
+      //     Velocities: data.Velocities[timeCnt.current * 2],
+      //   };
+      //   const input = { Angles: currAngles.current, Velocities: velocities };
+      //   const threshold = { Angles: 5, Velocities: 0.1 };
+      //   checkDeviation(dataset, input, threshold);
 
-    //   if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
-    //     counterRef.current.rep += 1;
-    //     timeCnt.current = 0;
-    //   }
+      //   if (timeCnt.current * 2 + 1 === data.TimeCnt.length) {
+      //     counterRef.current.rep += 1;
+      //     timeCnt.current = 0;
+      //   }
 
-    //   if (
-    //     counterRef.current.rep === item.numOfRep &&
-    //     counterRef.current.set < item.numOfSet
-    //   ) {
-    //     counterRef.current.rep = 0;
-    //     counterRef.current.set += 1;
-    //   }
+      //   if (
+      //     counterRef.current.rep === item.numOfRep &&
+      //     counterRef.current.set < item.numOfSet
+      //   ) {
+      //     counterRef.current.rep = 0;
+      //     counterRef.current.set += 1;
+      //   }
 
       //   Create dataset
       const record = {

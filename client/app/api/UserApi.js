@@ -27,6 +27,7 @@ const userRegister = async ({ data }) => {
     data.role_id = "a";
     data.status = "a";
     data.name = "New user";
+    data.phone = "0777819503";
     const url = "/users/register/";
     const config = {
       method: "POST",

@@ -56,6 +56,7 @@ const styles1 = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: SIZES.medium,
     fontFamily: "poppinsRegular",
+    color: "white",
   },
 
   smallText: {

@@ -1,26 +1,38 @@
-import React, { useContext } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { AuthContext } from '../context/AuthContext';
-import { ActivityIndicator, View } from 'react-native';
-import AuthStack from './AuthStack';
-import AppStack from './AppStack';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useContext } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
+import { ActivityIndicator, Modal, StyleSheet } from "react-native";
+import AuthStack from "./AuthStack";
+import AppStack from "./AppStack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { COLORS, SIZES } from "../constants";
+import LinearGradient from "react-native-linear-gradient";
 
 const Stack = createNativeStackNavigator();
+
+const styles = StyleSheet.create({
+  loader: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+});
 
 const AppNavigation = () => {
   const { isLoading, userToken } = useContext(AuthContext);
 
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size={'large'}></ActivityIndicator>
-      </View>
-    );
-  }
-
   return (
     <NavigationContainer>
+      <Modal transparent={true} visible={isLoading} animationType="fade">
+        <ActivityIndicator
+          style={styles.loader}
+          size={SIZES.xxLarge}
+          color={COLORS.btn}
+        ></ActivityIndicator>
+      </Modal>
+
       <Stack.Navigator>
         {userToken !== null ? (
           <Stack.Screen
