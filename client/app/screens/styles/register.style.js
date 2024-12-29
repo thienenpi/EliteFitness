@@ -6,13 +6,13 @@ const styles1 = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   linearGradient: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "flex-start", // Sử dụng 'flex-start' thay vì 'top'
-    paddingVertical: 120,
     width: "100%",
   },
+
   iconContainer: {
     position: "absolute",
     right: 16,
@@ -64,16 +64,28 @@ const styles1 = StyleSheet.create({
     color: COLORS.btn,
   },
 
+  linkText: {
+    fontFamily: "sfProHeavyItalic",
+    color: COLORS.exerciseBg,
+  },
+
   forgotPassText: {
     fontFamily: "sfProHeavyItalic",
     color: COLORS.exerciseBg,
+  },
+
+  textContainer: {
+    justifyContent: "center",
+    height: 60,
+    flexDirection: "row",
+    gap: 32,
   },
 
   errorText: {
     marginTop: SIZES.small,
     fontFamily: "sfProHeavy",
     fontSize: SIZES.medium,
-    color: 'red',
+    color: "red",
     alignSelf: "flex-start",
   },
 });

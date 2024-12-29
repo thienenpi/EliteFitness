@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { Link, useNavigation } from "@react-navigation/native";
 import React, { useContext, useState } from "react";
 import {
   Text,
@@ -7,6 +7,8 @@ import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
+  Pressable,
+  Linking,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
@@ -50,6 +52,13 @@ const Register = () => {
     // check if email is in the correct format
     const emailPattern = /\S+@\S+\.\S+/;
     return emailPattern.test(email);
+  };
+
+  const handlePrivacyPolicyPress = () => {
+    const privacyPolicyUrl = "https://elitefitness.azurewebsites.net/privacy-policy";
+    Linking.openURL(privacyPolicyUrl).catch((err) =>
+      console.error("Couldn't load page", err)
+    );
   };
 
   return (
@@ -156,24 +165,32 @@ const Register = () => {
               handleSubmit();
             }}
           ></CustomButton>
+
           <View
             style={{
-              height: 20,
-              marginTop: 28,
-              display: "flex",
+              justifyContent: "center",
               flexDirection: "row",
-              gap: 32,
+              height: 60,
+              alignItems: "center",
             }}
           >
-            <Text style={styles1.smallText}>Already have an account</Text>
-            <TouchableOpacity
-              isValid={true}
-              styles={styles1}
-              onPress={() => navigation.navigate("Login")}
-            >
-              <Text style={styles1.smallText}>Sign in</Text>
-            </TouchableOpacity>
+            <Text style={styles1.smallText}>
+              By signing up, you agree to our{" "}
+            </Text>
+            <Pressable onPress={handlePrivacyPolicyPress}>
+              <Text style={styles1.linkText}>Privacy Policy</Text>
+            </Pressable>
           </View>
+        </View>
+        <View style={styles1.textContainer}>
+          <Text style={styles1.smallText}>Already have an account</Text>
+          <TouchableOpacity
+            isValid={true}
+            styles={styles1}
+            onPress={() => navigation.navigate("Login")}
+          >
+            <Text style={styles1.smallText}>Sign in</Text>
+          </TouchableOpacity>
         </View>
       </LinearGradient>
     </TouchableWithoutFeedback>
