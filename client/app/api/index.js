@@ -1,6 +1,6 @@
 import { generateExercise } from "./ExerciseApi";
 import { predictHeight } from "./PraticeApi";
-import { calculateBMI } from "./UserApi";
+import { calculateBMI, deleteUser } from "./UserApi";
 
 export {
   // ExerciseApi
@@ -8,6 +8,7 @@ export {
 
   // UserApi
   calculateBMI,
+  deleteUser,
 
   // PraticeApi
   predictHeight,

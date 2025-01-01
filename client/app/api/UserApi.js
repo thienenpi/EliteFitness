@@ -103,4 +103,28 @@ const calculateBMI = async ({ userId, uri }) => {
   }
 };
 
-export { userLogin, userRegister, updatePassword, calculateBMI };
+const deleteUser = async ({ userId }) => {
+  try {
+    const url = "/users/";
+    const config = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        userId: userId,
+      },
+    };
+
+    const res = await ApiManagerNodeJS(url, config);
+    return res;
+  } catch (error) {
+    if (error.response) {
+      return error.response;
+    } else {
+      throw error;
+    }
+  }
+};
+
+export { userLogin, userRegister, updatePassword, calculateBMI, deleteUser };

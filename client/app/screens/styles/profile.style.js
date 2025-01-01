@@ -29,10 +29,12 @@ const styles = StyleSheet.create({
     marginHorizontal: SIZES.xSmall,
   },
 
+  
+
   btnContainer: (backgroundColor) => ({
     backgroundColor: backgroundColor,
     borderRadius: 12,
-    width: SIZES.width - SIZES.xxLarge * 5,
+    width: SIZES.width - SIZES.xxLarge * 6,
     height: SIZES.xxLarge,
     alignItems: "center",
     justifyContent: "center",
@@ -41,7 +43,7 @@ const styles = StyleSheet.create({
 
   btnLabel: {
     fontFamily: "rufner",
-    fontSize: SIZES.large,
+    fontSize: SIZES.medium * 0.9,
     color: COLORS.black,
   },
 });

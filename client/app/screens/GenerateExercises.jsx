@@ -6,13 +6,14 @@ import {
   Modal,
   Button,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./styles/generateExercises.style";
 import { AppBar, CustomButton, ExerciseColumn } from "../components";
 import { useNavigation } from "@react-navigation/native";
 import { CheckBox } from "react-native-elements";
 import { generateExercise } from "../api";
 import { COLORS, TEXTS } from "../constants";
+import { AuthContext } from "../context/AuthContext";
 
 const typeOptions = [
   { label: "Strength", value: "Strength" },
@@ -66,6 +67,7 @@ const levelOptions = [
 
 const GenerateExercises = () => {
   const navigation = useNavigation();
+  const { setIsLoading } = useContext(AuthContext);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedMuscles, setSelectedMuscles] = useState([]);
   const [selectedEquipments, setSelectedEquipments] = useState([]);
@@ -99,6 +101,7 @@ const GenerateExercises = () => {
       criteria: criteria,
     };
 
+    setIsLoading(true);
     try {
       const res = await generateExercise({ data: data });
 
@@ -123,7 +126,9 @@ const GenerateExercises = () => {
 
       console.log("Workout", workout);
       setWorkout(workout);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -156,7 +161,17 @@ const GenerateExercises = () => {
             onRequestClose={() => setModalTypeVisible(false)}
           >
             <View style={styles.modalView}>
-              <Text style ={{marginBottom:12, marginLeft:12, fontFamily: TEXTS.bodyHeavy.fontFamily, fontSize: TEXTS.bodyHeavy.fontSize, color: COLORS.primary}}>Select Type</Text>
+              <Text
+                style={{
+                  marginBottom: 12,
+                  marginLeft: 12,
+                  fontFamily: TEXTS.bodyHeavy.fontFamily,
+                  fontSize: TEXTS.bodyHeavy.fontSize,
+                  color: COLORS.primary,
+                }}
+              >
+                Select Type
+              </Text>
               <ScrollView>
                 {typeOptions.map((option) => (
                   <CheckBox
@@ -174,11 +189,11 @@ const GenerateExercises = () => {
                 ))}
               </ScrollView>
               <CustomButton
-            isValid={true}
-            styles={styles}
-            label={"Done"}
-            onPress={() => setModalTypeVisible(false)}
-          />
+                isValid={true}
+                styles={styles}
+                label={"Done"}
+                onPress={() => setModalTypeVisible(false)}
+              />
             </View>
           </Modal>
 
@@ -201,7 +216,17 @@ const GenerateExercises = () => {
             onRequestClose={() => setModalMuscleVisible(false)}
           >
             <View style={styles.modalView}>
-              <Text style ={{marginBottom:12, marginLeft:12, fontFamily: TEXTS.bodyHeavy.fontFamily, fontSize: TEXTS.bodyHeavy.fontSize, color: COLORS.primary}}>Select Target Muscles</Text>
+              <Text
+                style={{
+                  marginBottom: 12,
+                  marginLeft: 12,
+                  fontFamily: TEXTS.bodyHeavy.fontFamily,
+                  fontSize: TEXTS.bodyHeavy.fontSize,
+                  color: COLORS.primary,
+                }}
+              >
+                Select Target Muscles
+              </Text>
 
               <ScrollView>
                 {muscleOptions.map((option) => (
@@ -220,11 +245,11 @@ const GenerateExercises = () => {
                 ))}
               </ScrollView>
               <CustomButton
-            isValid={true}
-            styles={styles}
-            label={"Done"}
-            onPress={() => setModalMuscleVisible(false)}
-          />
+                isValid={true}
+                styles={styles}
+                label={"Done"}
+                onPress={() => setModalMuscleVisible(false)}
+              />
             </View>
           </Modal>
 
@@ -247,7 +272,17 @@ const GenerateExercises = () => {
             onRequestClose={() => setModalEquipmentVisible(false)}
           >
             <View style={styles.modalView}>
-              <Text style ={{marginBottom:12, marginLeft:12, fontFamily: TEXTS.bodyHeavy.fontFamily, fontSize: TEXTS.bodyHeavy.fontSize, color: COLORS.primary}}>Select Equipments</Text>
+              <Text
+                style={{
+                  marginBottom: 12,
+                  marginLeft: 12,
+                  fontFamily: TEXTS.bodyHeavy.fontFamily,
+                  fontSize: TEXTS.bodyHeavy.fontSize,
+                  color: COLORS.primary,
+                }}
+              >
+                Select Equipments
+              </Text>
 
               <ScrollView>
                 {equipmentOptions.map((option) => (
@@ -266,12 +301,11 @@ const GenerateExercises = () => {
                 ))}
               </ScrollView>
               <CustomButton
-            isValid={true}
-            styles={styles}
-            label={"Done"}
-            onPress={() => setModalEquipmentVisible(false)}
-          />
-             
+                isValid={true}
+                styles={styles}
+                label={"Done"}
+                onPress={() => setModalEquipmentVisible(false)}
+              />
             </View>
           </Modal>
 
@@ -294,7 +328,17 @@ const GenerateExercises = () => {
             onRequestClose={() => setModalLevelVisible(false)}
           >
             <View style={styles.modalView}>
-              <Text style ={{marginBottom:12, marginLeft:12, fontFamily: TEXTS.bodyHeavy.fontFamily, fontSize: TEXTS.bodyHeavy.fontSize, color: COLORS.primary}}>Select Level</Text>
+              <Text
+                style={{
+                  marginBottom: 12,
+                  marginLeft: 12,
+                  fontFamily: TEXTS.bodyHeavy.fontFamily,
+                  fontSize: TEXTS.bodyHeavy.fontSize,
+                  color: COLORS.primary,
+                }}
+              >
+                Select Level
+              </Text>
 
               <ScrollView>
                 {levelOptions.map((option) => (
@@ -313,12 +357,11 @@ const GenerateExercises = () => {
                 ))}
               </ScrollView>
               <CustomButton
-            isValid={true}
-            styles={styles}
-            label={"Done"}
-            onPress={() => setModalLevelVisible(false)}
-          />
-          
+                isValid={true}
+                styles={styles}
+                label={"Done"}
+                onPress={() => setModalLevelVisible(false)}
+              />
             </View>
           </Modal>
 

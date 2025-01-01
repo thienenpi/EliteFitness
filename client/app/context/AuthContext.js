@@ -25,6 +25,17 @@ export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [error, setError] = useState(null);
   const [confirm, setConfirm] = useState(null);
+  const defaultUser = {
+    _id: null,
+    email: "a@a.a",
+    name: "New user",
+    password: "a",
+    phone: "0777819503",
+    role_id: "a",
+    status: "a",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzI1ZDI4OWVhNWY2Mjk1NWNkOWY3MiIsImVtYWlsIjoiYUBhLmEiLCJyb2xlX2lkIjoiYSIsInN0YXR1cyI6ImEiLCJpYXQiOjE3MzU1NTAxNzIsImV4cCI6MTczNjE1NDk3Mn0.wkCZexwyU0pcZ5vEP-g0PnJ2KrSbtKgEqyst_8KMQaQ",
+  };
 
   const register = async ({ data }) => {
     setIsLoading(true);
@@ -175,7 +186,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setIsLoading(true);
-    setUserInfo(null);
+    // setUserInfo(null);
     setUserToken(null);
     AsyncStorage.removeItem("userToken");
     AsyncStorage.removeItem("userInfo");
@@ -222,8 +233,11 @@ export const AuthProvider = ({ children }) => {
         confirmCode,
         isLoading,
         setIsLoading,
+        defaultUser,
         userToken,
+        setUserToken,
         userInfo,
+        setUserInfo,
         confirm,
         setConfirm,
       }}

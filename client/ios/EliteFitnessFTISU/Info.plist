@@ -27,8 +27,8 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.onioned.elitefitness</string>
-          <string>com.onioned.elitefitness</string>
+          <string>com.thiennp03.elitefitness</string>
+          <string>com.thiennp03.EliteFitness</string>
         </array>
       </dict>
       <dict>
@@ -45,7 +45,7 @@
       </dict>
     </array>
     <key>CFBundleVersion</key>
-    <string>1</string>
+    <string>10</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>
@@ -61,6 +61,33 @@
     <string>Allow $(PRODUCT_NAME) to save photos</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>This app requires access to your photos to allow you to select and share images within the app. Your photos will only be used for this purpose and will not be shared with third parties.</string>
+    <key>NSPrivacyCollectedDataTypes</key>
+    <dict>
+      <key>NSPrivacyCollectedDataTypeName</key>
+      <string>Collected to personalize your experience, such as displaying your name in the app and providing personalized content.</string>
+      <key>NSPrivacyCollectedDataTypeEmailAddress</key>
+      <string>Collected to communicate with you, send account-related information, and personalize your app experience.</string>
+      <key>NSPrivacyCollectedDataTypePhoneNumber</key>
+      <string>Collected to provide customer support, verify your identity, and for account-related communications.</string>
+      <key>NSPrivacyCollectedDataTypePhysicalAddress</key>
+      <string>Collected for verifying your location, sending physical goods, or personalizing content based on your location.</string>
+      <key>NSPrivacyCollectedDataTypeOtherUserContactInfo</key>
+      <string>Collected to improve communication and provide support beyond the app's functionalities.</string>
+      <key>NSPrivacyCollectedDataTypeContacts</key>
+      <string>Collected to enhance your experience by integrating with your contacts for better interaction within the app.</string>
+      <key>NSPrivacyCollectedDataTypeEmailsOrTextMessages</key>
+      <string>Collected to personalize content, provide updates, and manage communication effectively.</string>
+      <key>NSPrivacyCollectedDataTypePhotosorVideos</key>
+      <string>Collected to allow you to upload and share photos or videos, and customize your app experience with your media.</string>
+      <key>NSPrivacyCollectedDataTypeOtherUserContent</key>
+      <string>Collected to support and manage your interactions and contributions within the app.</string>
+      <key>NSPrivacyCollectedDataTypeDeviceID</key>
+      <string>Collected to enhance app performance, provide analytics, and maintain app security.</string>
+      <key>NSPrivacyCollectedDataTypeProductInteraction</key>
+      <string>Collected to analyze how you use the app, improve functionality, and enhance user experience.</string>
+      <key>NSPrivacyCollectedDataTypePerformanceData</key>
+      <string>Collected to monitor app performance, detect issues, and optimize functionality.</string>
+    </dict>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>

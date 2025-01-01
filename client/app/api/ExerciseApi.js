@@ -1,4 +1,4 @@
-import ApiManagerNodeJS from "./ApiManager";
+import { ApiManagerNodeJS } from "./ApiManager";
 
 const generateExercise = async ({ data }) => {
   console.log("generateExercise", data);

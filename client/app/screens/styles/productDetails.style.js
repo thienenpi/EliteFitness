@@ -17,11 +17,11 @@ const styles = StyleSheet.create({
   headerContainer: {
     top: 0,
     left: 0,
-    right: 0,
+    width: "100%",
     flexDirection: "row",
     gap: 12,
     marginTop: 56,
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
 
   sideIcon: {

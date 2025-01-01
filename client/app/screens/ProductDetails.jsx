@@ -1,13 +1,17 @@
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { CustomButton } from "../components";
 import ProductSlider from "../components/shop/ProductDetailsSlider";
 import SearchBar from "../components/shop/SearchBar";
 import { COLORS } from "../constants";
 import styles from "./styles/productDetails.style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const showNotification = (message) => {
+  Alert.alert("Notification", message, [{ text: "OK" }]);
+};
 
 const ProductDetails = () => {
   const [productList, setProductList] = useState(null);
@@ -76,18 +80,18 @@ const ProductDetails = () => {
                 name="arrowleft"
               ></AntDesign>
             </TouchableOpacity>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <SearchBar onUpdateProductList={updateProducts} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <View style={{ flexDirection: "row", gap: 12 }}>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <MaterialCommunityIcons
                 size={24}
                 color={COLORS.btn}
                 name="bell-badge"
               ></MaterialCommunityIcons>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
               <MaterialCommunityIcons
@@ -121,7 +125,10 @@ const ProductDetails = () => {
       <CustomButton
         styles={styles}
         // TODO: thuc hien them vao gio hang
-        onPress={() => addToCart({ productID: item._id })}
+        onPress={() => {
+          addToCart({ productID: item._id });
+          showNotification("Item added to cart");
+        }}
         icon={
           <AntDesign
             size={16}

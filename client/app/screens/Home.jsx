@@ -21,6 +21,10 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../context/AuthContext";
 
+const showNotImplementedAlert = () => {
+  alert("This feature is not implemented yet.");
+};
+
 const Home = () => {
   const [foundExercises, setFoundExercises] = useState([]);
   const { setIsLoading } = useContext(AuthContext);
@@ -74,24 +78,24 @@ const Home = () => {
           style={styles.sideIcon}
         ></Image>
       </View>
-      <FilterRow></FilterRow>
+      {/* <FilterRow></FilterRow> */}
       <View style={styles.muscleContainer}>
         <View style={styles.muscleHeader}>
           <Text style={styles.title}>Target Muscle</Text>
-          <TouchableOpacity>
+          {/* <TouchableOpacity onPress={showNotImplementedAlert}>
             <MaterialCommunityIcons
               size={24}
               color={COLORS.btn}
               name="plus-circle-outline"
             ></MaterialCommunityIcons>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <MuscleRow onUpdateSelectedMuscles={updateSelectedMuscles}></MuscleRow>
       </View>
       <View style={styles.exerciseContainer}>
         <View style={styles.exerciseHeader}>
           <Text style={styles.title}>Exercise</Text>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => navigation.navigate("Generate Exercises")}
           >
             <MaterialCommunityIcons
@@ -99,7 +103,7 @@ const Home = () => {
               color={COLORS.btn}
               name="plus-circle-outline"
             ></MaterialCommunityIcons>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <ExerciseColumn items={foundExercises}></ExerciseColumn>
       </View>

@@ -4,6 +4,7 @@ import { SIZES, COLORS } from "../../constants";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: SIZES.height * 0.7,
     width: SIZES.width,
     flexDirection: "column",
     backgroundColor: COLORS.primaryBg,

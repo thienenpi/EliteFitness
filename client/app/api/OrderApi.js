@@ -1,4 +1,4 @@
-import ApiManagerNodeJS from "./ApiManager";
+import { ApiManagerNodeJS } from "./ApiManager";
 
 const createOrder = async ({ data, token }) => {
   try {

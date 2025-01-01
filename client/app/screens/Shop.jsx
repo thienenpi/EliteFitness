@@ -31,13 +31,13 @@ const Shop = () => {
             gap: 12,
           }}
         >
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <MaterialCommunityIcons
               size={24}
               color={COLORS.btn}
               name="bell-badge"
             ></MaterialCommunityIcons>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
             <MaterialCommunityIcons
               size={24}

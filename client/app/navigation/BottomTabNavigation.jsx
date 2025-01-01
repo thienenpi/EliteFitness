@@ -40,7 +40,7 @@ const BottomTabNavigation = () => {
         }}
       ></Tab.Screen>
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Log"
         component={Log}
         options={{
@@ -50,7 +50,7 @@ const BottomTabNavigation = () => {
             );
           },
         }}
-      ></Tab.Screen>
+      ></Tab.Screen> */}
 
       {/* <Tab.Screen
         name="Chatbot"
@@ -64,7 +64,7 @@ const BottomTabNavigation = () => {
         }}
       ></Tab.Screen> */}
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Shop"
         component={Shop}
         options={{
@@ -74,7 +74,7 @@ const BottomTabNavigation = () => {
             );
           },
         }}
-      ></Tab.Screen>
+      ></Tab.Screen> */}
 
       <Tab.Screen
         name="Profile"

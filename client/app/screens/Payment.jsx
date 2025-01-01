@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { Alert, FlatList, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles/payment.style";
 import { CustomButton, ProductCartItem } from "../components";
@@ -19,6 +19,10 @@ const orderData = {
 };
 
 var orderDetailList = [];
+
+const showNotification = (message) => {
+  Alert.alert("Notification", message, [{ text: "OK" }]);
+};
 
 const Payment = () => {
   const route = useRoute();
@@ -101,9 +105,11 @@ const Payment = () => {
       });
     });
 
-    clearCart().then(() => {
-      navigation.navigate("Home");
-    });
+    clearCart()
+      .then(() => {
+        navigation.navigate("Home");
+      })
+      .then(() => showNotification("Order successfully!"));
   };
 
   const renderItem = ({ item }) => (

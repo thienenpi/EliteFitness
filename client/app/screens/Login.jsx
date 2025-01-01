@@ -15,6 +15,7 @@ import InputField from "../components/InputField";
 import { AuthContext } from "../context/AuthContext";
 import { styles1, googleButton } from "./styles/login.style";
 import { COLORS } from "../constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const hideKeyboard = () => {
   Keyboard.dismiss();
@@ -22,7 +23,8 @@ const hideKeyboard = () => {
 
 const Login = () => {
   const navigation = useNavigation();
-  const { login, loginWithGoogle, isLoading } = useContext(AuthContext);
+  const { login, loginWithGoogle, setUserToken, setUserInfo, defaultUser } =
+    useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [inputType, setInputType] = useState("password");
@@ -46,6 +48,14 @@ const Login = () => {
     // check if email is in the correct format
     const emailPattern = /\S+@\S+\.\S+/;
     return emailPattern.test(email);
+  };
+
+  const setDefaultUser = () => {
+    setUserInfo(defaultUser);
+    setUserToken(defaultUser.token);
+
+    AsyncStorage.setItem("userInfo", JSON.stringify(defaultUser));
+    AsyncStorage.setItem("userToken", JSON.stringify(defaultUser.token));
   };
 
   return (
@@ -135,7 +145,23 @@ const Login = () => {
             </TouchableOpacity>
           </View>
 
-          <View style={{ height: 20 }}></View>
+          <View style={{ height: 10 }}></View>
+
+          {/* <View
+            style={{
+              height: 20,
+              display: "flex",
+              flexDirection: "row",
+              gap: 32,
+            }}
+          >
+            <Text style={styles1.smallText}>Or </Text>
+            <TouchableOpacity onPress={() => setDefaultUser()}>
+              <Text style={styles1.smallText}>Continue without an account</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ height: 10 }}></View> */}
 
           <TouchableOpacity
             onPress={() => navigation.navigate("Reset Password")}

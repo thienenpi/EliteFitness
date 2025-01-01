@@ -3,6 +3,10 @@ import React from "react";
 import styles from "./exerciseCardView.style";
 import { useNavigation } from "@react-navigation/native";
 
+const showNotImplementedAlert = () => {
+  alert("This feature is not implemented yet.");
+};
+
 const ExerciseCardView = ({ item }) => {
   const navigation = useNavigation();
 
@@ -11,19 +15,18 @@ const ExerciseCardView = ({ item }) => {
       onPress={
         item.csvPath
           ? () => navigation.navigate("Practice", { item })
-          : () => {}
+          : showNotImplementedAlert
       }
     >
       <View style={styles.container}>
-        <Image
-          style={styles.image}
-          source={{
-            uri:
-              item.imageUrl !== undefined
-                ? item.imageUrl
-                : "https://elitefitness.blob.core.windows.net/images/barbellCurl.png",
-          }}
-        ></Image>
+        {item.imageUrl !== undefined && (
+          <Image
+            style={styles.image}
+            source={{
+              uri: item.imageUrl,
+            }}
+          ></Image>
+        )}
         <View style={styles.details}>
           <Text style={styles.title} numberOfLines={1}>
             {item.title}
@@ -42,13 +45,13 @@ const ExerciseCardView = ({ item }) => {
         </View>
 
         <View style={styles.btnColumn}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={showNotImplementedAlert}>
             <Image
               style={styles.btn}
               source={require("../../../assets/icons/trash/3x.png")}
             ></Image>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={showNotImplementedAlert}>
             <Image
               style={styles.btn}
               source={require("../../../assets/icons/transger/3x.png")}

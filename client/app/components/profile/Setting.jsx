@@ -38,12 +38,19 @@ const workoutSettingOptions = [
   },
 ];
 
+const showNotImplementedAlert = () => {
+  alert("This feature is not implemented yet.");
+};
+
 const SettingOption = ({ header, selected, desc }) => {
   return (
     <View style={styles.optionItem}>
       <View style={styles.header}>
         <Text style={styles.optionHeader}>{header}</Text>
-        <TouchableOpacity style={styles.selectedContainer}>
+        <TouchableOpacity
+          style={styles.selectedContainer}
+          onPress={showNotImplementedAlert}
+        >
           <Text style={styles.optionSelected}>{selected}</Text>
           <Entypo size={14} color={COLORS.paragraphBg} name="chevron-right" />
         </TouchableOpacity>
@@ -62,9 +69,12 @@ const Forward = () => {
     <View style={styles.optionItem}>
       <View style={styles.header}>
         <Text style={styles.optionDesc}>
-          Generate inbody test with camera by clicking the shape beside.
+          Calculate the BMI with camera by clicking the shape beside.
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("BodyScan")}>
+        <TouchableOpacity
+          //   onPress={() => navigation.navigate("BodyScan")}
+          onPress={showNotImplementedAlert}
+        >
           <Ionicons
             name="body-outline"
             size={32}
@@ -101,9 +111,9 @@ const SettingSection = ({ title, options }) => {
 const Setting = () => {
   return (
     <View style={styles.container}>
-      <SettingSection title="Gym equipment" options={gymEquipmentOptions} />
+      {/* <SettingSection title="Gym equipment" options={gymEquipmentOptions} />
       <SettingSection title="Workout Setting" options={workoutSettingOptions} />
-      <SettingSection title="Measure BMI with Camera" options={null} />
+      <SettingSection title="Measure BMI with Camera" options={null} /> */}
     </View>
   );
 };

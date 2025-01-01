@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Elite Fitness FTISU",
-    "scheme": "com.onioned.elitefitness",
+    "scheme": "com.thiennp03.elitefitness",
     "slug": "EliteFitness",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -39,22 +39,36 @@
           "microphonePermission": "The Elite Fitness app requires access to your microphone to record audio or capture video within the app. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.",
           "recordAudioAndroid": true
         }
-      ]      
+      ]
     ],
     "ios": {
-      "buildNumber": "1",
+      "buildNumber": "10",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "supportsTablet": true,
       "icon": "./assets/icon.png",
       "infoPlist": {
-        "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
-        "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone.",
-        "NSPhotoLibraryUsageDescription": "We need access to your photo library",
+        "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera to allow you to capture and upload images directly from the app. Camera access will only be used for in-app functions and will not be used for tracking or advertising.",
+        "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone to record audio or capture video within the app. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.",
+        "NSPhotoLibraryUsageDescription": "$(PRODUCT_NAME) need access to your Photos Library to allow you to select and share images within the app. Your photos will only be used for this purpose and will not be shared with third parties.",
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
-        }
+        },
+        "NSPrivacyCollectedDataTypes": {
+          "NSPrivacyCollectedDataTypeName": "Collected to personalize your experience, such as displaying your name in the app and providing personalized content.",
+          "NSPrivacyCollectedDataTypeEmailAddress": "Collected to communicate with you, send account-related information, and personalize your app experience.",
+          "NSPrivacyCollectedDataTypePhoneNumber": "Collected to provide customer support, verify your identity, and for account-related communications.",
+          "NSPrivacyCollectedDataTypePhysicalAddress": "Collected for verifying your location, sending physical goods, or personalizing content based on your location.",
+          "NSPrivacyCollectedDataTypeOtherUserContactInfo": "Collected to improve communication and provide support beyond the app's functionalities.",
+          "NSPrivacyCollectedDataTypeContacts": "Collected to enhance your experience by integrating with your contacts for better interaction within the app.",
+          "NSPrivacyCollectedDataTypeEmailsOrTextMessages": "Collected to personalize content, provide updates, and manage communication effectively.",
+          "NSPrivacyCollectedDataTypePhotosorVideos": "Collected to allow you to upload and share photos or videos, and customize your app experience with your media.",
+          "NSPrivacyCollectedDataTypeOtherUserContent": "Collected to support and manage your interactions and contributions within the app.",
+          "NSPrivacyCollectedDataTypeDeviceID": "Collected to enhance app performance, provide analytics, and maintain app security.",
+          "NSPrivacyCollectedDataTypeProductInteraction": "Collected to analyze how you use the app, improve functionality, and enhance user experience.",
+          "NSPrivacyCollectedDataTypePerformanceData": "Collected to monitor app performance, detect issues, and optimize functionality."
+        },
+        "ITSAppUsesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.onioned.elitefitness",
+      "bundleIdentifier": "com.thiennp03.EliteFitness",
       "splash": {
         "image": "./assets/images/splash/splash.png",
         "resizeMode": "cover",
@@ -68,15 +82,13 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "CAMERA",
-        "RECORD_AUDIO",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "MEDIA_LIBRARY",
         "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.MEDIA_LIBRARY"
       ],
-      "package": "com.onioned.elitefitness"
+      "package": "com.thiennp03.EliteFitness"
     },
     "web": {
       "favicon": "./assets/favicon.png"

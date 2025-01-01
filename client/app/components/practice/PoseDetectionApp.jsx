@@ -318,7 +318,7 @@ const PoseDetectionApp = (props) => {
         ) {
           onUpdatePracticeState();
         }
-        
+
         renderRef.current = true;
 
         if (posesRef.current != null && posesRef.current.length > 0) {

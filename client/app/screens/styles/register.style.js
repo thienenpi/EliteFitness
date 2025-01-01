@@ -9,6 +9,7 @@ const styles1 = StyleSheet.create({
 
   linearGradient: {
     flex: 1,
+    alignItems: "center",
     justifyContent: "flex-start", // Sử dụng 'flex-start' thay vì 'top'
     width: "100%",
   },
