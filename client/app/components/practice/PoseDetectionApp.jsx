@@ -23,7 +23,7 @@ import {
 import Svg, { Circle } from "react-native-svg";
 
 import styles from "./poseDetectionApp.style";
-import { COLORS, SIZES, HOST_NODEJS } from "../../constants";
+import { COLORS, SIZES, HOST_NODEJS, TEXTS } from "../../constants";
 import * as util from "../../lib/utilities";
 import { JointAngle } from "../../lib/jointAngles";
 import { BodyPart } from "../../lib/bodyPart";
@@ -200,7 +200,7 @@ const PoseDetectionApp = (props) => {
       //   })
 
       await Camera.requestCameraPermissionsAsync();
-      await MediaLibrary.requestPermissionsAsync();
+      //   await MediaLibrary.requestPermissionsAsync();
 
       await tf.ready();
 
@@ -210,9 +210,9 @@ const PoseDetectionApp = (props) => {
       };
 
       if (LOAD_MODEL_FROM_BUNDLE) {
-        const modelJson = require("../../offline_model/movenet/model.json");
-        const modelWeights1 = require("../../offline_model/movenet/group1-shard1of2.bin");
-        const modelWeights2 = require("../../offline_model/movenet/group1-shard2of2.bin");
+        const modelJson = require("../../../assets/offline_model/movenet/model.json");
+        const modelWeights1 = require("../../../assets/offline_model/movenet/group1-shard1of2.bin");
+        const modelWeights2 = require("../../../assets/offline_model/movenet/group1-shard2of2.bin");
         movenetModelConfig.modelUrl = bundleResourceIO(modelJson, [
           modelWeights1,
           modelWeights2,
@@ -422,6 +422,9 @@ const PoseDetectionApp = (props) => {
             deviation: value,
           });
           lines += line + "\n";
+          if (lines === "") {
+            useSpeech(line);
+          }
         }
       });
     }

@@ -37,15 +37,15 @@ const Profile = () => {
       <User></User>
       <Setting></Setting>
 
-      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-        <CustomButton
-          label={"Log out"}
-          styles={styles}
-          isValid={true}
-          onPress={logout}
-        ></CustomButton>
+      {userInfo.email != "a@a.a" ? (
+        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+          <CustomButton
+            label={"Log out"}
+            styles={styles}
+            isValid={true}
+            onPress={logout}
+          ></CustomButton>
 
-        {userInfo._id && (
           <CustomButton
             label={"Delete account"}
             styles={styles}
@@ -66,8 +66,17 @@ const Profile = () => {
               );
             }}
           ></CustomButton>
-        )}
-      </View>
+        </View>
+      ) : (
+        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+          <CustomButton
+            label={"Sign in"}
+            styles={styles}
+            isValid={true}
+            onPress={logout}
+          ></CustomButton>
+        </View>
+      )}
     </ScrollView>
   );
 };

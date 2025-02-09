@@ -72,8 +72,8 @@ const Forward = () => {
           Calculate the BMI with camera by clicking the shape beside.
         </Text>
         <TouchableOpacity
-          //   onPress={() => navigation.navigate("BodyScan")}
-          onPress={showNotImplementedAlert}
+          onPress={() => navigation.navigate("BodyScan")}
+          //   onPress={showNotImplementedAlert}
         >
           <Ionicons
             name="body-outline"
@@ -111,9 +111,9 @@ const SettingSection = ({ title, options }) => {
 const Setting = () => {
   return (
     <View style={styles.container}>
-      {/* <SettingSection title="Gym equipment" options={gymEquipmentOptions} />
+      <SettingSection title="Gym equipment" options={gymEquipmentOptions} />
       <SettingSection title="Workout Setting" options={workoutSettingOptions} />
-      <SettingSection title="Measure BMI with Camera" options={null} /> */}
+      <SettingSection title="Measure BMI with Camera" options={null} />
     </View>
   );
 };

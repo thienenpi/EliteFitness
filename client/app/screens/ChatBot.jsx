@@ -17,7 +17,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
 
-  const deployment = "gpt-35-turbo-16k";
+  const deployment = "gpt-4o-mini";
   const apiVersion = "2024-08-01-preview";
   const client = new AzureOpenAI({
     endpoint: AZURE_OPENAI_ENDPOINT,

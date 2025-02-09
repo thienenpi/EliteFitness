@@ -91,6 +91,8 @@ const Practice = ({ navigation }) => {
           </View>
         </View>
 
+        <View style={{ height: 20 }}></View>
+
         <SettingRow
           styles={styles}
           title={"Turn off your camera"}
@@ -99,13 +101,13 @@ const Practice = ({ navigation }) => {
           value={!cameraState}
         ></SettingRow>
 
-        <SettingRow
+        {/* <SettingRow
           styles={styles}
           title={"Record your workout"}
           iconName={"clipboard-file"}
           onChange={updateRecordState}
           value={recordState}
-        ></SettingRow>
+        ></SettingRow> */}
 
         <CustomButton
           styles={styles}

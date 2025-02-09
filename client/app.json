@@ -29,25 +29,25 @@
         "expo-image-picker",
         {
           "photosPermission": "This app requires access to your photos to allow you to select and share images within the app. Your photos will only be used for this purpose and will not be shared with third parties.",
-          "cameraPermission": "This app requires access to your camera to allow you to capture and upload images directly from the app. Camera access will only be used for in-app functions and will not be used for tracking or advertising."
+          "cameraPermission": "This app requires access to your camera to allow us evaluate your pose frame by frame. We commit to not collect data from this. Camera access will only be used for in-app functions and is unrelated to tracking or advertising."
         }
       ],
       [
         "expo-camera",
         {
-          "cameraPermission": "The Elite Fitness app requires access to your camera to allow you to capture and upload images or videos directly from the app. Camera access will only be used for in-app functions and is unrelated to tracking or advertising.",
-          "microphonePermission": "The Elite Fitness app requires access to your microphone to record audio or capture video within the app. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.",
+          "cameraPermission": "This app requires access to your camera to allow us evaluate your pose frame by frame. We commit to not collect data from this. Camera access will only be used for in-app functions and is unrelated to tracking or advertising.",
+          "microphonePermission": "This app requires access to your microphone to record audio or capture video within the app. We commit to not collect data from this. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.",
           "recordAudioAndroid": true
         }
       ]
     ],
     "ios": {
-      "buildNumber": "10",
+      "buildNumber": "14",
       "googleServicesFile": "./GoogleService-Info.plist",
       "icon": "./assets/icon.png",
       "infoPlist": {
-        "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera to allow you to capture and upload images directly from the app. Camera access will only be used for in-app functions and will not be used for tracking or advertising.",
-        "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone to record audio or capture video within the app. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.",
+        "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera to allow us evaluate your pose frame by frame. We commit to not collect data from this. Camera access will only be used for in-app functions and is unrelated to tracking or advertising.",
+        "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone to record audio or capture video within the app. We commit to not collect data from this. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.",
         "NSPhotoLibraryUsageDescription": "$(PRODUCT_NAME) need access to your Photos Library to allow you to select and share images within the app. Your photos will only be used for this purpose and will not be shared with third parties.",
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
@@ -96,6 +96,13 @@
     "extra": {
       "eas": {
         "projectId": "d1678a1f-51be-4a2f-9ab3-08d5043239c9"
+      }
+    },
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/d1678a1f-51be-4a2f-9ab3-08d5043239c9",
+      "requestHeaders": {
+        "expo-channel-name": "production"
       }
     }
   }

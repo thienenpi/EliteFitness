@@ -19,7 +19,7 @@ const User = () => {
       </View>
 
       <View style={styles.userContainer}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{ flexDirection: "row", alignItems: "center" }}
         >
           <FontAwesome
@@ -28,7 +28,7 @@ const User = () => {
             name="diamond"
           ></FontAwesome>
           <Text style={styles.preText}>Premium</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

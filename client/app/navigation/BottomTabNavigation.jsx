@@ -1,8 +1,8 @@
-import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
-import { COLORS } from '../constants/index';
-import { ChatBot, Home, Log, Profile, Shop } from '../screens';
+import { FontAwesome, FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
+import { COLORS } from "../constants/index";
+import { ChatBot, Home, Log, Profile, Shop } from "../screens";
 
 // Create Bottom Tab Navigatior
 const Tab = createBottomTabNavigator();
@@ -10,15 +10,15 @@ const Tab = createBottomTabNavigator();
 // Config screen options
 const screenOptions = {
   headerShown: false,
-  tabBarActiveTintColor: '#F8C06D',
-  tabBarInactiveTintColor: '#7C7773',
+  tabBarActiveTintColor: "#F8C06D",
+  tabBarInactiveTintColor: "#7C7773",
   tabBarLabelStyle: {
     fontSize: 12,
   },
   tabBarStyle: [
     {
-      display: 'flex',
-      backgroundColor: 'black',
+      display: "flex",
+      backgroundColor: "black",
     },
     null,
   ],
@@ -52,7 +52,7 @@ const BottomTabNavigation = () => {
         }}
       ></Tab.Screen> */}
 
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Chatbot"
         component={ChatBot}
         options={{
@@ -62,9 +62,9 @@ const BottomTabNavigation = () => {
             );
           },
         }}
-      ></Tab.Screen> */}
+      ></Tab.Screen>
 
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Shop"
         component={Shop}
         options={{
@@ -74,7 +74,7 @@ const BottomTabNavigation = () => {
             );
           },
         }}
-      ></Tab.Screen> */}
+      ></Tab.Screen>
 
       <Tab.Screen
         name="Profile"

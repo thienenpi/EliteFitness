@@ -44,7 +44,7 @@ const ExerciseCardView = ({ item }) => {
           )}
         </View>
 
-        <View style={styles.btnColumn}>
+        {/* <View style={styles.btnColumn}>
           <TouchableOpacity onPress={showNotImplementedAlert}>
             <Image
               style={styles.btn}
@@ -57,7 +57,7 @@ const ExerciseCardView = ({ item }) => {
               source={require("../../../assets/icons/transger/3x.png")}
             ></Image>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </TouchableOpacity>
   );

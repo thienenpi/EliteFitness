@@ -45,7 +45,9 @@
       </dict>
     </array>
     <key>CFBundleVersion</key>
-    <string>10</string>
+    <string>14</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>
@@ -54,9 +56,9 @@
       <true/>
     </dict>
     <key>NSCameraUsageDescription</key>
-    <string>This app requires access to your camera to allow you to capture and upload images directly from the app. Camera access will only be used for in-app functions and will not be used for tracking or advertising.</string>
+    <string>This app requires access to your camera to allow us evaluate your pose frame by frame. We commit to not collect data from this. Camera access will only be used for in-app functions and is unrelated to tracking or advertising.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>The Elite Fitness app requires access to your microphone to record audio or capture video within the app. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.</string>
+    <string>This app requires access to your microphone to record audio or capture video within the app. We commit to not collect data from this. Microphone access will only be used for in-app functions and is unrelated to tracking or advertising.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
     <string>Allow $(PRODUCT_NAME) to save photos</string>
     <key>NSPhotoLibraryUsageDescription</key>
